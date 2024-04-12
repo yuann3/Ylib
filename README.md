@@ -1,6 +1,6 @@
 # Ylib - C Standard library
 
-![GitHub commit activity](https://img.shields.io/github/commit-activity/t/yuann3/Ylib) ![GitHub repo size](https://img.shields.io/github/repo-size/yuann3/Ylib)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/t/yuann3/Ylib) ![GitHub repo size](https://img.shields.io/github/repo-size/yuann3/Ylib) [![.github/workflows/norminette](https://github.com/yuann3/Ylib/actions/workflows/norminette.yml/badge.svg)](https://github.com/yuann3/Ylib/actions/workflows/norminette.yml)
 
 
 We're reinventing the wheel, Ylib is a rewrite of the C standard library and is part of the 42@SUTD course. It contains string type checking, memory management, etc...(continually updated)
