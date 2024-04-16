@@ -6,12 +6,23 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 19:40:46 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/16 19:42:50 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/04/16 20:43:00 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @file ft_split.c
+ * @brief Splits a string into words by a charset.
+ */
+
 #include "libft.h"
 
+/**
+ * @brief Checks if character is a charset.
+ * @param c Character to check.
+ * @param charset Charset to compare with.
+ * @return 1 if c is charset, 0 otherwise.
+ */
 int	is_charset(char c, char charset)
 {
 	if (c == charset)
@@ -19,6 +30,12 @@ int	is_charset(char c, char charset)
 	return (0);
 }
 
+/**
+ * @brief Counts words in a string.
+ * @param str String to count words in.
+ * @param charset Word delimiter.
+ * @return Number of words.
+ */
 int	count_words(char const *str, char charset)
 {
 	int	count;
@@ -36,6 +53,12 @@ int	count_words(char const *str, char charset)
 	return (count);
 }
 
+/**
+ * @brief Allocates memory for a word.
+ * @param str String to allocate word from.
+ * @param charset Word delimiter.
+ * @return Pointer to allocated word.
+ */
 char	*malloc_word(char const *str, char charset)
 {
 	char	*word;
