@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:56:51 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/16 15:09:12 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/04/16 16:09:14 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@
 # include <unistd.h>
 
 char	**ft_split(char *str, char *charset);
+int		ft_toupper(int c);
 
 #endif
