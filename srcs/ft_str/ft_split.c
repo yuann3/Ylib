@@ -5,25 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/12 17:21:42 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/16 15:01:27 by yiyli            ###   ########.fr       */
+/*   Created: 2024/04/16 19:40:46 by yiyli             #+#    #+#             */
+/*   Updated: 2024/04/16 19:42:50 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	is_charset(char c, char *charset)
+int	is_charset(char c, char charset)
 {
-	while (*charset)
-	{
-		if (c == *charset)
-			return (1);
-		charset++;
-	}
+	if (c == charset)
+		return (1);
 	return (0);
 }
 
-int	count_words(char *str, char *charset)
+int	count_words(char const *str, char charset)
 {
 	int	count;
 
@@ -40,7 +36,7 @@ int	count_words(char *str, char *charset)
 	return (count);
 }
 
-char	*malloc_word(char *str, char *charset)
+char	*malloc_word(char const *str, char charset)
 {
 	char	*word;
 	int		len;
@@ -61,16 +57,16 @@ char	*malloc_word(char *str, char *charset)
 
 /**
  * @brief Splits a string into words by a charset.
- * 
+ *
  * @param str The string to split.
- * @param charset Delimiters for splitting.
+ * @param charset Delimiter for splitting.
  * @return Array of words.
- * 
- * Allocates memory for an array of words. Iterates over the string, 
- * skipping charset characters and allocating memory for new words. 
- * The last array element is NULL. Returns the array.
+ *
+ * Allocates memory for an array of words. Iterates over the string,
+   skipping charset characters and allocating memory for new words.
+   The last array element is NULL. Returns the array.
  */
-char	**ft_split(char *str, char *charset)
+char	**ft_split(char const *str, char charset)
 {
 	char	**arr;
 	int		i;

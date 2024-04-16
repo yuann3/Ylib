@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 16:03:35 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/16 17:30:24 by yiyli            ###   ########.fr       */
+/*   Created: 2024/04/16 16:29:28 by yiyli             #+#    #+#             */
+/*   Updated: 2024/04/16 17:30:21 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /**
- * @file ft_toupper.c
- * @brief Converts a lowercase letter to uppercase.
+ * @file ft_tolower.c
+ * @brief Converts an uppercase letter to lowercase.
  */
 #include "libft.h"
 
 /**
- * @brief Converts a lowercase letter to uppercase.
+ * @brief Converts an uppercase letter to lowercase.
  * 
  * @param c The character to convert.
- * @return The converted character. If the input character is a lowercase letter 
- * (ASCII 97-122), it is converted to uppercase by 
- subtracting 32 from its ASCII value. 
- * If the input character is not a lowercase letter, 
- it is returned unchanged.
+ * @return The converted character. If the input character is an 
+ * uppercase letter ASCII 65-90), it is converted to lowercase by a
+ * dding 32 to its ASCII value. If the input character is not an 
+ uppercase letter, it is returned unchanged.
  */
-int	ft_toupper(int c)
+int	ft_tolower(int c)
 {
-	if (c > 96 && c < 123)
-		c -= 32;
+	if (c > 64 && c < 91)
+		c += 32;
 	return (c);
 }
