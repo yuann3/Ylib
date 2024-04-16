@@ -53,3 +53,6 @@ dkms.conf
 
 en.subject.pdf
 dist
+doxyfile
+html
+latex

@@ -6,12 +6,23 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 17:37:14 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/16 18:02:28 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/04/16 20:45:22 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * @file ft_strdup.c
+ * @brief Duplicates a string.
+ * @param s String to duplicate.
+ * @return Pointer to the duplicated string.
+ * 
+ * Allocates memory for a new string of the same size as s,
+ * copies the characters from s into the new string, and
+ * adds a null terminator at the end. If memory allocation
+ * fails, returns NULL.
+ */
 char	*ft_strdup(const char *s)
 {
 	int		i;
