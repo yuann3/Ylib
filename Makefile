@@ -6,7 +6,7 @@
 #    By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/16 16:28:52 by yiyli             #+#    #+#              #
-#    Updated: 2024/04/16 20:50:16 by yiyli            ###   ########.fr        #
+#    Updated: 2024/04/16 22:02:50 by yiyli            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,11 +65,15 @@ fclean: clean
 .PHONY: re
 re: fclean all
 
+# Run norminette on all c files and h files
 .PHONY: norm
 norm:
 	$(NORM) $(NORM_FLAGS) $(sources)
 	$(NORM) $(NORM_FLAGS) $(wildcard $(INCLUDE_DIR)/*.h)
 
+# flatten all files in srcs/ and include/ to dist/
+# e.g. srcs/**/*.c include/**/*.h => dist/
+# dist/ is the folder to be submitted to vogsphere
 .PHONY: dist
 dist:
 	$(RM) -r $(DIST_DIR)
@@ -78,6 +82,7 @@ dist:
 	find $(INCLUDE_DIR) -type f -exec cp {} $(DIST_DIR) \;
 	cp Makefile $(DIST_DIR)
 
+# Generate documentation using doxygen
 .PHONY: doc
 doc:
 	make dist
