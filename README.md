@@ -12,12 +12,12 @@ The repository is still in the early stages of development, and the following is
 
 | **Status** 	|     **Name**    	|                  **Description**                  	| **Status** 	|   **Name**   	|             **Description**            	|
 |:----------:	|:---------------:	|:-------------------------------------------------:	|:----------:	|:------------:	|:--------------------------------------:	|
-| 🔲          	|   **_FT_IS_**   	|      _functions for checking character types_     	| 🔲          	| **_FT_MEM_** 	| _functions for memory management_      	|
-| 🔲          	| ft_isalpha      	|                                                   	| 🔲          	| ft_memset    	|                                        	|
-| 🔲          	| ft_isdigit      	|                                                   	| 🔲          	| ft_memmove   	|                                        	|
-| 🔲          	| ft_isalnum      	|                                                   	| 🔲          	| ft_memcpy    	|                                        	|
-| 🔲          	| ft_isascii      	|                                                   	| 🔲          	| ft_memcmp    	|                                        	|
-| 🔲          	| ft_isprint      	|                                                   	| 🔲          	| ft_memchr    	|                                        	|
+| ✅          	|   **_FT_IS_**   	|      _functions for checking character types_     	| 🔲          	| **_FT_MEM_** 	| _functions for memory management_      	|
+| ✅          	| ft_isalpha      	|                                                   	| 🔲          	| ft_memset    	|                                        	|
+| ✅          	| ft_isdigit      	|                                                   	| 🔲          	| ft_memmove   	|                                        	|
+| ✅          	| ft_isalnum      	|                                                   	| 🔲          	| ft_memcpy    	|                                        	|
+| ✅          	| ft_isascii      	|                                                   	| 🔲          	| ft_memcmp    	|                                        	|
+| ✅          	| ft_isprint      	|                                                   	| 🔲          	| ft_memchr    	|                                        	|
 |            	|                 	|                                                   	| 🔲          	| ft_calloc    	|                                        	|
 |            	|                 	|                                                   	| 🔲          	| ft_bzero     	|                                        	|
 | **Status** 	|     **Name**    	|                  **Description**                  	| **Status** 	|   **Name**   	|             **Description**            	|
