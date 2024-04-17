@@ -12,7 +12,7 @@ The repository is still in the early stages of development, and the following is
 
 | **Status** 	|     **Name**    	|                  **Description**                  	| **Status** 	|   **Name**   	|             **Description**            	|
 |:----------:	|:---------------:	|:-------------------------------------------------:	|:----------:	|:------------:	|:--------------------------------------:	|
-| 🟨          	|   **_FT_IS_**   	|      _functions for checking character types_     	| 🟨          	| **_FT_MEM_** 	| _functions for memory management_      	|
+| 🔲          	|   **_FT_IS_**   	|      _functions for checking character types_     	| 🔲          	| **_FT_MEM_** 	| _functions for memory management_      	|
 | 🔲          	| ft_isalpha      	|                                                   	| 🔲          	| ft_memset    	|                                        	|
 | 🔲          	| ft_isdigit      	|                                                   	| 🔲          	| ft_memmove   	|                                        	|
 | 🔲          	| ft_isalnum      	|                                                   	| 🔲          	| ft_memcpy    	|                                        	|
@@ -21,9 +21,9 @@ The repository is still in the early stages of development, and the following is
 |            	|                 	|                                                   	| 🔲          	| ft_calloc    	|                                        	|
 |            	|                 	|                                                   	| 🔲          	| ft_bzero     	|                                        	|
 | **Status** 	|     **Name**    	|                  **Description**                  	| **Status** 	|   **Name**   	|             **Description**            	|
-| 🟨          	|   **_FT_LST_**  	|     _functions that manipulating linked lists_    	| 🟨          	| **_FT_STR_** 	| _functions that are related to string_ 	|
+| 🔲          	|   **_FT_LST_**  	|     _functions that manipulating linked lists_    	| 🟨          	| **_FT_STR_** 	| _functions that are related to string_ 	|
 | 🔲          	| ft_lstadd_back  	|                                                   	| ✅          	| ft_strlen    	|                                        	|
-| 🔲          	| ft_lstadd_front 	|                                                   	| 🔲          	| ft_strlcpy   	|                                        	|
+| 🔲          	| ft_lstadd_front 	|                                                   	| ✅          	| ft_strlcpy   	|                                        	|
 | 🔲          	| ft_lstclear     	|                                                   	| 🔲          	| ft_strlcat   	|                                        	|
 | 🔲          	| ft_lstdelone    	|                                                   	| ✅          	| ft_toupper   	|                                        	|
 | 🔲          	| ft_lstiter      	|                                                   	| ✅          	| ft_tolower   	|                                        	|
@@ -33,7 +33,7 @@ The repository is still in the early stages of development, and the following is
 | 🔲          	| ft_lstsize      	|                                                   	| ✅          	| ft_atoi      	|                                        	|
 | 🔲          	|                 	|                                                   	| ✅          	| ft_strdup    	|                                        	|
 | **Status** 	|     **Name**    	|                  **Description**                  	| 🔲          	| ft_striteri  	|                                        	|
-| 🟨          	|   **_FT_PUT_**  	| _functions for outputting characters and strings_ 	| 🔲          	| ft_strmapi   	|                                        	|
+| 🔲          	|   **_FT_PUT_**  	| _functions for outputting characters and strings_ 	| 🔲          	| ft_strmapi   	|                                        	|
 | 🔲          	| ft_putchar_fd   	|                                                   	| 🔲          	| ft_itoa      	|                                        	|
 | 🔲          	| ft_putstr_fd    	|                                                   	| ✅          	| ft_split     	|                                        	|
 | 🔲          	| ft_putendl_fd   	|                                                   	| 🔲          	| ft_strtrim   	|                                        	|
