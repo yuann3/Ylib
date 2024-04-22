@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:56:51 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/17 19:45:07 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/04/22 19:36:47 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,8 @@ char	*ft_strdup(const char *s);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t destsize);
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
+
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif
