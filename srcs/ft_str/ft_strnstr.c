@@ -1,34 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 19:29:45 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/22 20:52:00 by yiyli            ###   ########.fr       */
+/*   Created: 2024/04/22 20:47:42 by yiyli             #+#    #+#             */
+/*   Updated: 2024/04/22 21:15:04 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/**
- * @file ft_putstr_fd.c
- * @brief Writes a string to a given file descriptor.
- * 
- * @param s The string to be written.
- * @param fd The file descriptor to write to.
- */
-void	ft_putstr_fd(char *s, int fd)
+char	*ft_strnstr(char *str, char *substr, size_t len)
 {
-	int	len;
+	size_t	i;
+	size_t	j;
 
-	len = 0;
-	if (!s)
-		return ;
-	while (s[len] != '\0')
+	i = 0;
+	if (substr[0] == '\0')
+		return ((char *)str);
+	while (str[i] != '\0' && i < len)
 	{
-		write(fd, &s[len], 1);
-		len++;
+		j = 0;
+		while (substr[j] == str[i + j] && (i + j) < len)
+		{
+			if (substr[j + 1] == '\0')
+				return ((char *)&str[i]);
+			j++;
+		}
+		i++;
 	}
+	return (NULL);
 }

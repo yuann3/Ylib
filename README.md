@@ -29,7 +29,7 @@ The repository is still in the early stages of development, and the following is
 | 🔲          	| ft_lstiter      	|                                                   	| ✅          	| ft_tolower   	|                                        	|
 | 🔲          	| ft_lstlast      	|                                                   	| ✅          	| ft_strchr    	|                                        	|
 | 🔲          	| ft_lstmap       	|                                                   	| ✅          	| ft_strncmp   	|                                        	|
-| 🔲          	| ft_lstnew       	|                                                   	| 🔲          	| ft_strnstr   	|                                        	|
+| 🔲          	| ft_lstnew       	|                                                   	| ✅          	| ft_strnstr   	|                                        	|
 | 🔲          	| ft_lstsize      	|                                                   	| ✅          	| ft_atoi      	|                                        	|
 | 🔲          	|                 	|                                                   	| ✅          	| ft_strdup    	|                                        	|
 | **Status** 	|     **Name**    	|                  **Description**                  	| 🔲          	| ft_striteri  	|                                        	|
