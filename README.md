@@ -38,5 +38,5 @@ The repository is still in the early stages of development, and the following is
 | ✅          | ft_putstr_fd    |                                                   | ✅          | ft_split     |                                        |
 | ✅          | ft_putendl_fd   |                                                   | ✅          | ft_strtrim   |                                        |
 | ✅          | ft_putnbr_fd    |                                                   | ✅          | ft_strjoin   |                                        |
-|            |                 |                                                   | 🔲          | ft_substr    |                                        |
+|            |                 |                                                   | ✅          | ft_substr    |                                        |
 |            |                 |                                                   | ✅          | ft_strrchr   |                                        |
