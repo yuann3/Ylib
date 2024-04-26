@@ -6,12 +6,20 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 13:34:35 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/26 13:41:23 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/04/26 14:10:49 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/**
+ * @file ft_strmapi.c
+ * @brief Converts an integer to a string.
+ *
+ * @param n The integer.
+ * @return char* The string representation of the integer,
+	or NULL if an error occurs.
+ */
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char			*new_str;
