@@ -16,7 +16,7 @@ The repository is still in the early stages of development, and the following is
 | ✅          | ft_isalpha      |                                                   | ✅          | ft_memset    |                                        |
 | ✅          | ft_isdigit      |                                                   | ✅          | ft_memmove   |                                        |
 | ✅          | ft_isalnum      |                                                   | ✅          | ft_memcpy    |                                        |
-| ✅          | ft_isascii      |                                                   | 🔲          | ft_memcmp    |                                        |
+| ✅          | ft_isascii      |                                                   | ✅          | ft_memcmp    |                                        |
 | ✅          | ft_isprint      |                                                   | 🔲          | ft_memchr    |                                        |
 |            |                 |                                                   | 🔲          | ft_calloc    |                                        |
 |            |                 |                                                   | 🔲          | ft_bzero     |                                        |
