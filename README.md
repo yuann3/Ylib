@@ -32,7 +32,7 @@ The repository is still in the early stages of development, and the following is
 | 🔲          | ft_lstnew       |                                                   | ✅          | ft_strnstr   |                                        |
 | 🔲          | ft_lstsize      |                                                   | ✅          | ft_atoi      |                                        |
 | 🔲          |                 |                                                   | ✅          | ft_strdup    |                                        |
-| **Status** | **Name**        | **Description**                                   | 🔲          | ft_striteri  |                                        |
+| **Status** | **Name**        | **Description**                                   | ✅          | ft_striteri  |                                        |
 | ✅          | **_FT_PUT_**    | _functions for outputting characters and strings_ | 🔲          | ft_strmapi   |                                        |
 | ✅          | ft_putchar_fd   |                                                   | 🔲          | ft_itoa      |                                        |
 | ✅          | ft_putstr_fd    |                                                   | ✅          | ft_split     |                                        |
