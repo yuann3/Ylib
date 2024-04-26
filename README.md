@@ -19,7 +19,7 @@ The repository is still in the early stages of development, and the following is
 | ✅          | ft_isascii      |                                                   | ✅          | ft_memcmp    |                                        |
 | ✅          | ft_isprint      |                                                   | ✅          | ft_memchr    |                                        |
 |            |                 |                                                   | 🔲          | ft_calloc    |                                        |
-|            |                 |                                                   | 🔲          | ft_bzero     |                                        |
+|            |                 |                                                   | ✅          | ft_bzero     |                                        |
 | **Status** | **Name**        | **Description**                                   | **Status** | **Name**     | **Description**                        |
 | 🔲          | **_FT_LST_**    | _functions that manipulating linked lists_        | ✅          | **_FT_STR_** | _functions that are related to string_ |
 | 🔲          | ft_lstadd_back  |                                                   | ✅          | ft_strlen    |                                        |
