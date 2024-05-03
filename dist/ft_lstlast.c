@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 12:13:03 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/03 12:21:00 by yiyli            ###   ########.fr       */
+/*   Created: 2024/05/03 12:28:32 by yiyli             #+#    #+#             */
+/*   Updated: 2024/05/03 12:33:36 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+t_list	*ft_lstlast(t_list *lst)
 {
-	while (lst != NULL && f != NULL)
-	{
-		f(lst->content);
+	if (lst == NULL)
+		return (NULL);
+	while (lst->next != NULL)
 		lst = lst->next;
-	}
+	return (lst);
 }
