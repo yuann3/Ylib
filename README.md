@@ -25,7 +25,7 @@ The repository is still in the early stages of development, and the following is
 | ✅          | ft_lstadd_back  |                                                   | ✅          | ft_strlen    |                                        |
 | ✅          | ft_lstadd_front |                                                   | ✅          | ft_strlcpy   |                                        |
 | ✅          | ft_lstclear     |                                                   | ✅          | ft_strlcat   |                                        |
-| 🔲          | ft_lstdelone    |                                                   | ✅          | ft_toupper   |                                        |
+| ✅          | ft_lstdelone    |                                                   | ✅          | ft_toupper   |                                        |
 | 🔲          | ft_lstiter      |                                                   | ✅          | ft_tolower   |                                        |
 | 🔲          | ft_lstlast      |                                                   | ✅          | ft_strchr    |                                        |
 | ✅          | ft_lstmap       |                                                   | ✅          | ft_strncmp   |                                        |
