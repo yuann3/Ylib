@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:56:51 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/27 22:38:34 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/03 10:16:05 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+int					ft_lstsize(t_list *lst);
+t_list				*ft_lstnew(void *content);
 
 int					ft_isalpha(int c);
 int					ft_isdigit(int n);
