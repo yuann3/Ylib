@@ -6,14 +6,14 @@
 #    By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/16 16:28:52 by yiyli             #+#    #+#              #
-#    Updated: 2024/04/16 22:02:50 by yiyli            ###   ########.fr        #
+#    Updated: 2024/05/03 12:39:22 by yiyli            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := libft.a
 SOURCE_DIR := srcs
 OBJECT_DIR := objs
-INCLUDE_DIR := includes
+INCLUDE_DIR := libft.h
 DIST_DIR := dist
 
 # CC
