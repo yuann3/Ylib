@@ -6,85 +6,75 @@
 #    By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/16 16:28:52 by yiyli             #+#    #+#              #
-#    Updated: 2024/05/03 12:39:22 by yiyli            ###   ########.fr        #
+#    Updated: 2024/05/14 15:00:51 by yiyli            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := libft.a
-SOURCE_DIR := srcs
-OBJECT_DIR := objs
-INCLUDE_DIR := libft.h
-DIST_DIR := dist
+SRCS := ft_lstsize.c ft_lstadd_front.c \
+	ft_lstadd_back.c ft_lstclear.c \
+	ft_lstdelone.c ft_lstiter.c \
+	ft_lstnew.c ft_lstlast.c \
+	ft_lstmap.c ft_isalpha.c \
+	ft_isdigit.c ft_isalnum.c \
+	ft_isascii.c ft_isprint.c \
+	ft_memcmp.c ft_memset.c \
+	ft_memmove.c ft_memcpy.c \
+	ft_memchr.c ft_calloc.c \
+	ft_bzero.c ft_toupper.c \
+	ft_tolower.c ft_atoi.c \
+	ft_strncmp.c ft_strncpy.c \
+	ft_strndup.c ft_itoa.c \
+	ft_split.c ft_strmapi.c \
+	ft_strchr.c ft_strdup.c \
+	ft_strnstr.c ft_strrchr.c \
+	ft_strjoin.c ft_strtrim.c \
+	ft_substr.c ft_striteri.c \
+	ft_strlen.c ft_strlcpy.c \
+	ft_strlcat.c ft_putchar_fd.c \
+	ft_putstr_fd.c ft_putendl_fd.c \
+	ft_putnbr_fd.c
+OBJS := ft_lstsize.o ft_lstadd_front.o \
+	ft_lstadd_back.o ft_lstclear.o \
+	ft_lstdelone.o ft_lstiter.o \
+	ft_lstnew.o ft_lstlast.o \
+	ft_lstmap.o ft_isalpha.o \
+	ft_isdigit.o ft_isalnum.o \
+	ft_isascii.o ft_isprint.o \
+	ft_memcmp.o ft_memset.o \
+	ft_memmove.o ft_memcpy.o \
+	ft_memchr.o ft_calloc.o \
+	ft_bzero.o ft_toupper.o \
+	ft_tolower.o ft_atoi.o \
+	ft_strncmp.o ft_strncpy.o \
+	ft_strndup.o ft_itoa.o \
+	ft_split.o ft_strmapi.o \
+	ft_strchr.o ft_strdup.o \
+	ft_strnstr.o ft_strrchr.o \
+	ft_strjoin.o ft_strtrim.o \
+	ft_substr.o ft_striteri.o \
+	ft_strlen.o ft_strlcpy.o \
+	ft_strlcat.o ft_putchar_fd.o \
+	ft_putstr_fd.o ft_putendl_fd.o \
+	ft_putnbr_fd.o 
 
-# CC
-CC := cc
-CFLAGS := -Wall -Wextra -Werror -I $(INCLUDE_DIR)
+FLAGS = -Wall -Wextra -Werror
 
-# Norminette
-NORM := norminette
-NORM_FLAGS := -R CheckForbiddenSourceHeader -R CheckDefine
+CC = cc
 
-MKDIR = mkdir -p
+HEADER = libft.h
 
-# Helper function to list all files matching pattern recursively
-# e.g. List all *.c files in srcs/ folder
-rwildcard = $(shell find $(1) -type f -name '$(2)')
-
-# Find all files we work with
-# e.g. srcs/**/*.c, include/**/*.h
-sources := $(call rwildcard,$(SOURCE_DIR),*.c)
-
-# Convert c files to o files
-# e.g. srcs/main.c srcs/dict/dict.c => objs/main.o objs/dict/dict.o
-objects := $(sources:$(SOURCE_DIR)/%.c=$(OBJECT_DIR)/%.o)
-
-.PHONY: all
 all: $(NAME)
 
-# Compile binary from all o files
-# e.g. objs/main.o objs/dict/dict.o => rush-02
-$(NAME): $(objects)
-	ar rcs $@ $^
+$(NAME):
+	$(CC) $(FLAGS) -c $(SRCS)
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 
-# Compile each c file to o file
-# Also, consider h file, though it is not included for compilation
-# e.g. srcs/dict/dict.c (srcs/dict/dict.h) => objs/dict/dict.o
-$(OBJECT_DIR)/%.o: $(SOURCE_DIR)/%.c
-	@$(NORM) $(NORM_FLAGS) $<
-	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-.PHONY: clean
 clean:
-	$(RM) -r $(OBJECT_DIR)
+	rm -rf $(OBJS)
 
-.PHONY: fclean
 fclean: clean
-	$(RM) $(NAME)
+	rm -f $(NAME)
 
-.PHONY: re
 re: fclean all
-
-# Run norminette on all c files and h files
-.PHONY: norm
-norm:
-	$(NORM) $(NORM_FLAGS) $(sources)
-	$(NORM) $(NORM_FLAGS) $(wildcard $(INCLUDE_DIR)/*.h)
-
-# flatten all files in srcs/ and include/ to dist/
-# e.g. srcs/**/*.c include/**/*.h => dist/
-# dist/ is the folder to be submitted to vogsphere
-.PHONY: dist
-dist:
-	$(RM) -r $(DIST_DIR)
-	$(MKDIR) $(DIST_DIR)
-	find $(SOURCE_DIR) -type f -exec cp {} $(DIST_DIR) \;
-	find $(INCLUDE_DIR) -type f -exec cp {} $(DIST_DIR) \;
-	cp Makefile $(DIST_DIR)
-
-# Generate documentation using doxygen
-.PHONY: doc
-doc:
-	make dist
-	doxygen doxyfile
-	open html/index.html

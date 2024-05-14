@@ -6,7 +6,7 @@
 #    By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/16 16:28:52 by yiyli             #+#    #+#              #
-#    Updated: 2024/04/16 22:02:50 by yiyli            ###   ########.fr        #
+#    Updated: 2024/05/14 14:35:24 by yiyli            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,6 @@ dist:
 	$(MKDIR) $(DIST_DIR)
 	find $(SOURCE_DIR) -type f -exec cp {} $(DIST_DIR) \;
 	find $(INCLUDE_DIR) -type f -exec cp {} $(DIST_DIR) \;
-	cp Makefile $(DIST_DIR)
 
 # Generate documentation using doxygen
 .PHONY: doc
