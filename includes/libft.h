@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:56:51 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/08 14:18:23 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/15 16:25:19 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ char				**ft_split(char const *str, char charset);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strchr(const char *s, int c);
 char				*ft_strdup(const char *s);
-char				*ft_strnstr(char *str, char *substr, size_t len);
+char				*ft_strnstr(const char *str, const char *substr,
+						size_t len);
 char				*ft_strrchr(const char *str, int c);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);

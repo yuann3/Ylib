@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 20:47:42 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/23 15:04:32 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/15 16:37:32 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * @param len The maximum number of characters to be compared.
  * @return char* A pointer to the first occurrence of the substring in str.
  */
-char	*ft_strnstr(char *str, char *substr, size_t len)
+char	*ft_strnstr(const char *str, const char *substr, size_t len)
 {
 	size_t	i;
 	size_t	j;

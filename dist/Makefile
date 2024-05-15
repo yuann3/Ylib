@@ -6,7 +6,7 @@
 #    By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/16 16:28:52 by yiyli             #+#    #+#              #
-#    Updated: 2024/05/14 15:00:51 by yiyli            ###   ########.fr        #
+#    Updated: 2024/05/15 16:38:03 by yiyli            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS := ft_lstsize.c ft_lstadd_front.c \
 	ft_strlcat.c ft_putchar_fd.c \
 	ft_putstr_fd.c ft_putendl_fd.c \
 	ft_putnbr_fd.c
+
 OBJS := ft_lstsize.o ft_lstadd_front.o \
 	ft_lstadd_back.o ft_lstclear.o \
 	ft_lstdelone.o ft_lstiter.o \
