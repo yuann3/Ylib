@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:26:46 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/26 16:32:10 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/17 17:55:36 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	unsigned char		*d;
 	const unsigned char	*s;
 
+	if (!src)
+		return (0);
 	d = dest;
 	s = src;
 	while (n--)
