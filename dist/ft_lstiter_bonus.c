@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 12:13:03 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/17 18:56:45 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/19 16:33:41 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 /**
  * @file ft_lstiter_bonus.c
- * @brief Deletes and frees the given element,
-	using the function 'del' and free(3).
+ * @brief Iterates the list 'lst' and applies the
+ * function 'f' to the content of each element.
  *
- * @param lst Pointer to the element to be deleted.
- * @param del Address of the function used to delete the content of the element.
+ * @param lst Pointer to the list.
+ * @param f Address of the function to apply to the content of the elements.
  */
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
