@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:19:08 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/26 17:36:55 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/19 15:37:11 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 
 /**
  * @file ft_calloc.c
- * @brief Sets the first n bytes of the block of memory pointed by s to zero.
+ * @brief Allocates memory for an array of 'count' elements,
+	each of 'size' bytes,
+	and initializes all bytes in the allocated storage to zero.
  *
- * @param s Pointer to the block of memory to set to zero.
- * @param n Number of bytes to set to zero.
+ * @param count Number of elements to be allocated.
+ * @param size Size of each element.
+ * @return void* Returns a pointer to the allocated memory,
+	or NULL if the allocation fails.
  */
 void	*ft_calloc(size_t count, size_t size)
 {
-	size_t	total;
 	void	*ptr;
 
-	total = count * size;
-	if (count != 0 && total / count != size)
-		return (NULL);
-	ptr = malloc(total);
-	if (ptr == NULL)
-		return (NULL);
-	ft_memset(ptr, 0, total);
+	ptr = malloc(count * size);
+	if (ptr)
+		ft_bzero(ptr, count * size);
 	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 11:04:44 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/17 18:59:19 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/19 16:30:54 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*new_node;
 	t_list	*current;
 
+	if (!lst || !f || !del)
+		return (NULL);
 	new_list = NULL;
 	current = NULL;
 	while (lst)

@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:42:58 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/26 16:55:10 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/19 15:33:32 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	*ft_memchr(const void *str, int c, size_t n)
 {
 	const unsigned char	*p;
 
+	if (!str)
+		return (NULL);
 	p = str;
 	while (n-- != 0)
 	{

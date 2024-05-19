@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 13:34:35 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/26 14:10:49 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/19 14:18:18 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 /**
  * @file ft_strmapi.c
- * @brief Converts an integer to a string.
+ * @brief Applies a function to each character of a string,
+	creating a new string.
  *
- * @param n The integer.
- * @return char* The string representation of the integer,
+ * @param s The original string.
+ * @param f The function to apply to each character.
+ * @return char* The new string resulting from successive applications of 'f',
 	or NULL if an error occurs.
  */
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))

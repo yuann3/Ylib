@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:10:32 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/26 17:35:57 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/19 15:26:41 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,5 @@
  */
 void	ft_bzero(void *s, size_t n)
 {
-	unsigned char	*p;
-
-	p = s;
-	while (n--)
-		*p++ = 0;
+	ft_memset(s, 0, n);
 }

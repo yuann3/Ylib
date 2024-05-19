@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 13:21:01 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/26 14:11:24 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/19 15:10:18 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 /**
  * @file ft_striteri.c
- * @brief Converts an integer to a string.
+ * @brief Applies a function 'f' to each character of the string 's',
+	and passes its index as first argument.
  *
- * @param n The integer.
- * @return char* The string representation of the integer,
-	or NULL if an error occurs.
+ * @param s Pointer to the string.
+ * @param f Address of the function to apply to each character of the string.
  */
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
