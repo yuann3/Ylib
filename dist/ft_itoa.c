@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 13:48:49 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/26 14:10:17 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/21 15:52:01 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,21 @@ static int	ft_numlen(int n)
 	return (len);
 }
 
-/**
- * @brief Helper function,
-	checks if an integer is negative and adjusts it if necessary.
- *
- * @param n Pointer to the integer.
- * @param str Pointer to the string.
- */
-static void	ft_ifnegative(int *n, char *str)
+static void	fill_str(char *str, int n, int len)
 {
-	if (*n == -2147483648)
+	int	sign;
+
+	sign = 1;
+	if (n < 0)
+		sign = -1;
+	str[len] = '\0';
+	while (len--)
 	{
-		str[0] = '-';
-		str[1] = '2';
-		*n = 147483648;
+		str[len] = (n % 10) * sign + '0';
+		n /= 10;
 	}
-	else if (*n < 0)
-	{
+	if (sign == -1)
 		str[0] = '-';
-		*n = -(*n);
-	}
 }
 
 /**
@@ -65,24 +60,13 @@ static void	ft_ifnegative(int *n, char *str)
  */
 char	*ft_itoa(int n)
 {
-	int		len;
 	char	*str;
+	int		len;
 
 	len = ft_numlen(n);
-	str = malloc(len + 1);
+	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-	str[len] = '\0';
-	if (n == 0)
-	{
-		str[0] = '0';
-		return (str);
-	}
-	ft_ifnegative(&n, str);
-	while (n != 0)
-	{
-		str[--len] = (char)(n % 10 + '0');
-		n /= 10;
-	}
+	fill_str(str, n, len);
 	return (str);
 }
