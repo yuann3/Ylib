@@ -5,109 +5,80 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 19:40:46 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/12 21:27:29 by yiyli            ###   ########.fr       */
+/*   Created: 2024/05/21 12:59:45 by yiyli             #+#    #+#             */
+/*   Updated: 2024/05/21 13:37:18 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
- * @file ft_split.c
- * @brief Splits a string into words by a charset.
- */
-
 #include "libft.h"
 
-/**
- * @brief Checks if character is a charset.
- * @param c Character to check.
- * @param charset Charset to compare with.
- * @return 1 if c is charset, 0 otherwise.
- */
-int	is_charset(char c, char charset)
-{
-	if (c == charset)
-		return (1);
-	return (0);
-}
-
-/**
- * @brief Counts words in a string.
- * @param str String to count words in.
- * @param charset Word delimiter.
- * @return Number of words.
- */
-int	count_words(char const *str, char charset)
+static int	count_words(char const *s, char c)
 {
 	int	count;
+	int	i;
 
 	count = 0;
-	while (*str)
+	i = 0;
+	while (s[i])
 	{
-		while (*str && is_charset(*str, charset))
-			str++;
-		if (*str && !is_charset(*str, charset))
+		while (s[i] == c)
+			i++;
+		if (s[i] != c && s[i])
 			count++;
-		while (*str && !is_charset(*str, charset))
-			str++;
+		while (s[i] != c && s[i])
+			i++;
 	}
 	return (count);
 }
 
-/**
- * @brief Allocates memory for a word.
- * @param str String to allocate word from.
- * @param charset Word delimiter.
- * @return Pointer to allocated word.
- */
-char	*malloc_word(char const *str, char charset)
+static void	free_strs(char **strs, int index)
 {
-	char	*word;
-	int		len;
+	int	i;
 
-	len = 0;
-	while (str[len] && !is_charset(str[len], charset))
-		len++;
-	word = (char *)malloc(sizeof(char) * (len + 1));
-	len = 0;
-	while (str[len] && !is_charset(str[len], charset))
+	i = 0;
+	while (i < index)
 	{
-		word[len] = str[len];
-		len++;
+		free(strs[i]);
+		i++;
 	}
-	word[len] = '\0';
-	return (word);
+	free(strs);
 }
 
-/**
- * @brief Splits a string into words by a charset.
- *
- * @param str The string to split.
- * @param charset Delimiter for splitting.
- * @return Array of words.
- *
- * Allocates memory for an array of words. Iterates over the string,
-   skipping charset characters and allocating memory for new words.
-   The last array element is NULL. Returns the array.
- */
-char	**ft_split(char const *str, char charset)
+static int	get_word_len(char const *s, char c)
 {
-	char	**arr;
+	int	len;
+
+	len = 0;
+	while (s[len] && s[len] != c)
+		len++;
+	return (len);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**strs;
+	int		word_count;
 	int		i;
 
-	arr = (char **)malloc(sizeof(char *) * (count_words(str, charset) + 1));
+	word_count = count_words(s, c);
+	strs = (char **)malloc(sizeof(char *) * (word_count + 1));
+	if (!strs)
+		return (NULL);
 	i = 0;
-	while (*str)
+	while (*s && i < word_count)
 	{
-		while (*str && is_charset(*str, charset))
-			str++;
-		if (*str && !is_charset(*str, charset))
+		while (*s == c)
+			s++;
+		strs[i] = ft_strdup(s);
+		if (!strs[i])
 		{
-			arr[i] = malloc_word(str, charset);
-			i++;
+			free_strs(strs, i);
+			return (NULL);
 		}
-		while (*str && !is_charset(*str, charset))
-			str++;
+		strs[i][get_word_len(s, c)] = '\0';
+		s += get_word_len(s, c);
+		i++;
 	}
-	arr[i] = 0;
-	return (arr);
+	strs[i] = NULL;
+	return (strs);
 }
