@@ -29,6 +29,8 @@ BONUS_SRCS := ft_lstsize_bonus.c ft_lstadd_front_bonus.c \
 
 BONUS_OBJS := $(BONUS_SRCS:.c=.o)
 
+BONUS_NAME := libft_bonus.a
+
 FLAGS = -Wall -Wextra -Werror
 
 CC = cc
@@ -41,26 +43,23 @@ $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
-bonus: $(NAME) $(BONUS_OBJS)
+bonus: $(BONUS_NAME) $(NAME)
+
+$(BONUS_NAME): $(BONUS_OBJS)
+	ar rc $(BONUS_NAME) $(BONUS_OBJS)
+	ranlib $(BONUS_NAME)
 	ar rc $(NAME) $(BONUS_OBJS)
 	ranlib $(NAME)
-
-bonus_build: $(BONUS_OBJS)
-
-bonus_link: $(NAME)
-	ar rc $(NAME) $(BONUS_OBJS)
-	ranlib $(NAME)
-
 
 %.o: %.c $(HEADER)
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJS) $(BONUS_OBJS)
+	rm -rf $(OBJS) $(BONUS_OBJS) $(BONUS_NAME)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus bonus_build bonus_link
+.PHONY: all clean fclean re bonus
