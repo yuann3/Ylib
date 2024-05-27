@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 13:48:49 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/21 15:52:01 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/21 16:01:37 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	ft_numlen(int n)
 	return (len);
 }
 
-static void	fill_str(char *str, int n, int len)
+static void	ft_fill_str(char *str, int n, int len)
 {
 	int	sign;
 
@@ -67,6 +67,6 @@ char	*ft_itoa(int n)
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (NULL);
-	fill_str(str, n, len);
+	ft_fill_str(str, n, len);
 	return (str);
 }

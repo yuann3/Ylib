@@ -48,7 +48,8 @@ bonus: $(BONUS_NAME) $(NAME)
 $(BONUS_NAME): $(BONUS_OBJS)
 	ar rc $(BONUS_NAME) $(BONUS_OBJS)
 	ranlib $(BONUS_NAME)
-
+	ar rc $(NAME) $(BONUS_OBJS)
+	ranlib $(NAME)
 
 %.o: %.c $(HEADER)
 	$(CC) $(FLAGS) -c $< -o $@
