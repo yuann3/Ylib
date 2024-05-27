@@ -6,7 +6,7 @@
 #    By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/16 16:28:52 by yiyli             #+#    #+#              #
-#    Updated: 2024/05/14 14:35:24 by yiyli            ###   ########.fr        #
+#    Updated: 2024/05/27 21:54:04 by yiyli            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,10 +76,11 @@ norm:
 # dist/ is the folder to be submitted to vogsphere
 .PHONY: dist
 dist:
-	$(RM) -r $(DIST_DIR)
-	$(MKDIR) $(DIST_DIR)
+	find $(DIST_DIR) -type f \( -name '*.c' -o -name '*.h' -o -name '*.o' \) -exec $(RM) {} +
+	$(MKDIR) -p $(DIST_DIR)
 	find $(SOURCE_DIR) -type f -exec cp {} $(DIST_DIR) \;
 	find $(INCLUDE_DIR) -type f -exec cp {} $(DIST_DIR) \;
+
 
 # Generate documentation using doxygen
 .PHONY: doc
