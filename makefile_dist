@@ -38,12 +38,19 @@ HEADER = libft.h
 all: $(NAME)
 
 $(NAME): $(OBJS)
-		ar rc $(NAME) $(OBJS)
-		ranlib $(NAME)
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 
 bonus: $(NAME) $(BONUS_OBJS)
 	ar rc $(NAME) $(BONUS_OBJS)
 	ranlib $(NAME)
+
+bonus_build: $(BONUS_OBJS)
+
+bonus_link: $(NAME)
+	ar rc $(NAME) $(BONUS_OBJS)
+	ranlib $(NAME)
+
 
 %.o: %.c $(HEADER)
 	$(CC) $(FLAGS) -c $< -o $@
@@ -56,4 +63,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus bonus_build bonus_link
