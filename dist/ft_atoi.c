@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 19:53:51 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/16 20:18:41 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/28 23:40:14 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,40 @@
  */
 #include "libft.h"
 
+int	ft_isspace(int c)
+{
+	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
+		|| c == '\r');
+}
+
 /**
  * @brief Converts string to integer.
- * 
+ *
  * @param str Input string.
- * @return Integer representation of string. 
- * 
- * Skips leading whitespace, checks for sign, 
+ * @return Integer representation of string.
+ *
+ * Skips leading whitespace, checks for sign,
  * and converts digits to integer.
  */
 int	ft_atoi(const char *str)
 {
-	int	i;
 	int	sign;
 	int	result;
 
-	i = 0;
+	while (ft_isspace(*str))
+		str++;
 	sign = 1;
-	result = 0;
-	while (str[i] && ((str[i] >= 9 && str[i] <= 13) || str[i] == 32))
-		i++;
-	if (str[i] == '+' || str[i] == '-')
+	if (*str == '+' || *str == '-')
 	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
+		if (*str == '-')
+			sign = -1;
+		str++;
 	}
-	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
+	result = 0;
+	while (ft_isdigit(*str))
 	{
-		result = (str[i] - '0') + (result * 10);
-		i++;
+		result = (*str - '0') + (result * 10);
+		str++;
 	}
 	return (sign * result);
 }
