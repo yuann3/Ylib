@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 14:30:53 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/17 17:52:24 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/28 23:53:13 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,8 @@ void	*ft_memset(void *b, int c, size_t len)
 {
 	unsigned char	*ptr;
 
-	if (!b)
-		return (0);
-	ptr = b;
-	while (len > 0)
-	{
-		*ptr = (unsigned char)c;
-		ptr++;
-		len--;
-	}
+	ptr = (unsigned char *)b;
+	while (len--)
+		*ptr++ = (unsigned char)c;
 	return (b);
 }
