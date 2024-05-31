@@ -28,8 +28,6 @@ void	*ft_memchr(const void *str, int c, size_t n)
 {
 	const unsigned char	*p;
 
-	if (!str)
-		return (NULL);
 	p = str;
 	while (n-- != 0)
 	{
