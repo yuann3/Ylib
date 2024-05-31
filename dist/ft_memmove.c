@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 15:13:47 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/29 08:48:42 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/29 08:49:11 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,24 @@
  */
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	unsigned char		*dst_ptr;
-	unsigned const char	*src_ptr;
+	unsigned char		*d;
+	const unsigned char	*s;
 
-	if (!dst && !src && len != 0)
+	if (!src && !dst && len != 0)
 		return (NULL);
+	d = (unsigned char *)dst;
+	s = (const unsigned char *)src;
 	if (dst < src)
 	{
-		dst_ptr = (unsigned char *)dst;
-		src_ptr = (unsigned const char *)src;
 		while (len--)
-			*dst_ptr++ = *src_ptr++;
+			*d++ = *s++;
 	}
 	else
 	{
-		dst_ptr = (unsigned char *)dst + len;
-		src_ptr = (unsigned const char *)src + len;
+		d += len;
+		s += len;
 		while (len--)
-			*--dst_ptr = *--src_ptr;
+			*--d = *--s;
 	}
 	return (dst);
 }

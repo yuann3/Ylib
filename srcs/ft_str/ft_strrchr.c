@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 21:16:51 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/24 18:57:41 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/31 13:39:35 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,16 @@
  */
 char	*ft_strrchr(const char *str, int c)
 {
-	char	*ret;
-	int		i;
+	const char	*last_occurrence;
 
-	ret = NULL;
-	i = 0;
-	while (str[i])
+	last_occurrence = NULL;
+	while (*str != '\0')
 	{
-		if (str[i] == (char)c)
-			ret = &((char *)str)[i];
-		i++;
+		if (*str == (char)c)
+			last_occurrence = str;
+		str++;
 	}
-	if (c == '\0')
-		ret = &((char *)str)[i];
-	return (ret);
+	if ((char)c == '\0')
+		return ((char *)str);
+	return ((char *)last_occurrence);
 }

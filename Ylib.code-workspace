@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+    "files.autoSave": "onFocusChange",
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": "\\.(c|h)$",
+                "cmd": "c_formatter_42 ${file}",
+                "isAsync": true
+            }
+        ]
+    	}
+	}
+}
