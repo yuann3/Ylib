@@ -6,11 +6,32 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:59:45 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/21 13:37:18 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/05/31 20:21:46 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+char	*ft_strndup_split(const char *s, size_t n)
+{
+	char	*dup;
+	size_t	len;
+
+	len = 0;
+	while (s[len] && len < n)
+		len++;
+	dup = (char *)malloc(sizeof(char) * (len + 1));
+	if (!dup)
+		return (NULL);
+	len = 0;
+	while (s[len] && len < n)
+	{
+		dup[len] = s[len];
+		len++;
+	}
+	dup[len] = '\0';
+	return (dup);
+}
 
 static int	count_words(char const *s, char c)
 {
@@ -69,7 +90,7 @@ char	**ft_split(char const *s, char c)
 	{
 		while (*s == c)
 			s++;
-		strs[i] = ft_strdup(s);
+		strs[i] = ft_strndup_split(s, get_word_len(s, c));
 		if (!strs[i])
 		{
 			free_strs(strs, i);
