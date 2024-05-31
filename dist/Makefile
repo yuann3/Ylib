@@ -62,24 +62,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re bonus
-
-TEST_SRCS := TEST.c
-TEST_OBJS := $(TEST_SRCS:.c=.o)
-TEST_NAME := test
-
-test: $(TEST_NAME)
-
-$(TEST_NAME): $(TEST_OBJS) $(NAME)
-	$(CC) $(FLAGS) $(TEST_OBJS) $(NAME) -o $(TEST_NAME)
-
-TEST.o: TEST.c $(HEADER)
-	$(CC) $(FLAGS) -c TEST.c -o TEST.o
-
-clean_test:
-	rm -rf $(TEST_OBJS) $(TEST_NAME)
-
-fclean_test: clean_test
-
-re_test: fclean_test test
-
-.PHONY: test clean_test fclean_test re_test
