@@ -42,19 +42,18 @@ $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
-bonus: $(BONUS_NAME) $(NAME)
+bonus: $(NAME) .bonus_built
 
-$(BONUS_NAME): $(BONUS_OBJS)
-	ar rc $(BONUS_NAME) $(BONUS_OBJS)
-	ranlib $(BONUS_NAME)
+.bonus_built: $(BONUS_OBJS)
 	ar rc $(NAME) $(BONUS_OBJS)
 	ranlib $(NAME)
+	touch .bonus_built
 
 %.o: %.c $(HEADER)
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJS) $(BONUS_OBJS) $(BONUS_NAME)
+	rm -rf $(OBJS) $(BONUS_OBJS) $(BONUS_NAME) .bonus_built
 
 fclean: clean
 	rm -f $(NAME)
