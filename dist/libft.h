@@ -34,6 +34,7 @@ t_list				*ft_lstlast(t_list *lst);
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 
+int					ft_ptrlen(void *ptr);
 int					ft_isalpha(int c);
 int					ft_isdigit(int n);
 int					ft_isalnum(int c);
@@ -67,10 +68,18 @@ void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 size_t				ft_strlen(const char *s);
 size_t				ft_strlcpy(char *dst, const char *src, size_t destsize);
 size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
+char				*ft_utoa(unsigned int n);
+char				*ft_xtoa(unsigned long num, int is_upper);
 
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
+void				ft_putchar(char c);
+void				ft_puthex(unsigned int n, int uppercase);
+void				ft_putnbr(int n);
+void				ft_putptr(void *ptr);
+void				ft_putstr(char *str);
+void				ft_putunbr(unsigned int n);
 
 #endif
