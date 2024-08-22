@@ -29,13 +29,8 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	const unsigned char	*p2;
 	size_t				i;
 
-<<<<<<< HEAD
 	p1 = (const unsigned char *)s1;
 	p2 = (const unsigned char *)s2;
-=======
-	p1 = s1;
-	p2 = s2;
->>>>>>> 27568f817c408c2f22dd5a2c4fa8705d2f8d45e4
 	i = 0;
 	while (i < n)
 	{
