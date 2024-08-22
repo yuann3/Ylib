@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 16:34:53 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/31 23:55:14 by yiyli            ###   ########.fr       */
+/*   Updated: 2024/06/01 00:54:04 by yiyli            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,13 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	const unsigned char	*p2;
 	size_t				i;
 
+<<<<<<< HEAD
 	p1 = (const unsigned char *)s1;
 	p2 = (const unsigned char *)s2;
+=======
+	p1 = s1;
+	p2 = s2;
+>>>>>>> 27568f817c408c2f22dd5a2c4fa8705d2f8d45e4
 	i = 0;
 	while (i < n)
 	{
