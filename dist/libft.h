@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
@@ -81,5 +82,6 @@ void				ft_putnbr(int n);
 void				ft_putptr(void *ptr);
 void				ft_putstr(char *str);
 void				ft_putunbr(unsigned int n);
+int		ft_printf(const char *format, ...);
 
 #endif

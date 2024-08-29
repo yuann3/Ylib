@@ -16,7 +16,8 @@ SRCS := ft_isalpha.c ft_isdigit.c \
 	ft_striteri.c ft_strlen.c \
 	ft_strlcpy.c ft_strlcat.c \
 	ft_putchar_fd.c ft_putstr_fd.c \
-	ft_putendl_fd.c ft_putnbr_fd.c
+	ft_putendl_fd.c ft_putnbr_fd.c \
+	ft_printf.c 
 
 OBJS := $(SRCS:.c=.o)
 
