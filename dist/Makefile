@@ -1,5 +1,10 @@
 NAME := libft.a
 
+CC := cc
+FLAGS := -Wall -Wextra -Werror
+
+HEADER := libft.h
+
 SRCS := ft_isalpha.c ft_isdigit.c \
 	ft_isalnum.c ft_isascii.c \
 	ft_isprint.c ft_memcmp.c \
@@ -17,7 +22,10 @@ SRCS := ft_isalpha.c ft_isdigit.c \
 	ft_strlcpy.c ft_strlcat.c \
 	ft_putchar_fd.c ft_putstr_fd.c \
 	ft_putendl_fd.c ft_putnbr_fd.c \
-	ft_printf.c 
+	ft_putchar.c ft_putstr.c \
+	ft_xtoa.c ft_utoa.c \
+	ft_putptr.c ft_putnbr.c \
+	ft_ptrlen.c
 
 OBJS := $(SRCS:.c=.o)
 
@@ -28,14 +36,6 @@ BONUS_SRCS := ft_lstsize_bonus.c ft_lstadd_front_bonus.c \
 	ft_lstmap_bonus.c
 
 BONUS_OBJS := $(BONUS_SRCS:.c=.o)
-
-BONUS_NAME := libft_bonus.a
-
-FLAGS = -Wall -Wextra -Werror
-
-CC = cc
-
-HEADER = libft.h
 
 all: $(NAME)
 
@@ -54,7 +54,7 @@ bonus: $(NAME) .bonus_built
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJS) $(BONUS_OBJS) $(BONUS_NAME) .bonus_built
+	rm -rf $(OBJS) $(BONUS_OBJS) .bonus_built
 
 fclean: clean
 	rm -f $(NAME)
