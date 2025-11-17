@@ -19,3 +19,11 @@ int	ft_strcmp(const char *s1, const char *s2)
 	}
 	return (*(const unsigned char *)s1 - *(const unsigned char *)s2);
 }
+
+#include <stdio.h>
+#include <string.h>
+
+int main(void) {
+	printf("%d\n", ft_strcmp("hell", "hel"));
+	printf("%d\n", strcmp("hell", "hel"));
+}
