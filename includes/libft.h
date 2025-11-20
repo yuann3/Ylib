@@ -6,7 +6,7 @@
 /*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
 /*                                              +#+#+#+#+#+      +#+          */
 /*   Created: 2025/11/18 18:42:23 by yiyuli           #+#      #+#            */
-/*   Updated: 2025/11/20 15:43:03 by yiyuli         ###      ########.fr      */
+/*   Updated: 2025/11/20 15:50:45 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char				*ft_strrchr(const char *str, int c);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
+char				*ft_strchr(const char *s, int c);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 size_t				ft_strlen(const char *s);
 size_t				ft_strlcpy(char *dst, const char *src, size_t destsize);
