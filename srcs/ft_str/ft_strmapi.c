@@ -1,27 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                                                          :::      ::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 13:34:35 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/27 21:38:35 by yiyli            ###   ########.fr       */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2025/11/20 15:06:56 by yiyuli           #+#      #+#            */
+/*   Updated: 2025/11/20 15:06:58 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-/**
- * @file ft_strmapi.c
- * @brief Applies a function to each character of a string,
-	creating a new string.
- *
- * @param s The original string.
- * @param f The function to apply to each character.
- * @return char* The new string resulting from successive applications of 'f',
-	or NULL if an error occurs.
- */
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {

@@ -1,25 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                                                          :::      ::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/24 18:43:23 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/25 20:19:38 by yiyli            ###   ########.fr       */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2025/11/20 15:02:48 by yiyuli           #+#      #+#            */
+/*   Updated: 2025/11/20 15:04:35 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/**
- * @file ft_strjoin.c
- * @brief Concatenates two strings into a new string.
- *
- * @param s1 The first string.
- * @param s2 The second string.
- * @return char* A new string that is the concatenation of s1 and s2.
- */
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	i;

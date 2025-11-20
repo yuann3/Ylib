@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                                                          :::      ::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 19:58:14 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/25 20:31:15 by yiyli            ###   ########.fr       */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2025/11/20 15:14:54 by yiyuli           #+#      #+#            */
+/*   Updated: 2025/11/20 15:14:55 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/**
- * @brief Checks if a character is in a set of characters.
- *
- * @param c The character to be checked.
- * @param set The set of characters.
- * @return int Returns 1 if the character is in the set, 0 otherwise.
- */
-int	ft_checkset(char c, const char *set)
+static int	ft_checkset(char c, const char *set)
 {
 	while (*set)
 	{
@@ -30,14 +23,6 @@ int	ft_checkset(char c, const char *set)
 	return (0);
 }
 
-/**
- * @file ft_strtrim.c
- * @brief Trims the start and end of a string based on a set of characters.
- *
- * @param s1 The string to be trimmed.
- * @param set The set of characters to trim.
- * @return char* Returns the trimmed string, or NULL if an error occurs.
- */
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	start;

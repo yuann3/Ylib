@@ -1,28 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                                                          :::      ::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 16:34:53 by yiyli             #+#    #+#             */
-/*   Updated: 2024/06/01 00:54:04 by yiyli            ###   ########.fr       */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2025/11/20 14:05:34 by yiyuli           #+#      #+#            */
+/*   Updated: 2025/11/20 14:05:43 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/**
- * @file ft_memcmp.c
- * @brief Compares two blocks of memory.
- *
- * @param s1 Pointer to the first block of memory.
- * @param s2 Pointer to the second block of memory.
- * @param n Number of bytes to compare.
- * @return int Returns an integer less than, equal to,
-	or greater than zero if the first n bytes of s1 is found, respectively,
-	to be less than, to match, or be greater than the first n bytes of s2.
- */
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	const unsigned char	*p1;

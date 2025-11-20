@@ -1,24 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                                                          :::      ::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 19:56:17 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/22 20:51:25 by yiyli            ###   ########.fr       */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2025/11/20 14:56:36 by yiyuli           #+#      #+#            */
+/*   Updated: 2025/11/20 14:56:39 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/**
- * @file ft_putnbr_fd.c
- * @brief Writes an integer to a given file descriptor.
- * 
- * @param n The integer to be written.
- * @param fd The file descriptor to write to.
- */
 void	ft_putnbr_fd(int n, int fd)
 {
 	if (n == -2147483648)

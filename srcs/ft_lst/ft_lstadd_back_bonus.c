@@ -1,24 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 10:29:44 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/17 18:36:03 by yiyli            ###   ########.fr       */
+/*                                                          :::      ::::::   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2025/11/20 14:49:04 by yiyuli           #+#      #+#            */
+/*   Updated: 2025/11/20 14:49:05 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/**
- * @file ft_lstadd_back.c
- * @brief Adds the element 'new' at the end of the list.
- *
- * @param lst Double pointer to the list.
- * @param new Pointer to the element to be added to the list.
- */
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*current;

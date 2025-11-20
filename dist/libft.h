@@ -6,7 +6,7 @@
 /*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 14:56:51 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/31 20:29:22 by yiyli            ###   ########.fr       */
+/*   Updated: 2025/11/20 14:48:31 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int					ft_tolower(int c);
 int					ft_atoi(const char *str);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_itoa(int n);
-char				**ft_split(char const *str, char charset);
+char				**ft_split(char *str, char *charset);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strchr(const char *s, int c);
 char				*ft_strdup(const char *s);

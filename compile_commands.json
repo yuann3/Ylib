@@ -12,9 +12,9 @@
       "objs/ft_mem/ft_memcmp.o",
       "srcs/ft_mem/ft_memcmp.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_mem/ft_memcmp.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_mem/ft_memcmp.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_mem/ft_memcmp.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_mem/ft_memcmp.o"
   },
   {
     "arguments": [
@@ -29,9 +29,9 @@
       "objs/ft_mem/ft_bzero.o",
       "srcs/ft_mem/ft_bzero.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_mem/ft_bzero.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_mem/ft_bzero.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_mem/ft_bzero.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_mem/ft_bzero.o"
   },
   {
     "arguments": [
@@ -46,9 +46,9 @@
       "objs/ft_mem/ft_memcpy.o",
       "srcs/ft_mem/ft_memcpy.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_mem/ft_memcpy.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_mem/ft_memcpy.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_mem/ft_memcpy.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_mem/ft_memcpy.o"
   },
   {
     "arguments": [
@@ -63,9 +63,9 @@
       "objs/ft_mem/ft_memchr.o",
       "srcs/ft_mem/ft_memchr.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_mem/ft_memchr.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_mem/ft_memchr.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_mem/ft_memchr.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_mem/ft_memchr.o"
   },
   {
     "arguments": [
@@ -80,9 +80,9 @@
       "objs/ft_mem/ft_memset.o",
       "srcs/ft_mem/ft_memset.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_mem/ft_memset.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_mem/ft_memset.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_mem/ft_memset.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_mem/ft_memset.o"
   },
   {
     "arguments": [
@@ -97,9 +97,9 @@
       "objs/ft_mem/ft_ptrlen.o",
       "srcs/ft_mem/ft_ptrlen.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_mem/ft_ptrlen.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_mem/ft_ptrlen.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_mem/ft_ptrlen.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_mem/ft_ptrlen.o"
   },
   {
     "arguments": [
@@ -114,9 +114,9 @@
       "objs/ft_mem/ft_memmove.o",
       "srcs/ft_mem/ft_memmove.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_mem/ft_memmove.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_mem/ft_memmove.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_mem/ft_memmove.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_mem/ft_memmove.o"
   },
   {
     "arguments": [
@@ -131,9 +131,9 @@
       "objs/ft_mem/ft_calloc.o",
       "srcs/ft_mem/ft_calloc.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_mem/ft_calloc.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_mem/ft_calloc.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_mem/ft_calloc.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_mem/ft_calloc.o"
   },
   {
     "arguments": [
@@ -148,9 +148,9 @@
       "objs/ft_str/ft_strnstr.o",
       "srcs/ft_str/ft_strnstr.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_strnstr.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_strnstr.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_strnstr.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_strnstr.o"
   },
   {
     "arguments": [
@@ -165,9 +165,9 @@
       "objs/ft_str/ft_strlcpy.o",
       "srcs/ft_str/ft_strlcpy.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_strlcpy.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_strlcpy.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_strlcpy.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_strlcpy.o"
   },
   {
     "arguments": [
@@ -182,9 +182,9 @@
       "objs/ft_str/ft_strlen.o",
       "srcs/ft_str/ft_strlen.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_strlen.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_strlen.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_strlen.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_strlen.o"
   },
   {
     "arguments": [
@@ -199,9 +199,9 @@
       "objs/ft_str/ft_utoa.o",
       "srcs/ft_str/ft_utoa.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_utoa.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_utoa.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_utoa.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_utoa.o"
   },
   {
     "arguments": [
@@ -216,9 +216,9 @@
       "objs/ft_str/ft_strchr.o",
       "srcs/ft_str/ft_strchr.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_strchr.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_strchr.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_strchr.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_strchr.o"
   },
   {
     "arguments": [
@@ -233,9 +233,9 @@
       "objs/ft_str/ft_striteri.o",
       "srcs/ft_str/ft_striteri.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_striteri.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_striteri.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_striteri.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_striteri.o"
   },
   {
     "arguments": [
@@ -250,9 +250,9 @@
       "objs/ft_str/ft_strjoin.o",
       "srcs/ft_str/ft_strjoin.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_strjoin.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_strjoin.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_strjoin.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_strjoin.o"
   },
   {
     "arguments": [
@@ -267,9 +267,9 @@
       "objs/ft_str/ft_xtoa.o",
       "srcs/ft_str/ft_xtoa.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_xtoa.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_xtoa.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_xtoa.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_xtoa.o"
   },
   {
     "arguments": [
@@ -284,9 +284,9 @@
       "objs/ft_str/ft_toupper.o",
       "srcs/ft_str/ft_toupper.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_toupper.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_toupper.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_toupper.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_toupper.o"
   },
   {
     "arguments": [
@@ -301,9 +301,9 @@
       "objs/ft_str/ft_split.o",
       "srcs/ft_str/ft_split.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_split.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_split.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_split.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_split.o"
   },
   {
     "arguments": [
@@ -318,9 +318,9 @@
       "objs/ft_str/ft_strrchr.o",
       "srcs/ft_str/ft_strrchr.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_strrchr.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_strrchr.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_strrchr.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_strrchr.o"
   },
   {
     "arguments": [
@@ -335,9 +335,9 @@
       "objs/ft_str/ft_substr.o",
       "srcs/ft_str/ft_substr.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_substr.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_substr.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_substr.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_substr.o"
   },
   {
     "arguments": [
@@ -352,9 +352,9 @@
       "objs/ft_str/ft_strncmp.o",
       "srcs/ft_str/ft_strncmp.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_strncmp.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_strncmp.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_strncmp.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_strncmp.o"
   },
   {
     "arguments": [
@@ -369,9 +369,9 @@
       "objs/ft_str/ft_strmapi.o",
       "srcs/ft_str/ft_strmapi.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_strmapi.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_strmapi.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_strmapi.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_strmapi.o"
   },
   {
     "arguments": [
@@ -386,9 +386,9 @@
       "objs/ft_str/ft_strtrim.o",
       "srcs/ft_str/ft_strtrim.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_strtrim.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_strtrim.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_strtrim.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_strtrim.o"
   },
   {
     "arguments": [
@@ -403,9 +403,9 @@
       "objs/ft_str/ft_strlcat.o",
       "srcs/ft_str/ft_strlcat.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_strlcat.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_strlcat.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_strlcat.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_strlcat.o"
   },
   {
     "arguments": [
@@ -420,9 +420,9 @@
       "objs/ft_str/ft_strdup.o",
       "srcs/ft_str/ft_strdup.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_strdup.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_strdup.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_strdup.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_strdup.o"
   },
   {
     "arguments": [
@@ -437,9 +437,9 @@
       "objs/ft_str/ft_atoi.o",
       "srcs/ft_str/ft_atoi.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_atoi.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_atoi.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_atoi.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_atoi.o"
   },
   {
     "arguments": [
@@ -454,9 +454,9 @@
       "objs/ft_str/ft_itoa.o",
       "srcs/ft_str/ft_itoa.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_itoa.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_itoa.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_itoa.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_itoa.o"
   },
   {
     "arguments": [
@@ -471,9 +471,26 @@
       "objs/ft_str/ft_tolower.o",
       "srcs/ft_str/ft_tolower.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_str/ft_tolower.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_str/ft_tolower.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_tolower.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_tolower.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_str/ft_strcmp.o",
+      "srcs/ft_str/ft_strcmp.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_str/ft_strcmp.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_str/ft_strcmp.o"
   },
   {
     "arguments": [
@@ -488,9 +505,9 @@
       "objs/ft_lst/ft_lstadd_front_bonus.o",
       "srcs/ft_lst/ft_lstadd_front_bonus.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_lst/ft_lstadd_front_bonus.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_lst/ft_lstadd_front_bonus.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_lst/ft_lstadd_front_bonus.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_lst/ft_lstadd_front_bonus.o"
   },
   {
     "arguments": [
@@ -505,9 +522,9 @@
       "objs/ft_lst/ft_lstdelone_bonus.o",
       "srcs/ft_lst/ft_lstdelone_bonus.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_lst/ft_lstdelone_bonus.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_lst/ft_lstdelone_bonus.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_lst/ft_lstdelone_bonus.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_lst/ft_lstdelone_bonus.o"
   },
   {
     "arguments": [
@@ -522,9 +539,9 @@
       "objs/ft_lst/ft_lstadd_back_bonus.o",
       "srcs/ft_lst/ft_lstadd_back_bonus.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_lst/ft_lstadd_back_bonus.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_lst/ft_lstadd_back_bonus.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_lst/ft_lstadd_back_bonus.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_lst/ft_lstadd_back_bonus.o"
   },
   {
     "arguments": [
@@ -539,9 +556,9 @@
       "objs/ft_lst/ft_lstmap_bonus.o",
       "srcs/ft_lst/ft_lstmap_bonus.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_lst/ft_lstmap_bonus.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_lst/ft_lstmap_bonus.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_lst/ft_lstmap_bonus.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_lst/ft_lstmap_bonus.o"
   },
   {
     "arguments": [
@@ -556,9 +573,9 @@
       "objs/ft_lst/ft_lstclear_bonus.o",
       "srcs/ft_lst/ft_lstclear_bonus.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_lst/ft_lstclear_bonus.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_lst/ft_lstclear_bonus.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_lst/ft_lstclear_bonus.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_lst/ft_lstclear_bonus.o"
   },
   {
     "arguments": [
@@ -573,9 +590,9 @@
       "objs/ft_lst/ft_lstiter_bonus.o",
       "srcs/ft_lst/ft_lstiter_bonus.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_lst/ft_lstiter_bonus.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_lst/ft_lstiter_bonus.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_lst/ft_lstiter_bonus.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_lst/ft_lstiter_bonus.o"
   },
   {
     "arguments": [
@@ -590,9 +607,9 @@
       "objs/ft_lst/ft_lstlast_bonus.o",
       "srcs/ft_lst/ft_lstlast_bonus.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_lst/ft_lstlast_bonus.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_lst/ft_lstlast_bonus.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_lst/ft_lstlast_bonus.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_lst/ft_lstlast_bonus.o"
   },
   {
     "arguments": [
@@ -607,9 +624,9 @@
       "objs/ft_lst/ft_lstsize_bonus.o",
       "srcs/ft_lst/ft_lstsize_bonus.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_lst/ft_lstsize_bonus.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_lst/ft_lstsize_bonus.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_lst/ft_lstsize_bonus.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_lst/ft_lstsize_bonus.o"
   },
   {
     "arguments": [
@@ -624,9 +641,9 @@
       "objs/ft_lst/ft_lstnew_bonus.o",
       "srcs/ft_lst/ft_lstnew_bonus.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_lst/ft_lstnew_bonus.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_lst/ft_lstnew_bonus.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_lst/ft_lstnew_bonus.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_lst/ft_lstnew_bonus.o"
   },
   {
     "arguments": [
@@ -638,11 +655,266 @@
       "includes",
       "-c",
       "-o",
-      "objs/ft_printf.o",
-      "srcs/ft_printf.c"
+      "objs/ft_put/ft_putstr_fd.o",
+      "srcs/ft_put/ft_putstr_fd.c"
     ],
-    "directory": "/Users/yuan/Developer/42Core/Ylib",
-    "file": "/Users/yuan/Developer/42Core/Ylib/srcs/ft_printf.c",
-    "output": "/Users/yuan/Developer/42Core/Ylib/objs/ft_printf.o"
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_put/ft_putstr_fd.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_put/ft_putstr_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_put/ft_putnbr.o",
+      "srcs/ft_put/ft_putnbr.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_put/ft_putnbr.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_put/ft_putnbr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_put/ft_putnbr_fd.o",
+      "srcs/ft_put/ft_putnbr_fd.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_put/ft_putnbr_fd.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_put/ft_putnbr_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_put/ft_printf.o",
+      "srcs/ft_put/ft_printf.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_put/ft_printf.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_put/ft_printf.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_put/ft_putendl_fd.o",
+      "srcs/ft_put/ft_putendl_fd.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_put/ft_putendl_fd.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_put/ft_putendl_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_put/ft_putchar.o",
+      "srcs/ft_put/ft_putchar.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_put/ft_putchar.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_put/ft_putchar.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_put/ft_puthex.o",
+      "srcs/ft_put/ft_puthex.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_put/ft_puthex.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_put/ft_puthex.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_put/ft_putchar_fd.o",
+      "srcs/ft_put/ft_putchar_fd.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_put/ft_putchar_fd.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_put/ft_putchar_fd.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_put/ft_putunbr.o",
+      "srcs/ft_put/ft_putunbr.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_put/ft_putunbr.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_put/ft_putunbr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_put/ft_putstr.o",
+      "srcs/ft_put/ft_putstr.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_put/ft_putstr.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_put/ft_putstr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_put/ft_putptr.o",
+      "srcs/ft_put/ft_putptr.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_put/ft_putptr.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_put/ft_putptr.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_is/ft_isdigit.o",
+      "srcs/ft_is/ft_isdigit.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_is/ft_isdigit.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_is/ft_isdigit.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_is/ft_isascii.o",
+      "srcs/ft_is/ft_isascii.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_is/ft_isascii.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_is/ft_isascii.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_is/ft_isprint.o",
+      "srcs/ft_is/ft_isprint.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_is/ft_isprint.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_is/ft_isprint.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_is/ft_isalpha.o",
+      "srcs/ft_is/ft_isalpha.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_is/ft_isalpha.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_is/ft_isalpha.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-I",
+      "includes",
+      "-c",
+      "-o",
+      "objs/ft_is/ft_isalnum.o",
+      "srcs/ft_is/ft_isalnum.c"
+    ],
+    "directory": "/Users/yuan/Developer/42_core/Ylib",
+    "file": "/Users/yuan/Developer/42_core/Ylib/srcs/ft_is/ft_isalnum.c",
+    "output": "/Users/yuan/Developer/42_core/Ylib/objs/ft_is/ft_isalnum.o"
   }
 ]
