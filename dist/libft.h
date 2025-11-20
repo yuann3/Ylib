@@ -6,7 +6,7 @@
 /*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
 /*                                              +#+#+#+#+#+      +#+          */
 /*   Created: 2025/11/18 18:42:23 by yiyuli           #+#      #+#            */
-/*   Updated: 2025/11/20 15:55:04 by yiyuli         ###      ########.fr      */
+/*   Updated: 2025/11/20 17:25:37 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,6 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
-void				ft_putchar(char c);
-void				ft_puthex(unsigned int n, int uppercase);
-void				ft_putnbr(int n);
-void				ft_putptr(void *ptr);
-void				ft_putstr(char *str);
 void				ft_putunbr(unsigned int n);
-int					ft_printf(const char *format, ...);
 
 #endif
