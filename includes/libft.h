@@ -6,7 +6,7 @@
 /*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
 /*                                              +#+#+#+#+#+      +#+          */
 /*   Created: 2025/11/18 18:42:23 by yiyuli           #+#      #+#            */
-/*   Updated: 2025/11/20 15:37:11 by yiyuli         ###      ########.fr      */
+/*   Updated: 2025/11/20 15:43:03 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,8 @@ int					ft_tolower(int c);
 int					ft_atoi(const char *str);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_itoa(int n);
-char				**ft_split(char const *s, char c);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-char				*ft_strchr(const char *s, int c);
+char				**ft_split(char *str, char *charset);
 char				*ft_strdup(const char *s);
 char				*ft_strnstr(const char *haystack, const char *needle,
 						size_t len);

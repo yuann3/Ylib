@@ -6,7 +6,7 @@
 /*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
 /*                                              +#+#+#+#+#+      +#+          */
 /*   Created: 2025/11/20 15:14:59 by yiyuli           #+#      #+#            */
-/*   Updated: 2025/11/20 15:15:05 by yiyuli         ###      ########.fr      */
+/*   Updated: 2025/11/20 15:36:16 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (len > slen - start)
 		len = slen - start;
-	substr = (char *)malloc(sizeof(char) * (len + 1));
+	substr = (char *)malloc(len + 1);
 	if (!substr)
 		return (NULL);
-	ft_strlcpy(substr, s + start, len + 1);
-	substr[slen] = '\0';
+	ft_memcpy(substr, s + start, len);
+	substr[len] = '\0';
 	return (substr);
 }
