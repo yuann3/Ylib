@@ -1,105 +1,90 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                                                          :::      ::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 12:59:45 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/31 20:21:46 by yiyli            ###   ########.fr       */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2025/11/20 14:46:37 by yiyuli           #+#      #+#            */
+/*   Updated: 2025/11/20 14:46:38 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strndup_split(const char *s, size_t n)
+static int	is_sep(char c, char *charset)
 {
-	char	*dup;
-	size_t	len;
-
-	len = 0;
-	while (s[len] && len < n)
-		len++;
-	dup = (char *)malloc(sizeof(char) * (len + 1));
-	if (!dup)
-		return (NULL);
-	len = 0;
-	while (s[len] && len < n)
+	while (*charset)
 	{
-		dup[len] = s[len];
-		len++;
+		if (c == *charset)
+			return (1);
+		charset++;
 	}
-	dup[len] = '\0';
-	return (dup);
+	return (0);
 }
 
-static int	count_words(char const *s, char c)
+static int	count_word(char *str, char *charset)
 {
 	int	count;
-	int	i;
 
 	count = 0;
-	i = 0;
-	while (s[i])
+	while (*str)
 	{
-		while (s[i] == c)
-			i++;
-		if (s[i] != c && s[i])
-			count++;
-		while (s[i] != c && s[i])
-			i++;
+		while (*str && is_sep(*str, charset))
+			++str;
+		if (*str && !is_sep(*str, charset))
+		{
+			++count;
+			while (*str && !is_sep(*str, charset))
+				++str;
+		}
 	}
 	return (count);
 }
 
-static void	free_strs(char **strs, int index)
+static char	*dup_word(char *str, int word_len)
 {
-	int	i;
-
-	i = 0;
-	while (i < index)
-	{
-		free(strs[i]);
-		i++;
-	}
-	free(strs);
-}
-
-static int	get_word_len(char const *s, char c)
-{
-	int	len;
-
-	len = 0;
-	while (s[len] && s[len] != c)
-		len++;
-	return (len);
-}
-
-char	**ft_split(char const *s, char c)
-{
-	char	**strs;
-	int		word_count;
+	char	*dest;
 	int		i;
 
-	word_count = count_words(s, c);
-	strs = (char **)malloc(sizeof(char *) * (word_count + 1));
-	if (!strs)
+	i = 0;
+	dest = malloc(word_len + 1);
+	if (!dest)
+		return (NULL);
+	while (i < word_len)
+	{
+		dest[i] = str[i];
+		++i;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+char	**ft_split(char *str, char *charset)
+{
+	char	**res;
+	int		words;
+	int		word_len;
+	int		i;
+
+	words = count_word(str, charset);
+	res = malloc(sizeof(char *) * (words + 1));
+	if (!res)
 		return (NULL);
 	i = 0;
-	while (*s && i < word_count)
+	while (i < words)
 	{
-		while (*s == c)
-			s++;
-		strs[i] = ft_strndup_split(s, get_word_len(s, c));
-		if (!strs[i])
-		{
-			free_strs(strs, i);
+		while (*str && is_sep(*str, charset))
+			++str;
+		word_len = 0;
+		while (str[word_len] && !is_sep(str[word_len], charset))
+			++word_len;
+		res[i] = dup_word(str, word_len);
+		if (!res[i])
 			return (NULL);
-		}
-		strs[i][get_word_len(s, c)] = '\0';
-		s += get_word_len(s, c);
 		i++;
+		str += word_len;
 	}
-	strs[i] = NULL;
-	return (strs);
+	res[i] = NULL;
+	return (res);
 }

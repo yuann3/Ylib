@@ -1,43 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                                                          :::      ::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 20:47:42 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/15 16:37:32 by yiyli            ###   ########.fr       */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2025/11/20 15:09:55 by yiyuli           #+#      #+#            */
+/*   Updated: 2025/11/20 15:11:23 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/**
- * @file ft_strnstr.c
- * @brief Locates the first occurrence of the substring in the string.
- *
- * @param str The string to be scanned.
- * @param substr The substring to be searched within str.
- * @param len The maximum number of characters to be compared.
- * @return char* A pointer to the first occurrence of the substring in str.
- */
-char	*ft_strnstr(const char *str, const char *substr, size_t len)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;
 	size_t	j;
 
+	if (*needle == '\0')
+		return ((char *)haystack);
 	i = 0;
-	if (substr[0] == '\0')
-		return ((char *)str);
-	while (str[i] != '\0' && i < len)
+	while (haystack[i] && i < len)
 	{
 		j = 0;
-		while (substr[j] == str[i + j] && (i + j) < len)
-		{
-			if (substr[j + 1] == '\0')
-				return ((char *)&str[i]);
+		while (i + j < len && haystack[i + j] == needle[j] && needle[j])
 			j++;
-		}
+		if (needle[j] == '\0')
+			return ((char *)(haystack + i));
 		i++;
 	}
 	return (NULL);

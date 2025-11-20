@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                                                          :::      ::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 19:53:51 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/28 23:40:14 by yiyli            ###   ########.fr       */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2025/11/20 14:09:28 by yiyuli           #+#      #+#            */
+/*   Updated: 2025/11/20 15:20:27 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
- * @file ft_atoi.c
- * @brief String to integer converter.
- */
 #include "libft.h"
 
-int	ft_isspace(int c)
+static int	ft_isspace(int c)
 {
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
-		|| c == '\r');
+	return (c == ' ' || (c >= 9 && c <= 13));
 }
 
 /**
@@ -39,17 +34,17 @@ int	ft_atoi(const char *str)
 	while (ft_isspace(*str))
 		str++;
 	sign = 1;
-	if (*str == '+' || *str == '-')
+	if (*str == '-' || *str == '+' )
 	{
-		if (*str == '-')
+	if (*str == '-')
 			sign = -1;
 		str++;
 	}
 	result = 0;
 	while (ft_isdigit(*str))
 	{
-		result = (*str - '0') + (result * 10);
+		result = result * 10 + (*str - '0');
 		str++;
 	}
-	return (sign * result);
+	return ((int)(sign * result));
 }

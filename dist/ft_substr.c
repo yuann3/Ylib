@@ -1,26 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                                                          :::      ::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/25 21:10:03 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/26 01:58:15 by yiyli            ###   ########.fr       */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2025/11/20 15:14:59 by yiyuli           #+#      #+#            */
+/*   Updated: 2025/11/20 15:15:05 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/**
- * @file ft_substr.c
- * @brief Creates a substring from a string.
- *
- * @param s The original string.
- * @param start The start index of the substring in the original string.
- * @param len The maximum length of the substring.
- * @return char* The created substring, or NULL if an error occurs.
- */
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;

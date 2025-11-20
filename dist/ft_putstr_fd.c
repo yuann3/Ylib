@@ -1,24 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                                                          :::      ::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 19:29:45 by yiyli             #+#    #+#             */
-/*   Updated: 2024/05/19 17:05:12 by yiyli            ###   ########.fr       */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2025/11/20 14:56:52 by yiyuli           #+#      #+#            */
+/*   Updated: 2025/11/20 14:56:55 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/**
- * @file ft_putstr_fd.c
- * @brief Writes a string to a given file descriptor.
- *
- * @param s The string to be written.
- * @param fd The file descriptor to write to.
- */
 void	ft_putstr_fd(char *s, int fd)
 {
 	int	len;

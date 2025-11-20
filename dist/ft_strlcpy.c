@@ -1,30 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                                                          :::      ::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 23:02:43 by yiyli             #+#    #+#             */
-/*   Updated: 2024/04/17 13:21:50 by yiyli            ###   ########.fr       */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2025/11/20 15:06:00 by yiyuli           #+#      #+#            */
+/*   Updated: 2025/11/20 15:06:01 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/**
- * @file ft_strlcpy.c
- * @brief Copies a string.
- * @param dst Destination string.
- * @param src Source string.
- * @param destsize Size of destination buffer.
- * @return Length of source string.
- * 
- * Copies up to destsize - 1 characters from the source string
- * to the destination string, null-terminating the result. If
- * destsize is 0, no characters are copied, but the length of
- * the source string is still returned.
- */
 size_t	ft_strlcpy(char *dst, const char *src, size_t destsize)
 {
 	size_t	i;

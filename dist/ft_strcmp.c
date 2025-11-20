@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                                                          :::      ::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yiyli <yy@eyuan.me>                        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 15:37:30 by yiyli             #+#    #+#             */
-/*   Updated: 2024/10/17 15:37:35 by yiyli            ###   ########.fr       */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2025/11/20 14:57:39 by yiyuli           #+#      #+#            */
+/*   Updated: 2025/11/20 14:57:42 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,4 @@ int	ft_strcmp(const char *s1, const char *s2)
 		s2++;
 	}
 	return (*(const unsigned char *)s1 - *(const unsigned char *)s2);
-}
-
-#include <stdio.h>
-#include <string.h>
-
-int main(void) {
-	printf("%d\n", ft_strcmp("hell", "hel"));
-	printf("%d\n", strcmp("hell", "hel"));
 }

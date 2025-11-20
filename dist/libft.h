@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
+/*                                                          :::      ::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: yiyli <etherealdt@gmail.com>               +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/16 14:56:51 by yiyli             #+#    #+#             */
-/*   Updated: 2025/11/20 14:48:31 by yiyuli         ###      ########.fr      */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2025/11/18 18:42:23 by yiyuli           #+#      #+#            */
+/*   Updated: 2025/11/20 15:12:54 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char				**ft_split(char *str, char *charset);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strchr(const char *s, int c);
 char				*ft_strdup(const char *s);
-char				*ft_strnstr(const char *str, const char *substr,
+char				*ft_strnstr(const char *haystack, const char *needle,
 						size_t len);
 char				*ft_strrchr(const char *str, int c);
 char				*ft_strjoin(char const *s1, char const *s2);
