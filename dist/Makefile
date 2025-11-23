@@ -6,7 +6,7 @@
 #    By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+         #
 #                                               +#+#+#+#+#+      +#+           #
 #    Created: 2025/11/23 21:52:22 by yiyuli           #+#      #+#             #
-#    Updated: 2025/11/23 22:00:30 by yiyuli         ###      ########.fr       #
+#    Updated: 2025/11/23 22:11:00 by yiyuli         ###      ########.fr       #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ bonus: $(NAME) .bonus_built
 	touch .bonus_built
 
 %.o: %.c $(HEADER)
-	$(CC) $(FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS) $(BONUS_OBJS) .bonus_built
