@@ -6,7 +6,7 @@
 #    By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+         #
 #                                               +#+#+#+#+#+      +#+           #
 #    Created: 2025/11/23 21:52:22 by yiyuli           #+#      #+#             #
-#    Updated: 2025/11/23 22:11:00 by yiyuli         ###      ########.fr       #
+#    Updated: 2025/11/24 18:01:10 by yiyuli         ###      ########.fr       #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,6 @@ bonus: $(NAME) .bonus_built
 
 .bonus_built: $(BONUS_OBJS)
 	ar rc $(NAME) $(BONUS_OBJS)
-	ranlib $(NAME)
 	touch .bonus_built
 
 %.o: %.c $(HEADER)

@@ -6,31 +6,31 @@
 /*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
 /*                                              +#+#+#+#+#+      +#+          */
 /*   Created: 2025/11/20 14:56:36 by yiyuli           #+#      #+#            */
-/*   Updated: 2025/11/20 14:56:39 by yiyuli         ###      ########.fr      */
+/*   Updated: 2025/11/27 22:39:11 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static void	print_recursive(long nb, int fd)
+{
+	char	c;
+
+	if (nb >= 10)
+		print_recursive(nb / 10, fd);
+	c = '0' + (nb % 10);
+	write(fd, &c, 1);
+}
+
 void	ft_putnbr_fd(int n, int fd)
 {
-	if (n == -2147483648)
+	long	nb;
+
+	nb = n;
+	if (nb < 0)
 	{
-		ft_putchar_fd('-', fd);
-		ft_putchar_fd('2', fd);
-		ft_putnbr_fd(147483648, fd);
+		write(fd, "-", 1);
+		nb = -nb;
 	}
-	else if (n < 0)
-	{
-		ft_putchar_fd('-', fd);
-		n = -n;
-		ft_putnbr_fd(n, fd);
-	}
-	else if (n > 9)
-	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putnbr_fd(n % 10, fd);
-	}
-	else
-		ft_putchar_fd(n + 48, fd);
+	print_recursive(nb, fd);
 }
