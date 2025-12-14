@@ -25,7 +25,10 @@ SRCS		:=	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c \
 				ft_atoi.c ft_calloc.c ft_strdup.c \
 				ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c \
 				ft_itoa.c ft_strmapi.c ft_striteri.c \
-				ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
+				ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
+				ft_vec_new.c ft_vec_push.c ft_vec_pop.c ft_vec_get.c \
+				ft_vec_set.c ft_vec_free.c ft_vec_clear.c ft_vec_reserve.c \
+				ft_vec_insert.c
 
 OBJS		:= $(SRCS:.c=.o)
 
