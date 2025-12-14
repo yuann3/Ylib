@@ -6,7 +6,7 @@
 /*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
 /*                                              +#+#+#+#+#+      +#+          */
 /*   Created: 2025/11/18 18:42:23 by yiyuli           #+#      #+#            */
-/*   Updated: 2025/12/14 13:39:11 by yiyuli         ###      ########.fr      */
+/*   Updated: 2025/12/14 16:06:11 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,65 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+/* ************************************************************************** */
+/*                                Linked List                                 */
+/* ************************************************************************** */
+
 /* Linked List */
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+/* Linked list functions */
+t_list				*ft_lstnew(void *content);
+void				ft_lstadd_front(t_list **lst, t_list *new);
+int					ft_lstsize(t_list *lst);
+t_list				*ft_lstlast(t_list *lst);
+void				ft_lstadd_back(t_list **lst, t_list *new);
+void				ft_lstdelone(t_list *lst, void (*del)(void *));
+void				ft_lstclear(t_list **lst, void (*del)(void *));
+void				ft_lstiter(t_list *lst, void (*f)(void *));
+t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
+						void (*del)(void *));
+
+/* ************************************************************************** */
+/*                              Double-Ended Queue                            */
+/* ************************************************************************** */
+typedef struct s_deque
+{
+	void			*data;
+	size_t			head;
+	size_t			tail;
+	size_t			len;
+	size_t			cap;
+	size_t			elem_size;
+}					t_deque;
+
+/* Lifecycle */
+t_deque				*ft_deque_new(size_t elem_size, size_t init_cap);
+/* void				ft_deque_free(t_deque *d); */
+/* void				ft_deque_clear(t_deque *d); */
+
+/* /\* Push/Pop *\/ */
+/* int					ft_deque_push_front(t_deque *d, const void *elem); */
+/* int					ft_deque_push_back(t_deque *d, const void *elem); */
+/* int					ft_deque_pop_front(t_deque *d, void *out); */
+/* int					ft_deque_pop_back(t_deque *d, void *out); */
+
+/* /\* Access *\/ */
+/* void				*ft_deque_front(t_deque *d); */
+/* void				*ft_deque_back(t_deque *d); */
+/* void				*ft_deque_get(t_deque *d, size_t index); */
+
+/* /\* Utility *\/ */
+/* int					ft_deque_is_empty(t_deque *d); */
+/* int					ft_deque_is_full(t_deque *d); */
+
+/* ************************************************************************** */
+/*                           Vector / dynamic array                           */
+/* ************************************************************************** */
 
 /* Vector (Dynamic array)*/
 typedef struct s_vec
@@ -45,6 +98,10 @@ void				ft_vec_free(t_vec *vec);
 void				ft_vec_clear(t_vec *vec);
 int					ft_vec_reserve(t_vec *vec, size_t new_cap);
 int					ft_vec_insert(t_vec *vec, size_t index, const void *elem);
+
+/* ************************************************************************** */
+/*                              stdlib functions                              */
+/* ************************************************************************** */
 
 /* Character checking functions */
 int					ft_isalpha(int c);
@@ -102,18 +159,6 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
-
-/* Linked list functions */
-t_list				*ft_lstnew(void *content);
-void				ft_lstadd_front(t_list **lst, t_list *new);
-int					ft_lstsize(t_list *lst);
-t_list				*ft_lstlast(t_list *lst);
-void				ft_lstadd_back(t_list **lst, t_list *new);
-void				ft_lstdelone(t_list *lst, void (*del)(void *));
-void				ft_lstclear(t_list **lst, void (*del)(void *));
-void				ft_lstiter(t_list *lst, void (*f)(void *));
-t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
-						void (*del)(void *));
 
 /* Printf functions */
 int					ft_printf(const char *format, ...);
