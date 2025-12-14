@@ -36,15 +36,14 @@ typedef struct s_vec
 }					t_vec;
 
 /* Vector functions */
-t_vec   *ft_vec_new(size_t elem_size, size_t init_cap);
-int     ft_vec_push(t_vec *vec, const void *elem);
-int     ft_vec_pop(t_vec *vec, void *out);
-void    *ft_vec_get(t_vec *vec, size_t index);
-int     ft_vec_set(t_vec *vec, size_t index, const void *elem);
-void    ft_vec_free(t_vec *vec);
-void    ft_vec_clear(t_vec *vec);
-int     ft_vec_reserve(t_vec *vec, size_t new_cap);
-
+t_vec				*ft_vec_new(size_t elem_size, size_t init_cap);
+int					ft_vec_push(t_vec *vec, const void *elem);
+int					ft_vec_pop(t_vec *vec, void *out);
+void				*ft_vec_get(t_vec *vec, size_t index);
+int					ft_vec_set(t_vec *vec, size_t index, const void *elem);
+void				ft_vec_free(t_vec *vec);
+void				ft_vec_clear(t_vec *vec);
+int					ft_vec_reserve(t_vec *vec, size_t new_cap);
 
 /* Character checking functions */
 int					ft_isalpha(int c);
