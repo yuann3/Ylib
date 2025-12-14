@@ -30,8 +30,8 @@ static size_t	ft_vec_next_cap(size_t cap)
 	if (cap > SIZE_MAX / 2)
 		return (0);
 	new_cap = cap + cap / 2;
-	if (new_cap < cap)
-		return (0);
+	if (new_cap <= cap)
+		new_cap = cap + 1;
 	return (new_cap);
 }
 

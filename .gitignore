@@ -57,3 +57,4 @@ doxyfile
 html
 latex
 .cache/
+test_runner
