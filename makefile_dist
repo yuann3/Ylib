@@ -8,7 +8,6 @@ SRCS := ft_isalpha.c ft_isdigit.c \
 	ft_calloc.c ft_bzero.c \
 	ft_toupper.c ft_tolower.c \
 	ft_atoi.c ft_strncmp.c \
-	ft_strncpy.c ft_strndup.c \
 	ft_itoa.c ft_split.c \
 	ft_strmapi.c ft_strchr.c \
 	ft_strdup.c ft_strnstr.c \
@@ -16,8 +15,20 @@ SRCS := ft_isalpha.c ft_isdigit.c \
 	ft_strtrim.c ft_substr.c \
 	ft_striteri.c ft_strlen.c \
 	ft_strlcpy.c ft_strlcat.c \
+	ft_strcmp.c \
 	ft_putchar_fd.c ft_putstr_fd.c \
-	ft_putendl_fd.c ft_putnbr_fd.c
+	ft_putendl_fd.c ft_putnbr_fd.c \
+	ft_printf.c ft_print_char.c \
+	ft_print_str.c ft_print_ptr.c \
+	ft_print_nbr.c ft_print_hex.c \
+	ft_vec_new.c ft_vec_push.c \
+	ft_vec_pop.c ft_vec_get.c \
+	ft_vec_set.c ft_vec_free.c \
+	ft_vec_clear.c ft_vec_reserve.c \
+	ft_vec_insert.c \
+	ft_deque_new.c ft_deque_push.c \
+	ft_deque_pop.c ft_deque_access.c \
+	ft_deque_swap.c ft_deque_utils.c
 
 OBJS := $(SRCS:.c=.o)
 
