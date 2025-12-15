@@ -34,3 +34,19 @@ int	ft_deque_is_full(t_deque *d)
 		return (0);
 	return (d->len == d->cap);
 }
+
+void	ft_deque_rotate(t_deque *d)
+{
+	if (!d || d->len <= 1)
+		return ;
+	d->head = (d->head + 1) % d->cap;
+	d->tail = (d->tail + 1) % d->cap;
+}
+
+void	ft_deque_rrotate(t_deque *d)
+{
+	if (!d || d->len <= 1)
+		return ;
+	d->head = (d->head - 1 + d->cap) % d->cap;
+	d->tail = (d->tail - 1 + d->cap) % d->cap;
+}

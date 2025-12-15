@@ -34,15 +34,6 @@ t_deque	*ft_deque_new(size_t elem_size, size_t init_cap)
 	return (d);
 }
 
-void	ft_deque_free(t_deque *d)
-{
-	if (!d)
-		return ;
-	if (d->data)
-		free(d->data);
-	free(d);
-}
-
 void	ft_deque_clear(t_deque *d)
 {
 	if (!d)
