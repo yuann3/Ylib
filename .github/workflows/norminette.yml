@@ -1,12 +1,14 @@
 # .github/workflows/main.yml
 on: [push, pull_request]
-
 jobs:
-  norminette_job:
+  check-norminette:
+    name: Norminette
     runs-on: ubuntu-latest
-    name: norminette
     steps:
-    - uses: actions/checkout@v2
-    - uses: alexandregv/norminette-action@v3
-      with:
-        flags: 'src dist'
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Norminette
+        uses: 42School/norminette@3.3.59
+        with:
+          args: '-RCheckForbiddenSourceHeader'
