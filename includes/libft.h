@@ -6,7 +6,7 @@
 /*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
 /*                                              +#+#+#+#+#+      +#+          */
 /*   Created: 2025/11/18 18:42:23 by yiyuli           #+#      #+#            */
-/*   Updated: 2025/12/14 16:06:11 by yiyuli         ###      ########.fr      */
+/*   Updated: 2025/12/15 18:03:05 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,23 +57,26 @@ typedef struct s_deque
 
 /* Lifecycle */
 t_deque				*ft_deque_new(size_t elem_size, size_t init_cap);
-/* void				ft_deque_free(t_deque *d); */
-/* void				ft_deque_clear(t_deque *d); */
+void				ft_deque_free(t_deque *d);
+void				ft_deque_clear(t_deque *d);
 
-/* /\* Push/Pop *\/ */
-/* int					ft_deque_push_front(t_deque *d, const void *elem); */
-/* int					ft_deque_push_back(t_deque *d, const void *elem); */
-/* int					ft_deque_pop_front(t_deque *d, void *out); */
-/* int					ft_deque_pop_back(t_deque *d, void *out); */
+/* Push/Pop */
+int					ft_deque_push_front(t_deque *d, const void *elem);
+int					ft_deque_push_back(t_deque *d, const void *elem);
+int					ft_deque_pop_front(t_deque *d, void *out);
+int					ft_deque_pop_back(t_deque *d, void *out);
 
-/* /\* Access *\/ */
-/* void				*ft_deque_front(t_deque *d); */
-/* void				*ft_deque_back(t_deque *d); */
-/* void				*ft_deque_get(t_deque *d, size_t index); */
+void				ft_deque_swap(t_deque *d);
 
-/* /\* Utility *\/ */
-/* int					ft_deque_is_empty(t_deque *d); */
-/* int					ft_deque_is_full(t_deque *d); */
+/* Access */
+void				*ft_deque_front(t_deque *d);
+void				*ft_deque_back(t_deque *d);
+void				*ft_deque_get(t_deque *d, size_t index);
+
+/* Utility */
+int					ft_deque_is_empty(t_deque *d);
+int					ft_deque_is_full(t_deque *d);
+void				ft_deque_free(t_deque *d);
 
 /* ************************************************************************** */
 /*                           Vector / dynamic array                           */
