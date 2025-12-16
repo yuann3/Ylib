@@ -2,14 +2,15 @@
 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/yuann3/Ylib) ![GitHub repo size](https://img.shields.io/github/repo-size/yuann3/Ylib) [![.github/workflows/norminette](https://github.com/yuann3/Ylib/actions/workflows/norminette.yml/badge.svg)](https://github.com/yuann3/Ylib/actions/workflows/norminette.yml)
 
-A C library that reimplements the standard library and extends it with modern data structures. Ylib provides type-safe generic containers (vector, deque, linked list), a complete printf implementation, and all essential C utilities. Written to 42 School norminette standards with zero external dependencies.
+A C library that reimplements the standard library and extends it with modern data structures and vector math. Ylib provides type-safe generic containers (vector, deque, linked list), 2D/3D vector mathematics for graphics programming, a complete printf implementation, and all essential C utilities. Written to 42 School norminette standards with zero external dependencies.
 
 ## Features
 
 - **Standard Library Reimplementation** - Drop-in replacements for string, memory, and character functions
 - **Generic Data Structures** - Type-safe vector, deque, and linked list with clean APIs
+- **Vector Math** - 2D and 3D vector operations for graphics (fract-ol, cub3d, miniRT)
 - **Complete ft_printf** - Full printf implementation supporting all common format specifiers
-- **Zero Dependencies** - Pure C with only standard headers
+- **Zero Dependencies** - Pure C with only standard headers (math.h for vector operations)
 - **42 Norminette Compliant** - Clean, consistent code style
 
 ## Quick Start
@@ -48,6 +49,37 @@ cc -Wall -Wextra -Werror -I includes main.c -L. -lft -o program
 ./program
 ```
 
+**Vector math example:**
+```c
+#include "libft.h"
+
+int main(void)
+{
+    t_vec3  position;
+    t_vec3  direction;
+    t_vec3  result;
+
+    // Create 3D vectors
+    position = ft_vec3_new(10.0, 20.0, 30.0);
+    direction = ft_vec3_new(1.0, 0.0, 0.0);
+
+    // Normalize and scale
+    direction = ft_vec3_norm(direction);
+    result = ft_vec3_add(position, ft_vec3_scale(direction, 5.0));
+
+    ft_printf("New position: (%.1f, %.1f, %.1f)\n",
+              result.x, result.y, result.z);
+    return (0);
+}
+```
+
+**Build with math library:**
+```bash
+make
+cc -Wall -Wextra -Werror -I includes main.c -L. -lft -lm -o program
+./program
+```
+
 See [Getting Started](docs/getting-started.md) for detailed setup instructions.
 
 ## API Overview
@@ -60,6 +92,7 @@ See [Getting Started](docs/getting-started.md) for detailed setup instructions.
 | **Conversion** | 4 | String/integer conversion, case conversion | [conversion.md](docs/api/conversion.md) |
 | **Output** | 4 | File descriptor output functions | [output.md](docs/api/output.md) |
 | **Printf** | 7 | Formatted output with `%c %s %p %d %i %u %x %X %%` | [printf.md](docs/api/printf.md) |
+| **Vec Math** | 23 | 2D/3D vectors: add, sub, scale, dot, cross, norm, lerp, rotate, reflect | [vec-math.md](docs/api/vec-math.md) |
 
 ### Data Structures
 
@@ -88,6 +121,7 @@ make re     # Rebuild everything
   - [Conversion Functions](docs/api/conversion.md)
   - [Output Functions](docs/api/output.md)
   - [Printf Implementation](docs/api/printf.md)
+  - [Vector Math](docs/api/vec-math.md)
 - **Data Structures**
   - [Linked List](docs/data-structures/linked-list.md)
   - [Vector (Dynamic Array)](docs/data-structures/vector.md)
@@ -106,8 +140,10 @@ Ylib/
 │   ├── ft_printf/       # Printf implementation
 │   ├── ft_put/          # Output functions
 │   ├── ft_lst/          # Linked list
-│   ├── ft_vec/          # Vector
-│   └── ft_deque/        # Deque
+│   ├── ft_vec/          # Vector (dynamic array)
+│   ├── ft_deque/        # Deque
+│   └── ft_vec_math/     # 2D/3D vector math
+├── tests/               # Unit tests
 ├── docs/                # Documentation
 ├── Makefile
 └── README.md
