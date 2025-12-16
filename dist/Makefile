@@ -28,7 +28,11 @@ SRCS := ft_isalpha.c ft_isdigit.c \
 	ft_vec_insert.c \
 	ft_deque_new.c ft_deque_push.c \
 	ft_deque_pop.c ft_deque_access.c \
-	ft_deque_swap.c ft_deque_utils.c
+	ft_deque_swap.c ft_deque_utils.c \
+	ft_vec2_basic.c ft_vec2_ops.c \
+	ft_vec2_transform.c ft_vec3_basic.c \
+	ft_vec3_ops.c ft_vec3_norm.c \
+	ft_vec3_transform.c
 
 OBJS := $(SRCS:.c=.o)
 

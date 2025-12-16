@@ -6,7 +6,7 @@
 /*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
 /*                                              +#+#+#+#+#+      +#+          */
 /*   Created: 2025/11/18 18:42:23 by yiyuli           #+#      #+#            */
-/*   Updated: 2025/12/15 18:10:28 by yiyuli         ###      ########.fr      */
+/*   Updated: 2025/12/16 13:28:37 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,215 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+typedef struct s_vec2
+{
+	double	x;
+	double	y;
+}			t_vec2;
+
+typedef struct s_vec3
+{
+	double	x;
+	double	y;
+	double	z;
+}			t_vec3;
+
+/* ************************************************************************** */
+/*                              2D Vector Math                                */
+/* ************************************************************************** */
+
+/**
+ * @brief Create a 2D vector from components.
+ * @param x X component.
+ * @param y Y component.
+ * @return New vector with specified components.
+ */
+t_vec2		ft_vec2_new(double x, double y);
+
+/**
+ * @brief Add two 2D vectors component-wise.
+ * @param a First vector.
+ * @param b Second vector.
+ * @return Sum of vectors (a.x + b.x, a.y + b.y).
+ */
+t_vec2		ft_vec2_add(t_vec2 a, t_vec2 b);
+
+/**
+ * @brief Subtract vector b from vector a.
+ * @param a First vector.
+ * @param b Second vector.
+ * @return Difference (a.x - b.x, a.y - b.y).
+ */
+t_vec2		ft_vec2_sub(t_vec2 a, t_vec2 b);
+
+/**
+ * @brief Multiply vector by scalar.
+ * @param v Vector to scale.
+ * @param s Scalar multiplier.
+ * @return Scaled vector (v.x * s, v.y * s).
+ */
+t_vec2		ft_vec2_scale(t_vec2 v, double s);
+
+/**
+ * @brief Compute dot product of two vectors.
+ * @param a First vector.
+ * @param b Second vector.
+ * @return Dot product (a.x * b.x + a.y * b.y).
+ */
+double		ft_vec2_dot(t_vec2 a, t_vec2 b);
+
+/**
+ * @brief Compute vector magnitude.
+ * @param v Vector.
+ * @return Length √(x² + y²).
+ */
+double		ft_vec2_len(t_vec2 v);
+
+/**
+ * @brief Compute squared length (avoids sqrt).
+ * @param v Vector.
+ * @return Squared length x² + y².
+ */
+double		ft_vec2_len_sq(t_vec2 v);
+
+/**
+ * @brief Normalize vector to unit length.
+ * @param v Vector to normalize.
+ * @return Unit vector with same direction, or zero vector if input is zero.
+ */
+t_vec2		ft_vec2_norm(t_vec2 v);
+
+/**
+ * @brief Distance between two points.
+ * @param a First point.
+ * @param b Second point.
+ * @return Distance |b - a|.
+ */
+double		ft_vec2_dist(t_vec2 a, t_vec2 b);
+
+/**
+ * @brief Linear interpolation between two vectors.
+ * @param a Start vector (t=0).
+ * @param b End vector (t=1).
+ * @param t Interpolation parameter.
+ * @return Interpolated vector a + t * (b - a).
+ */
+t_vec2		ft_vec2_lerp(t_vec2 a, t_vec2 b, double t);
+
+/**
+ * @brief Rotate vector by angle (radians).
+ * @param v Vector to rotate.
+ * @param angle Rotation angle in radians.
+ * @return Rotated vector.
+ */
+t_vec2		ft_vec2_rotate(t_vec2 v, double angle);
+
+/* ************************************************************************** */
+/*                              3D Vector Math                                */
+/* ************************************************************************** */
+
+/**
+ * @brief Create a 3D vector from components.
+ * @param x X component.
+ * @param y Y component.
+ * @param z Z component.
+ * @return New vector with specified components.
+ */
+t_vec3		ft_vec3_new(double x, double y, double z);
+
+/**
+ * @brief Add two 3D vectors component-wise.
+ * @param a First vector.
+ * @param b Second vector.
+ * @return Sum of vectors (a.x + b.x, a.y + b.y, a.z + b.z).
+ */
+t_vec3		ft_vec3_add(t_vec3 a, t_vec3 b);
+
+/**
+ * @brief Subtract vector b from vector a.
+ * @param a First vector.
+ * @param b Second vector.
+ * @return Difference (a.x - b.x, a.y - b.y, a.z - b.z).
+ */
+t_vec3		ft_vec3_sub(t_vec3 a, t_vec3 b);
+
+/**
+ * @brief Multiply vector by scalar.
+ * @param v Vector to scale.
+ * @param s Scalar multiplier.
+ * @return Scaled vector (v.x * s, v.y * s, v.z * s).
+ */
+t_vec3		ft_vec3_scale(t_vec3 v, double s);
+
+/**
+ * @brief Negate a vector (reverse direction).
+ * @param v Vector to negate.
+ * @return Negated vector (-v.x, -v.y, -v.z).
+ */
+t_vec3		ft_vec3_negate(t_vec3 v);
+
+/**
+ * @brief Compute dot product of two vectors.
+ * @param a First vector.
+ * @param b Second vector.
+ * @return Dot product (a.x * b.x + a.y * b.y + a.z * b.z).
+ */
+double		ft_vec3_dot(t_vec3 a, t_vec3 b);
+
+/**
+ * @brief Compute cross product (perpendicular vector).
+ * @param a First vector.
+ * @param b Second vector.
+ * @return Cross product a × b, perpendicular to both inputs.
+ */
+t_vec3		ft_vec3_cross(t_vec3 a, t_vec3 b);
+
+/**
+ * @brief Compute vector magnitude.
+ * @param v Vector.
+ * @return Length √(x² + y² + z²).
+ */
+double		ft_vec3_len(t_vec3 v);
+
+/**
+ * @brief Compute squared length (avoids sqrt).
+ * @param v Vector.
+ * @return Squared length x² + y² + z².
+ */
+double		ft_vec3_len_sq(t_vec3 v);
+
+/**
+ * @brief Normalize vector to unit length.
+ * @param v Vector to normalize.
+ * @return Unit vector with same direction, or zero vector if input is zero.
+ */
+t_vec3		ft_vec3_norm(t_vec3 v);
+
+/**
+ * @brief Distance between two points.
+ * @param a First point.
+ * @param b Second point.
+ * @return Distance |b - a|.
+ */
+double		ft_vec3_dist(t_vec3 a, t_vec3 b);
+
+/**
+ * @brief Linear interpolation between two vectors.
+ * @param a Start vector (t=0).
+ * @param b End vector (t=1).
+ * @param t Interpolation parameter.
+ * @return Interpolated vector a + t * (b - a).
+ */
+t_vec3		ft_vec3_lerp(t_vec3 a, t_vec3 b, double t);
+
+/**
+ * @brief Reflect vector off surface with given normal.
+ * @param v Incident vector.
+ * @param normal Surface normal (should be unit length).
+ * @return Reflected vector v - 2 * dot(v, n) * n.
+ */
+t_vec3		ft_vec3_reflect(t_vec3 v, t_vec3 normal);
+
 /* ************************************************************************** */
 /*                                Linked List                                 */
 /* ************************************************************************** */
@@ -28,65 +237,65 @@
  */
 typedef struct s_list
 {
-	void			*content;	/**< Pointer to node data */
-	struct s_list	*next;		/**< Pointer to next node */
-}					t_list;
+	void			*content;
+	struct s_list	*next;
+}			t_list;
 
 /**
  * @brief Create a new list node.
  * @param content Pointer to content for the new node.
  * @return New node with content set and next = NULL, or NULL on failure.
  */
-t_list				*ft_lstnew(void *content);
+t_list		*ft_lstnew(void *content);
 
 /**
  * @brief Add node at the beginning of a list.
  * @param lst Address of pointer to first node.
  * @param new Node to add.
  */
-void				ft_lstadd_front(t_list **lst, t_list *new);
+void		ft_lstadd_front(t_list **lst, t_list *new);
 
 /**
  * @brief Count the number of nodes in a list.
  * @param lst Pointer to first node.
  * @return Number of nodes.
  */
-int					ft_lstsize(t_list *lst);
+int			ft_lstsize(t_list *lst);
 
 /**
  * @brief Return the last node of a list.
  * @param lst Pointer to first node.
  * @return Last node, or NULL if list is empty.
  */
-t_list				*ft_lstlast(t_list *lst);
+t_list		*ft_lstlast(t_list *lst);
 
 /**
  * @brief Add node at the end of a list.
  * @param lst Address of pointer to first node.
  * @param new Node to add.
  */
-void				ft_lstadd_back(t_list **lst, t_list *new);
+void		ft_lstadd_back(t_list **lst, t_list *new);
 
 /**
  * @brief Delete and free a single node.
  * @param lst Node to delete.
  * @param del Function to free the content.
  */
-void				ft_lstdelone(t_list *lst, void (*del)(void *));
+void		ft_lstdelone(t_list *lst, void (*del)(void *));
 
 /**
  * @brief Delete and free all nodes in a list.
  * @param lst Address of pointer to first node.
  * @param del Function to free each node's content.
  */
-void				ft_lstclear(t_list **lst, void (*del)(void *));
+void		ft_lstclear(t_list **lst, void (*del)(void *));
 
 /**
  * @brief Apply a function to the content of each node.
  * @param lst Pointer to first node.
  * @param f Function to apply to each content.
  */
-void				ft_lstiter(t_list *lst, void (*f)(void *));
+void		ft_lstiter(t_list *lst, void (*f)(void *));
 
 /**
  * @brief Create a new list by applying a function to each node's content.
@@ -95,8 +304,7 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
  * @param del Function to free content if allocation fails.
  * @return New list, or NULL on failure.
  */
-t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
-						void (*del)(void *));
+t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /* ************************************************************************** */
 /*                              Double-Ended Queue                            */
@@ -111,13 +319,13 @@ t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
  */
 typedef struct s_deque
 {
-	void			*data;		/**< Circular buffer holding elements */
-	size_t			head;		/**< Index of first element */
-	size_t			tail;		/**< Index after last element */
-	size_t			len;		/**< Current number of elements */
-	size_t			cap;		/**< Total buffer capacity */
-	size_t			elem_size;	/**< Size of each element in bytes */
-}					t_deque;
+	void	*data;
+	size_t	head;
+	size_t	tail;
+	size_t	len;
+	size_t	cap;
+	size_t	elem_size;
+}			t_deque;
 
 /* Lifecycle */
 
@@ -127,20 +335,20 @@ typedef struct s_deque
  * @param init_cap Initial capacity. If 0, defaults to 8.
  * @return Pointer to new deque, or NULL on failure.
  */
-t_deque				*ft_deque_new(size_t elem_size, size_t init_cap);
+t_deque		*ft_deque_new(size_t elem_size, size_t init_cap);
 
 /**
  * @brief Free all memory associated with a deque.
  * @param d Pointer to deque. Safe to call with NULL.
  * @note Does not free elements with internal pointers; caller must handle.
  */
-void				ft_deque_free(t_deque *d);
+void		ft_deque_free(t_deque *d);
 
 /**
  * @brief Reset deque to empty state without freeing memory.
  * @param d Pointer to deque. Safe to call with NULL.
  */
-void				ft_deque_clear(t_deque *d);
+void		ft_deque_clear(t_deque *d);
 
 /* Push/Pop */
 
@@ -151,7 +359,7 @@ void				ft_deque_clear(t_deque *d);
  * @return 1 on success, 0 on failure (NULL args or allocation failure).
  * @note Grows capacity automatically when full. O(1) amortized.
  */
-int					ft_deque_push_front(t_deque *d, const void *elem);
+int			ft_deque_push_front(t_deque *d, const void *elem);
 
 /**
  * @brief Add element to back of deque.
@@ -160,7 +368,7 @@ int					ft_deque_push_front(t_deque *d, const void *elem);
  * @return 1 on success, 0 on failure (NULL args or allocation failure).
  * @note Grows capacity automatically when full. O(1) amortized.
  */
-int					ft_deque_push_back(t_deque *d, const void *elem);
+int			ft_deque_push_back(t_deque *d, const void *elem);
 
 /**
  * @brief Remove and optionally return first element.
@@ -168,7 +376,7 @@ int					ft_deque_push_back(t_deque *d, const void *elem);
  * @param out Output buffer for removed element. Can be NULL to discard.
  * @return 1 on success, 0 if deque is NULL or empty.
  */
-int					ft_deque_pop_front(t_deque *d, void *out);
+int			ft_deque_pop_front(t_deque *d, void *out);
 
 /**
  * @brief Remove and optionally return last element.
@@ -176,7 +384,7 @@ int					ft_deque_pop_front(t_deque *d, void *out);
  * @param out Output buffer for removed element. Can be NULL to discard.
  * @return 1 on success, 0 if deque is NULL or empty.
  */
-int					ft_deque_pop_back(t_deque *d, void *out);
+int			ft_deque_pop_back(t_deque *d, void *out);
 
 /* push_swap operations */
 
@@ -186,21 +394,21 @@ int					ft_deque_pop_back(t_deque *d, void *out);
  * @note No-op if deque has fewer than 2 elements or malloc fails for large
  *       elements. Uses stack buffer for elem_size <= 64, heap otherwise.
  */
-void				ft_deque_swap(t_deque *d);
+void		ft_deque_swap(t_deque *d);
 
 /**
  * @brief Rotate: move first element to back (ra/rb in push_swap).
  * @param d Pointer to deque.
  * @note O(1) - only adjusts indices, no data movement.
  */
-void				ft_deque_rotate(t_deque *d);
+void		ft_deque_rotate(t_deque *d);
 
 /**
  * @brief Reverse rotate: move last element to front (rra/rrb in push_swap).
  * @param d Pointer to deque.
  * @note O(1) - only adjusts indices, no data movement.
  */
-void				ft_deque_rrotate(t_deque *d);
+void		ft_deque_rrotate(t_deque *d);
 
 /* Access */
 
@@ -209,14 +417,14 @@ void				ft_deque_rrotate(t_deque *d);
  * @param d Pointer to deque.
  * @return Pointer to first element, or NULL if empty/NULL.
  */
-void				*ft_deque_front(t_deque *d);
+void		*ft_deque_front(t_deque *d);
 
 /**
  * @brief Get pointer to last element without removing.
  * @param d Pointer to deque.
  * @return Pointer to last element, or NULL if empty/NULL.
  */
-void				*ft_deque_back(t_deque *d);
+void		*ft_deque_back(t_deque *d);
 
 /**
  * @brief Get pointer to element at logical index.
@@ -225,7 +433,7 @@ void				*ft_deque_back(t_deque *d);
  * @return Pointer to element, or NULL if out of bounds/NULL.
  * @note O(1) random access.
  */
-void				*ft_deque_get(t_deque *d, size_t index);
+void		*ft_deque_get(t_deque *d, size_t index);
 
 /* Utility */
 
@@ -234,14 +442,14 @@ void				*ft_deque_get(t_deque *d, size_t index);
  * @param d Pointer to deque.
  * @return 1 if empty or NULL, 0 otherwise.
  */
-int					ft_deque_is_empty(t_deque *d);
+int			ft_deque_is_empty(t_deque *d);
 
 /**
  * @brief Check if deque is at capacity.
  * @param d Pointer to deque.
  * @return 1 if full, 0 if not full or NULL.
  */
-int					ft_deque_is_full(t_deque *d);
+int			ft_deque_is_full(t_deque *d);
 
 /* ************************************************************************** */
 /*                           Vector / dynamic array                           */
@@ -255,11 +463,11 @@ int					ft_deque_is_full(t_deque *d);
  */
 typedef struct s_vec
 {
-	void			*data;		/**< Contiguous buffer holding elements */
-	size_t			len;		/**< Current number of elements */
-	size_t			cap;		/**< Total buffer capacity */
-	size_t			elem_size;	/**< Size of each element in bytes */
-}					t_vec;
+	void	*data;
+	size_t	len;
+	size_t	cap;
+	size_t	elem_size;
+}			t_vec;
 
 /**
  * @brief Create a new vector with specified element size and initial capacity.
@@ -267,7 +475,7 @@ typedef struct s_vec
  * @param init_cap Initial capacity. If 0, defaults to a reasonable size.
  * @return Pointer to new vector, or NULL on failure.
  */
-t_vec				*ft_vec_new(size_t elem_size, size_t init_cap);
+t_vec		*ft_vec_new(size_t elem_size, size_t init_cap);
 
 /**
  * @brief Append an element to the end of the vector.
@@ -276,7 +484,7 @@ t_vec				*ft_vec_new(size_t elem_size, size_t init_cap);
  * @return 1 on success, 0 on failure.
  * @note Grows capacity automatically when full. O(1) amortized.
  */
-int					ft_vec_push(t_vec *vec, const void *elem);
+int			ft_vec_push(t_vec *vec, const void *elem);
 
 /**
  * @brief Remove and optionally return the last element.
@@ -284,7 +492,7 @@ int					ft_vec_push(t_vec *vec, const void *elem);
  * @param out Output buffer for removed element. Can be NULL to discard.
  * @return 1 on success, 0 if vector is NULL or empty.
  */
-int					ft_vec_pop(t_vec *vec, void *out);
+int			ft_vec_pop(t_vec *vec, void *out);
 
 /**
  * @brief Get pointer to element at index.
@@ -292,7 +500,7 @@ int					ft_vec_pop(t_vec *vec, void *out);
  * @param index Index of element (0-based).
  * @return Pointer to element, or NULL if out of bounds/NULL.
  */
-void				*ft_vec_get(t_vec *vec, size_t index);
+void		*ft_vec_get(t_vec *vec, size_t index);
 
 /**
  * @brief Set element at index by copying from elem.
@@ -301,19 +509,19 @@ void				*ft_vec_get(t_vec *vec, size_t index);
  * @param elem Pointer to new element value.
  * @return 1 on success, 0 if out of bounds or NULL args.
  */
-int					ft_vec_set(t_vec *vec, size_t index, const void *elem);
+int			ft_vec_set(t_vec *vec, size_t index, const void *elem);
 
 /**
  * @brief Free all memory associated with a vector.
  * @param vec Pointer to vector. Safe to call with NULL.
  */
-void				ft_vec_free(t_vec *vec);
+void		ft_vec_free(t_vec *vec);
 
 /**
  * @brief Reset vector to empty state without freeing memory.
  * @param vec Pointer to vector. Safe to call with NULL.
  */
-void				ft_vec_clear(t_vec *vec);
+void		ft_vec_clear(t_vec *vec);
 
 /**
  * @brief Ensure vector has at least new_cap capacity.
@@ -322,7 +530,7 @@ void				ft_vec_clear(t_vec *vec);
  * @return 1 on success, 0 on failure.
  * @note Does nothing if current capacity >= new_cap.
  */
-int					ft_vec_reserve(t_vec *vec, size_t new_cap);
+int			ft_vec_reserve(t_vec *vec, size_t new_cap);
 
 /**
  * @brief Insert an element at the specified index.
@@ -332,7 +540,7 @@ int					ft_vec_reserve(t_vec *vec, size_t new_cap);
  * @return 1 on success, 0 on failure.
  * @note Elements at index and beyond are shifted right. O(n).
  */
-int					ft_vec_insert(t_vec *vec, size_t index, const void *elem);
+int			ft_vec_insert(t_vec *vec, size_t index, const void *elem);
 
 /* ************************************************************************** */
 /*                          Character classification                          */
@@ -343,35 +551,35 @@ int					ft_vec_insert(t_vec *vec, size_t index, const void *elem);
  * @param c Character to check.
  * @return Non-zero if alphabetic, 0 otherwise.
  */
-int					ft_isalpha(int c);
+int			ft_isalpha(int c);
 
 /**
  * @brief Check if character is a digit (0-9).
  * @param c Character to check.
  * @return Non-zero if digit, 0 otherwise.
  */
-int					ft_isdigit(int c);
+int			ft_isdigit(int c);
 
 /**
  * @brief Check if character is alphanumeric (a-z, A-Z, 0-9).
  * @param c Character to check.
  * @return Non-zero if alphanumeric, 0 otherwise.
  */
-int					ft_isalnum(int c);
+int			ft_isalnum(int c);
 
 /**
  * @brief Check if character is in ASCII range (0-127).
  * @param c Character to check.
  * @return Non-zero if ASCII, 0 otherwise.
  */
-int					ft_isascii(int c);
+int			ft_isascii(int c);
 
 /**
  * @brief Check if character is printable (including space).
  * @param c Character to check.
  * @return Non-zero if printable, 0 otherwise.
  */
-int					ft_isprint(int c);
+int			ft_isprint(int c);
 
 /* ************************************************************************** */
 /*                             String functions                               */
@@ -382,7 +590,7 @@ int					ft_isprint(int c);
  * @param s Null-terminated string.
  * @return Number of characters before the null terminator.
  */
-size_t				ft_strlen(const char *s);
+size_t		ft_strlen(const char *s);
 
 /**
  * @brief Locate first occurrence of character in string.
@@ -391,7 +599,7 @@ size_t				ft_strlen(const char *s);
  * @return Pointer to first occurrence, or NULL if not found.
  * @note The terminating null is considered part of the string.
  */
-char				*ft_strchr(const char *s, int c);
+char		*ft_strchr(const char *s, int c);
 
 /**
  * @brief Locate last occurrence of character in string.
@@ -399,7 +607,7 @@ char				*ft_strchr(const char *s, int c);
  * @param c Character to find (converted to char).
  * @return Pointer to last occurrence, or NULL if not found.
  */
-char				*ft_strrchr(const char *s, int c);
+char		*ft_strrchr(const char *s, int c);
 
 /**
  * @brief Compare two strings up to n characters.
@@ -408,7 +616,7 @@ char				*ft_strrchr(const char *s, int c);
  * @param n Maximum number of characters to compare.
  * @return <0 if s1 < s2, 0 if equal, >0 if s1 > s2.
  */
-int					ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /**
  * @brief Locate substring in string, searching at most len characters.
@@ -417,8 +625,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
  * @param len Maximum characters to search.
  * @return Pointer to start of match, or NULL if not found.
  */
-char				*ft_strnstr(const char *haystack, const char *needle,
-						size_t len);
+char		*ft_strnstr(const char *haystack, const char *needle, size_t len);
 
 /**
  * @brief Copy string to buffer with size limit.
@@ -428,7 +635,7 @@ char				*ft_strnstr(const char *haystack, const char *needle,
  * @return Total length of src (for truncation detection).
  * @note Always null-terminates if dstsize > 0.
  */
-size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 /**
  * @brief Append string to buffer with size limit.
@@ -438,14 +645,14 @@ size_t				ft_strlcpy(char *dst, const char *src, size_t dstsize);
  * @return Total length of string it tried to create.
  * @note Always null-terminates if dstsize > strlen(dst).
  */
-size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
+size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
 
 /**
  * @brief Duplicate a string.
  * @param s1 String to duplicate.
  * @return Newly allocated copy, or NULL on failure.
  */
-char				*ft_strdup(const char *s1);
+char		*ft_strdup(const char *s1);
 
 /**
  * @brief Extract a substring from a string.
@@ -454,7 +661,7 @@ char				*ft_strdup(const char *s1);
  * @param len Maximum length of substring.
  * @return Newly allocated substring, or NULL on failure.
  */
-char				*ft_substr(char const *s, unsigned int start, size_t len);
+char		*ft_substr(char const *s, unsigned int start, size_t len);
 
 /**
  * @brief Concatenate two strings into a new string.
@@ -462,7 +669,7 @@ char				*ft_substr(char const *s, unsigned int start, size_t len);
  * @param s2 Second string.
  * @return Newly allocated combined string, or NULL on failure.
  */
-char				*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strjoin(char const *s1, char const *s2);
 
 /**
  * @brief Trim characters from beginning and end of string.
@@ -470,7 +677,7 @@ char				*ft_strjoin(char const *s1, char const *s2);
  * @param set Characters to remove.
  * @return Newly allocated trimmed string, or NULL on failure.
  */
-char				*ft_strtrim(char const *s1, char const *set);
+char		*ft_strtrim(char const *s1, char const *set);
 
 /**
  * @brief Split string by delimiter into array of strings.
@@ -479,7 +686,7 @@ char				*ft_strtrim(char const *s1, char const *set);
  * @return Null-terminated array of strings, or NULL on failure.
  * @note Caller must free each string and the array.
  */
-char				**ft_split(char const *s, char c);
+char		**ft_split(char const *s, char c);
 
 /**
  * @brief Apply function to each character, creating new string.
@@ -487,14 +694,14 @@ char				**ft_split(char const *s, char c);
  * @param f Function taking index and character, returning new character.
  * @return Newly allocated transformed string, or NULL on failure.
  */
-char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char		*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 /**
  * @brief Apply function to each character in place.
  * @param s String to modify.
  * @param f Function taking index and pointer to character.
  */
-void				ft_striteri(char *s, void (*f)(unsigned int, char *));
+void		ft_striteri(char *s, void (*f)(unsigned int, char *));
 
 /* ************************************************************************** */
 /*                             Memory functions                               */
@@ -507,14 +714,14 @@ void				ft_striteri(char *s, void (*f)(unsigned int, char *));
  * @param len Number of bytes to fill.
  * @return Pointer to memory area b.
  */
-void				*ft_memset(void *b, int c, size_t len);
+void		*ft_memset(void *b, int c, size_t len);
 
 /**
  * @brief Zero out a memory area.
  * @param s Pointer to memory area.
  * @param n Number of bytes to zero.
  */
-void				ft_bzero(void *s, size_t n);
+void		ft_bzero(void *s, size_t n);
 
 /**
  * @brief Copy memory area (non-overlapping).
@@ -524,7 +731,7 @@ void				ft_bzero(void *s, size_t n);
  * @return Pointer to dst.
  * @note Behavior undefined if regions overlap; use ft_memmove instead.
  */
-void				*ft_memcpy(void *dst, const void *src, size_t n);
+void		*ft_memcpy(void *dst, const void *src, size_t n);
 
 /**
  * @brief Copy memory area (handles overlapping regions).
@@ -533,7 +740,7 @@ void				*ft_memcpy(void *dst, const void *src, size_t n);
  * @param len Number of bytes to copy.
  * @return Pointer to dst.
  */
-void				*ft_memmove(void *dst, const void *src, size_t len);
+void		*ft_memmove(void *dst, const void *src, size_t len);
 
 /**
  * @brief Locate byte in memory area.
@@ -542,7 +749,7 @@ void				*ft_memmove(void *dst, const void *src, size_t len);
  * @param n Number of bytes to search.
  * @return Pointer to first occurrence, or NULL if not found.
  */
-void				*ft_memchr(const void *s, int c, size_t n);
+void		*ft_memchr(const void *s, int c, size_t n);
 
 /**
  * @brief Compare two memory areas.
@@ -551,7 +758,7 @@ void				*ft_memchr(const void *s, int c, size_t n);
  * @param n Number of bytes to compare.
  * @return <0 if s1 < s2, 0 if equal, >0 if s1 > s2.
  */
-int					ft_memcmp(const void *s1, const void *s2, size_t n);
+int			ft_memcmp(const void *s1, const void *s2, size_t n);
 
 /**
  * @brief Allocate and zero-initialize memory.
@@ -559,7 +766,7 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
  * @param size Size of each element.
  * @return Pointer to allocated memory, or NULL on failure.
  */
-void				*ft_calloc(size_t count, size_t size);
+void		*ft_calloc(size_t count, size_t size);
 
 /* ************************************************************************** */
 /*                          Character conversion                              */
@@ -570,14 +777,14 @@ void				*ft_calloc(size_t count, size_t size);
  * @param c Character to convert.
  * @return Uppercase equivalent, or c if not a lowercase letter.
  */
-int					ft_toupper(int c);
+int			ft_toupper(int c);
 
 /**
  * @brief Convert uppercase letter to lowercase.
  * @param c Character to convert.
  * @return Lowercase equivalent, or c if not an uppercase letter.
  */
-int					ft_tolower(int c);
+int			ft_tolower(int c);
 
 /* ************************************************************************** */
 /*                          Conversion functions                              */
@@ -588,14 +795,14 @@ int					ft_tolower(int c);
  * @param str String to convert.
  * @return Integer value. Skips leading whitespace and handles +/- sign.
  */
-int					ft_atoi(const char *str);
+int			ft_atoi(const char *str);
 
 /**
  * @brief Convert integer to string.
  * @param n Integer to convert.
  * @return Newly allocated string representation, or NULL on failure.
  */
-char				*ft_itoa(int n);
+char		*ft_itoa(int n);
 
 /* ************************************************************************** */
 /*                        File descriptor output                              */
@@ -606,28 +813,28 @@ char				*ft_itoa(int n);
  * @param c Character to write.
  * @param fd File descriptor.
  */
-void				ft_putchar_fd(char c, int fd);
+void		ft_putchar_fd(char c, int fd);
 
 /**
  * @brief Write a string to a file descriptor.
  * @param s String to write.
  * @param fd File descriptor.
  */
-void				ft_putstr_fd(char *s, int fd);
+void		ft_putstr_fd(char *s, int fd);
 
 /**
  * @brief Write a string followed by newline to a file descriptor.
  * @param s String to write.
  * @param fd File descriptor.
  */
-void				ft_putendl_fd(char *s, int fd);
+void		ft_putendl_fd(char *s, int fd);
 
 /**
  * @brief Write an integer to a file descriptor.
  * @param n Integer to write.
  * @param fd File descriptor.
  */
-void				ft_putnbr_fd(int n, int fd);
+void		ft_putnbr_fd(int n, int fd);
 
 /* ************************************************************************** */
 /*                              ft_printf                                     */
@@ -640,42 +847,42 @@ void				ft_putnbr_fd(int n, int fd);
  * @return Number of characters printed, or -1 on error.
  * @note Supports: %c %s %p %d %i %u %x %X %%
  */
-int					ft_printf(const char *format, ...);
+int			ft_printf(const char *format, ...);
 
 /**
  * @brief Print a single character to stdout.
  * @param character Character to print.
  * @return Number of characters printed (1), or -1 on error.
  */
-int					ft_print_char(int character);
+int			ft_print_char(int character);
 
 /**
  * @brief Print a string to stdout.
  * @param str String to print. Prints "(null)" if NULL.
  * @return Number of characters printed, or -1 on error.
  */
-int					ft_print_str(char *str);
+int			ft_print_str(char *str);
 
 /**
  * @brief Print a pointer address in hexadecimal.
  * @param ptr Pointer to print.
  * @return Number of characters printed, or -1 on error.
  */
-int					ft_print_ptr(void *ptr);
+int			ft_print_ptr(void *ptr);
 
 /**
  * @brief Print a signed integer.
  * @param number Integer to print.
  * @return Number of characters printed, or -1 on error.
  */
-int					ft_print_nbr(int number);
+int			ft_print_nbr(int number);
 
 /**
  * @brief Print an unsigned integer.
  * @param number Unsigned integer to print.
  * @return Number of characters printed, or -1 on error.
  */
-int					ft_print_unsigned(unsigned int number);
+int			ft_print_unsigned(unsigned int number);
 
 /**
  * @brief Print an unsigned integer in hexadecimal.
@@ -683,6 +890,6 @@ int					ft_print_unsigned(unsigned int number);
  * @param uppercase If non-zero, use uppercase hex digits (A-F).
  * @return Number of characters printed, or -1 on error.
  */
-int					ft_print_hex(unsigned int n, int uppercase);
+int			ft_print_hex(unsigned int n, int uppercase);
 
 #endif
