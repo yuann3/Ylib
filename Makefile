@@ -88,3 +88,18 @@ doc:
 	make dist
 	doxygen doxyfile
 	open html/index.html
+
+# Generate STB-style single-header library
+RELEASE_DIR := release
+
+.PHONY: single-header
+single-header: $(NAME)
+	@$(MKDIR) -p $(RELEASE_DIR)
+	@./scripts/gen_single_header.sh > $(RELEASE_DIR)/libft.h
+	@echo "Generated $(RELEASE_DIR)/libft.h"
+
+.PHONY: test-single-header
+test-single-header: single-header
+	$(CC) -Wall -Wextra -Werror -I $(RELEASE_DIR) tests/test_single_header.c -o test_single -lm
+	@./test_single && echo "Single-header test passed"
+	@$(RM) test_single
