@@ -12,28 +12,28 @@
 
 #include "libft.h"
 
-static int	ft_handle_format(va_list args, char specifier)
+static int	ft_handle_format(va_list *args, char specifier)
 {
 	if (specifier == 'c')
-		return (ft_print_char(va_arg(args, int)));
+		return (ft_print_char(va_arg(*args, int)));
 	else if (specifier == 's')
-		return (ft_print_str(va_arg(args, char *)));
+		return (ft_print_str(va_arg(*args, char *)));
 	else if (specifier == 'p')
-		return (ft_print_ptr(va_arg(args, void *)));
+		return (ft_print_ptr(va_arg(*args, void *)));
 	else if (specifier == 'd' || specifier == 'i')
-		return (ft_print_nbr(va_arg(args, int)));
+		return (ft_print_nbr(va_arg(*args, int)));
 	else if (specifier == 'u')
-		return (ft_print_unsigned(va_arg(args, unsigned int)));
+		return (ft_print_unsigned(va_arg(*args, unsigned int)));
 	else if (specifier == 'x')
-		return (ft_print_hex(va_arg(args, unsigned int), 0));
+		return (ft_print_hex(va_arg(*args, unsigned int), 0));
 	else if (specifier == 'X')
-		return (ft_print_hex(va_arg(args, unsigned int), 1));
+		return (ft_print_hex(va_arg(*args, unsigned int), 1));
 	else if (specifier == '%')
 		return (ft_print_char('%'));
 	return (0);
 }
 
-static int	ft_print_format(va_list args, const char **format)
+static int	ft_print_format(va_list *args, const char **format)
 {
 	int	result;
 
@@ -42,7 +42,7 @@ static int	ft_print_format(va_list args, const char **format)
 	return (result);
 }
 
-static int	ft_parse_format(va_list args, const char *format)
+static int	ft_parse_format(va_list *args, const char *format)
 {
 	int	total_len;
 	int	result;
@@ -76,7 +76,7 @@ int	ft_printf(const char *format, ...)
 	if (!format)
 		return (-1);
 	va_start(args, format);
-	total_len = ft_parse_format(args, format);
+	total_len = ft_parse_format(&args, format);
 	va_end(args);
 	return (total_len);
 }

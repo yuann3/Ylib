@@ -91,10 +91,10 @@ static void	test_ft_printf(void)
 	ret = ft_printf("Number: %d", 42);
 	printf("\n");
 	test(ret == 10, "ft_printf returns correct length");
-	printf("  Testing ft_printf string: ");
-	ret = ft_printf("%s", "hello");
+	printf("  Testing multi-arg: ");
+	ret = ft_printf("Hello %s %d", "world", 42);
 	printf("\n");
-	test(ret == 5, "ft_printf string works");
+	test(ret == 14, "ft_printf multi-arg works");
 }
 
 static void	test_ft_lst(void)
