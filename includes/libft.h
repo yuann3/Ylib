@@ -543,6 +543,49 @@ int			ft_vec_reserve(t_vec *vec, size_t new_cap);
 int			ft_vec_insert(t_vec *vec, size_t index, const void *elem);
 
 /* ************************************************************************** */
+/*                                  Hashmap                                   */
+/* ************************************************************************** */
+
+/**
+ * @brief Hash table with string keys and arbitrary values.
+ *
+ * Provides O(1) average-case lookup, insertion, and deletion.
+ * Uses chaining with t_vec for collision resolution.
+ * Automatically resizes when load factor exceeds 0.75.
+ *
+ * @param buckets Array of bucket vectors (lazily allocated).
+ * @param size Current number of entries.
+ * @param cap Number of buckets (capacity).
+ * @param del Value destructor function (can be NULL).
+ */
+typedef struct s_hashmap
+{
+	t_vec	**buckets;
+	size_t	size;
+	size_t	cap;
+	void	(*del)(void *);
+}	t_hashmap;
+
+/* Lifecycle */
+t_hashmap	*ft_hashmap_new(size_t init_cap, void (*del)(void *));
+void		ft_hashmap_free(t_hashmap *map);
+void		ft_hashmap_clear(t_hashmap *map);
+
+/* Operations */
+int			ft_hashmap_set(t_hashmap *map, const char *key, void *value);
+void		*ft_hashmap_get(t_hashmap *map, const char *key);
+int			ft_hashmap_has(t_hashmap *map, const char *key);
+int			ft_hashmap_del(t_hashmap *map, const char *key);
+
+/* Iteration */
+void		ft_hashmap_iter(t_hashmap *map,
+				void (*fn)(const char *, void *, void *),
+				void *ctx);
+
+/* Utility */
+size_t		ft_hashmap_size(t_hashmap *map);
+
+/* ************************************************************************** */
 /*                          Character classification                          */
 /* ************************************************************************** */
 

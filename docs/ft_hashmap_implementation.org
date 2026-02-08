@@ -1,7 +1,7 @@
 #+TITLE: ft_hashmap: A Hash Table Implementation for libft
 #+AUTHOR: yiyuli
 #+DATE: 2026-02-08
-#+PROPERTY: header-args:c :comments link :mkdirp yes
+#+PROPERTY: header-args:c :comments no :mkdirp yes
 
 * Chapter 1: Introduction to Hash Tables
 
@@ -134,7 +134,7 @@ function is provided; otherwise, the caller must manage value memory.
 The internal header defines ~t_hashmap_entry~, which is not exposed
 to users of the library. Users only see ~t_hashmap~ in ~libft.h~.
 
-#+begin_src c :tangle srcs/ft_hashmap/ft_hashmap_internal.h
+#+begin_src c :tangle ../srcs/ft_hashmap/ft_hashmap_internal.h
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                          :::      ::::::   */
@@ -152,18 +152,13 @@ to users of the library. Users only see ~t_hashmap~ in ~libft.h~.
 
 # include "libft.h"
 
-/**
- * @brief Internal key-value pair stored in hash buckets.
- *
- * This structure is not exposed to library users. Each entry holds
- * an owned copy of the key (freed on removal) and a pointer to the
- * value (freed via the del callback if provided).
- */
 typedef struct s_hashmap_entry
 {
 	char	*key;
 	void	*value;
 }	t_hashmap_entry;
+
+int	ft_hashmap_grow(t_hashmap *map);
 
 #endif
 #+end_src
@@ -206,7 +201,9 @@ int			ft_hashmap_has(t_hashmap *map, const char *key);
 int			ft_hashmap_del(t_hashmap *map, const char *key);
 
 /* Iteration */
-void		ft_hashmap_iter(t_hashmap *map, void (*fn)(const char *, void *));
+void		ft_hashmap_iter(t_hashmap *map,
+				void (*fn)(const char *, void *, void *),
+				void *ctx);
 
 /* Utility */
 size_t		ft_hashmap_size(t_hashmap *map);
@@ -253,7 +250,7 @@ Freeing requires careful ordering:
 Clear removes all entries but keeps the bucket array allocated.
 This is useful for reusing a hashmap without reallocation overhead.
 
-#+begin_src c :tangle srcs/ft_hashmap/ft_hashmap_new.c
+#+begin_src c :tangle ../srcs/ft_hashmap/ft_hashmap_new.c
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                          :::      ::::::   */
@@ -434,7 +431,114 @@ Before diving into the code, note these critical safety requirements:
 3. *Grow failure*: Handle allocation failures during rehashing gracefully
 4. *42 Norm*: Split ~hashmap_grow~ into smaller functions (max 25 lines)
 
-#+begin_src c :tangle srcs/ft_hashmap/ft_hashmap_set.c
+#+begin_src c :tangle ../srcs/ft_hashmap/ft_hashmap_grow.c
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                          :::      ::::::   */
+/*   ft_hashmap_grow.c                                 :+:      :+:    :+:   */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2026/02/08 00:00:00 by yiyuli           #+#      #+#            */
+/*   Updated: 2026/02/08 00:00:00 by yiyuli         ###      ########.fr      */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_hashmap_internal.h"
+
+static size_t	hashmap_hash(const char *key)
+{
+	size_t			hash;
+	unsigned char	*str;
+
+	hash = 5381;
+	str = (unsigned char *)key;
+	while (*str)
+	{
+		hash = ((hash << 5) + hash) + *str;
+		str++;
+	}
+	return (hash);
+}
+
+static int	rehash_insert(t_vec **buckets, size_t cap, t_hashmap_entry *entry)
+{
+	size_t	idx;
+
+	idx = hashmap_hash(entry->key) % cap;
+	if (!buckets[idx])
+		buckets[idx] = ft_vec_new(sizeof(t_hashmap_entry), 4);
+	if (!buckets[idx])
+		return (0);
+	return (ft_vec_push(buckets[idx], entry));
+}
+
+static int	rehash_all(t_vec **new_b, size_t new_cap,
+		t_vec **old_b, size_t old_cap)
+{
+	size_t			i;
+	size_t			j;
+	t_hashmap_entry	*entry;
+
+	i = 0;
+	while (i < old_cap)
+	{
+		if (old_b[i])
+		{
+			j = 0;
+			while (j < old_b[i]->len)
+			{
+				entry = ft_vec_get(old_b[i], j);
+				if (!rehash_insert(new_b, new_cap, entry))
+					return (0);
+				j++;
+			}
+		}
+		i++;
+	}
+	return (1);
+}
+
+static void	free_bucket_shells(t_vec **buckets, size_t cap)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < cap)
+	{
+		if (buckets[i])
+			ft_vec_free(buckets[i]);
+		i++;
+	}
+}
+
+int	ft_hashmap_grow(t_hashmap *map)
+{
+	t_vec	**new_buckets;
+	size_t	new_cap;
+
+	if (map->cap > SIZE_MAX / 2)
+		return (0);
+	new_cap = map->cap * 2;
+	new_buckets = ft_calloc(new_cap, sizeof(t_vec *));
+	if (!new_buckets)
+		return (0);
+	if (!rehash_all(new_buckets, new_cap, map->buckets, map->cap))
+	{
+		free_bucket_shells(new_buckets, new_cap);
+		return (free(new_buckets), 0);
+	}
+	free_bucket_shells(map->buckets, map->cap);
+	free(map->buckets);
+	map->buckets = new_buckets;
+	map->cap = new_cap;
+	return (1);
+}
+#+end_src
+
+The ~set~ function and its direct helpers live in a separate file:
+
+#+begin_src c :tangle ../srcs/ft_hashmap/ft_hashmap_set.c
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                          :::      ::::::   */
@@ -449,40 +553,21 @@ Before diving into the code, note these critical safety requirements:
 
 #include "ft_hashmap_internal.h"
 
-/**
- * @brief Compute hash value for a string key using djb2 algorithm.
- *
- * djb2 was created by Daniel J. Bernstein. It uses the formula:
- * hash = hash * 33 + c, which is computed as (hash << 5) + hash + c
- * for efficiency. The magic number 5381 is a prime that gives good
- * distribution.
- *
- * @param key Null-terminated string to hash.
- * @return Hash value (not yet modulo'd to bucket index).
- */
 static size_t	hashmap_hash(const char *key)
 {
-	size_t	hash;
+	size_t			hash;
+	unsigned char	*str;
 
 	hash = 5381;
-	while (*key)
+	str = (unsigned char *)key;
+	while (*str)
 	{
-		hash = ((hash << 5) + hash) + *key;
-		key++;
+		hash = ((hash << 5) + hash) + *str;
+		str++;
 	}
 	return (hash);
 }
 
-/**
- * @brief Find entry with matching key in a bucket.
- *
- * Performs linear search through the bucket's entries.
- * Returns NULL if bucket is NULL or key not found.
- *
- * @param bucket The bucket vector to search.
- * @param key Key to find.
- * @return Pointer to entry if found, NULL otherwise.
- */
 static t_hashmap_entry	*find_entry(t_vec *bucket, const char *key)
 {
 	size_t			i;
@@ -501,75 +586,8 @@ static t_hashmap_entry	*find_entry(t_vec *bucket, const char *key)
 	return (NULL);
 }
 
-/**
- * @brief Rehash a single bucket into the new bucket array.
- *
- * Moves all entries from the old bucket to their new positions
- * in the resized map. Frees the old keys after successful rehash.
- *
- * @param map Hashmap with new bucket array already allocated.
- * @param bucket Old bucket to rehash.
- */
-static void	rehash_bucket(t_hashmap *map, t_vec *bucket)
-{
-	t_hashmap_entry	*entry;
-
-	while (bucket->len > 0)
-	{
-		entry = ft_vec_get(bucket, bucket->len - 1);
-		if (ft_hashmap_set(map, entry->key, entry->value))
-			free(entry->key);
-		bucket->len--;
-	}
-	ft_vec_free(bucket);
-}
-
-/**
- * @brief Grow hash table capacity and rehash all entries.
- *
- * Doubles the capacity, allocates new bucket array, and rehashes
- * all existing entries. On failure, original map is unchanged.
- * Checks for integer overflow before doubling capacity.
- *
- * @param map Hashmap to grow.
- * @return 1 on success, 0 on allocation failure or overflow.
- */
-static int	hashmap_grow(t_hashmap *map)
-{
-	t_vec	**old_buckets;
-	size_t	old_cap;
-	size_t	i;
-
-	if (map->cap > SIZE_MAX / 2)
-		return (0);
-	old_buckets = map->buckets;
-	old_cap = map->cap;
-	map->cap = old_cap * 2;
-	map->buckets = ft_calloc(map->cap, sizeof(t_vec *));
-	if (!map->buckets)
-		return (map->buckets = old_buckets, map->cap = old_cap, 0);
-	map->size = 0;
-	i = 0;
-	while (i < old_cap)
-	{
-		if (old_buckets[i])
-			rehash_bucket(map, old_buckets[i]);
-		i++;
-	}
-	return (free(old_buckets), 1);
-}
-
-/**
- * @brief Update an existing entry's value.
- *
- * Handles the case where new value equals old value (no-op) to
- * prevent use-after-free. Calls del on old value if different.
- *
- * @param map Hashmap containing the entry.
- * @param existing Entry to update.
- * @param value New value to set.
- */
-static void	update_entry(t_hashmap *map, t_hashmap_entry *existing, void *value)
+static void	update_entry(t_hashmap *map, t_hashmap_entry *existing,
+		void *value)
 {
 	if (existing->value == value)
 		return ;
@@ -578,21 +596,6 @@ static void	update_entry(t_hashmap *map, t_hashmap_entry *existing, void *value)
 	existing->value = value;
 }
 
-/**
- * @brief Insert or update a key-value pair.
- *
- * If key exists, updates the value (freeing old value if del set).
- * If key is new, creates a copy of the key and stores the value.
- * Grows table if load factor exceeds 0.75 after insertion.
- *
- * Safety: Checks for self-assignment to prevent use-after-free.
- * Safety: Checks grow return value to report allocation failure.
- *
- * @param map Hashmap to modify.
- * @param key Key string (will be copied).
- * @param value Value pointer (ownership depends on del callback).
- * @return 1 on success, 0 on failure (NULL args or allocation failure).
- */
 int	ft_hashmap_set(t_hashmap *map, const char *key, void *value)
 {
 	size_t			idx;
@@ -615,7 +618,7 @@ int	ft_hashmap_set(t_hashmap *map, const char *key, void *value)
 		return (free(new_entry.key), 0);
 	map->size++;
 	if (map->size * 4 > map->cap * 3)
-		if (!hashmap_grow(map))
+		if (!ft_hashmap_grow(map))
 			return (1);
 	return (1);
 }
@@ -673,7 +676,7 @@ We use *swap-and-pop* to avoid O(n) shifting:
 
 This is O(1) instead of O(n) for deletion!
 
-#+begin_src c :tangle srcs/ft_hashmap/ft_hashmap_get.c
+#+begin_src c :tangle ../srcs/ft_hashmap/ft_hashmap_get.c
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                          :::      ::::::   */
@@ -688,25 +691,21 @@ This is O(1) instead of O(n) for deletion!
 
 #include "ft_hashmap_internal.h"
 
-/**
- * @brief Compute hash value for a string key using djb2 algorithm.
- */
 static size_t	hashmap_hash(const char *key)
 {
-	size_t	hash;
+	size_t			hash;
+	unsigned char	*str;
 
 	hash = 5381;
-	while (*key)
+	str = (unsigned char *)key;
+	while (*str)
 	{
-		hash = ((hash << 5) + hash) + *key;
-		key++;
+		hash = ((hash << 5) + hash) + *str;
+		str++;
 	}
 	return (hash);
 }
 
-/**
- * @brief Find entry with matching key in a bucket.
- */
 static t_hashmap_entry	*find_entry(t_vec *bucket, const char *key)
 {
 	size_t			i;
@@ -725,17 +724,6 @@ static t_hashmap_entry	*find_entry(t_vec *bucket, const char *key)
 	return (NULL);
 }
 
-/**
- * @brief Retrieve value for a given key.
- *
- * Returns NULL if key is not found. Note that NULL is also a valid
- * value, so use ft_hashmap_has() to distinguish between "not found"
- * and "found with NULL value".
- *
- * @param map Hashmap to search.
- * @param key Key to look up.
- * @return Value pointer if found, NULL if not found or NULL args.
- */
 void	*ft_hashmap_get(t_hashmap *map, const char *key)
 {
 	size_t			idx;
@@ -750,16 +738,6 @@ void	*ft_hashmap_get(t_hashmap *map, const char *key)
 	return (NULL);
 }
 
-/**
- * @brief Check if a key exists in the hashmap.
- *
- * More reliable than checking get() == NULL when NULL values
- * are stored in the map.
- *
- * @param map Hashmap to search.
- * @param key Key to look up.
- * @return 1 if key exists, 0 if not found or NULL args.
- */
 int	ft_hashmap_has(t_hashmap *map, const char *key)
 {
 	size_t	idx;
@@ -769,18 +747,43 @@ int	ft_hashmap_has(t_hashmap *map, const char *key)
 	idx = hashmap_hash(key) % map->cap;
 	return (find_entry(map->buckets[idx], key) != NULL);
 }
+#+end_src
 
-/**
- * @brief Remove entry from bucket using swap-and-pop.
- *
- * Frees the key, calls del on value if set, then swaps with
- * last element and decrements length. O(1) removal.
- *
- * @param map Hashmap containing the bucket.
- * @param bucket Bucket containing the entry.
- * @param entry Entry to remove.
- */
-static void	remove_entry(t_hashmap *map, t_vec *bucket, t_hashmap_entry *entry)
+The delete operation lives in its own file due to the norminette
+5-function-per-file limit:
+
+#+begin_src c :tangle ../srcs/ft_hashmap/ft_hashmap_del.c
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                          :::      ::::::   */
+/*   ft_hashmap_del.c                                  :+:      :+:    :+:   */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2026/02/08 00:00:00 by yiyuli           #+#      #+#            */
+/*   Updated: 2026/02/08 00:00:00 by yiyuli         ###      ########.fr      */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_hashmap_internal.h"
+
+static size_t	hashmap_hash(const char *key)
+{
+	size_t			hash;
+	unsigned char	*str;
+
+	hash = 5381;
+	str = (unsigned char *)key;
+	while (*str)
+	{
+		hash = ((hash << 5) + hash) + *str;
+		str++;
+	}
+	return (hash);
+}
+
+static void	remove_entry(t_hashmap *map, t_vec *bucket,
+		t_hashmap_entry *entry)
 {
 	t_hashmap_entry	*last;
 
@@ -794,16 +797,6 @@ static void	remove_entry(t_hashmap *map, t_vec *bucket, t_hashmap_entry *entry)
 	map->size--;
 }
 
-/**
- * @brief Remove a key-value pair from the hashmap.
- *
- * Frees the key and calls del(value) if del was provided.
- * Uses swap-and-pop for O(1) removal from bucket vector.
- *
- * @param map Hashmap to modify.
- * @param key Key to remove.
- * @return 1 if key was found and removed, 0 otherwise.
- */
 int	ft_hashmap_del(t_hashmap *map, const char *key)
 {
 	size_t			idx;
@@ -837,25 +830,28 @@ The ~ft_hashmap_iter~ function visits every key-value pair, calling a
 user-provided callback. The iteration order is *not* defined - it
 depends on hash values and insertion order.
 
+The ~ctx~ parameter allows passing user context to the callback,
+avoiding the need for global state (a common C pattern for closures):
+
 #+begin_example
-  ft_hashmap_iter(map, print_pair);
+  ft_hashmap_iter(map, print_pair, stdout);
 
   Visits:
     buckets[0]: (empty)
     buckets[1]: (empty)
-    buckets[2]: callback("A", 1), callback("B", 2)  <-- collision bucket
-    buckets[3]: callback("C", 3)
+    buckets[2]: callback("A", 1, ctx), callback("B", 2, ctx)
+    buckets[3]: callback("C", 3, ctx)
     ...
 #+end_example
 
-This matches the ~ft_lstiter~ pattern from the linked list API.
+Mutating the map inside the callback is *not* allowed (undefined behavior).
 
 ** Size Function
 
 ~ft_hashmap_size~ returns the number of entries (not buckets). This is
 stored in ~map->size~ and maintained by set/del operations, so it's O(1).
 
-#+begin_src c :tangle srcs/ft_hashmap/ft_hashmap_iter.c
+#+begin_src c :tangle ../srcs/ft_hashmap/ft_hashmap_iter.c
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                          :::      ::::::   */
@@ -874,13 +870,16 @@ stored in ~map->size~ and maintained by set/del operations, so it's O(1).
  * @brief Iterate over all key-value pairs in the hashmap.
  *
  * Calls the provided function for each entry. Iteration order is
- * undefined (depends on hash distribution). Matches the ft_lstiter
- * pattern from the linked list API.
+ * undefined (depends on hash distribution). The ctx parameter is
+ * passed through to the callback for user context (avoids globals).
+ * Mutating the map inside fn is undefined behavior.
  *
  * @param map Hashmap to iterate.
- * @param fn Callback function receiving (key, value) for each entry.
+ * @param fn Callback receiving (key, value, ctx) for each entry.
+ * @param ctx User context pointer passed to each callback invocation.
  */
-void	ft_hashmap_iter(t_hashmap *map, void (*fn)(const char *, void *))
+void	ft_hashmap_iter(t_hashmap *map,
+		void (*fn)(const char *, void *, void *), void *ctx)
 {
 	size_t			i;
 	size_t			j;
@@ -899,7 +898,7 @@ void	ft_hashmap_iter(t_hashmap *map, void (*fn)(const char *, void *))
 			while (j < bucket->len)
 			{
 				entry = ft_vec_get(bucket, j);
-				fn(entry->key, entry->value);
+				fn(entry->key, entry->value, ctx);
 				j++;
 			}
 		}
@@ -1015,9 +1014,12 @@ int			ft_hashmap_del(t_hashmap *map, const char *key);
 /**
  * @brief Iterate over all key-value pairs.
  * @param map Hashmap to iterate.
- * @param fn Callback function receiving (key, value).
+ * @param fn Callback receiving (key, value, ctx) for each entry.
+ * @param ctx User context pointer passed through to fn.
  */
-void		ft_hashmap_iter(t_hashmap *map, void (*fn)(const char *, void *));
+void		ft_hashmap_iter(t_hashmap *map,
+				void (*fn)(const char *, void *, void *),
+				void *ctx);
 
 /* Utility */
 
@@ -1078,10 +1080,11 @@ if (ft_hashmap_has(env, "UNDEFINED"))
 ft_hashmap_del(env, "SHELL");
 
 // Iterate all
-void print_var(const char *key, void *value) {
+void print_var(const char *key, void *value, void *ctx) {
+    (void)ctx;
     printf("%s=%s\n", key, (char *)value);
 }
-ft_hashmap_iter(env, print_var);
+ft_hashmap_iter(env, print_var, NULL);
 
 // Cleanup
 ft_hashmap_free(env);
@@ -1172,20 +1175,22 @@ The ~update_entry~ helper checks for self-assignment before calling ~del~.
 
 ** Grow Failure Handling
 
-During ~hashmap_grow~, if ~ft_hashmap_set~ fails for an entry:
-- The entry's value becomes orphaned (potential memory leak)
-- This is documented behavior under out-of-memory conditions
-- The hashmap remains functional with reduced entries
+The ~hashmap_grow~ function uses an *atomic swap* pattern:
+1. Allocate entirely new bucket array
+2. Rehash all entries into the new array
+3. If rehash fails mid-way, free the new array and leave the old map untouched
+4. On success, free old bucket shells (not entries) and swap in the new array
 
-This is a trade-off: fully atomic grow would require 2x memory temporarily,
-which may not be available if we're already at memory limits.
+This ensures the map is never in a corrupted state. The trade-off is that
+grow temporarily requires 2x bucket memory, but entries themselves are
+moved (not copied), so the overhead is only ~8 bytes per bucket pointer.
 
 ** Documented Limitations
 
 | Situation | Behavior | Mitigation |
 |-----------+----------+------------|
 | Capacity overflow | ~grow~ returns 0 | Map works but degrades to O(n) |
-| OOM during grow | Some entries may be lost | Document as OOM behavior |
+| OOM during grow | Map unchanged (atomic) | Grow fails, set still returns 1 |
 | Same value reused | No double-free | Self-assignment check |
 | Empty string key | Works correctly | Hash returns 5381 |
 | NULL value | Stored and returned | Use ~has~ to distinguish |
