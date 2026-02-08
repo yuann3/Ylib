@@ -662,6 +662,14 @@ char		*ft_strrchr(const char *s, int c);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /**
+ * @brief Compare two strings.
+ * @param s1 First string.
+ * @param s2 Second string.
+ * @return <0 if s1 < s2, 0 if equal, >0 if s1 > s2.
+ */
+int			ft_strcmp(const char *s1, const char *s2);
+
+/**
  * @brief Locate substring in string, searching at most len characters.
  * @param haystack String to search in.
  * @param needle Substring to find.

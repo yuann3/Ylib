@@ -38,7 +38,7 @@ static t_hashmap_entry	*find_entry(t_vec *bucket, const char *key)
 	while (i < bucket->len)
 	{
 		entry = ft_vec_get(bucket, i);
-		if (ft_strncmp(entry->key, key, ft_strlen(key) + 1) == 0)
+		if (ft_strcmp(entry->key, key) == 0)
 			return (entry);
 		i++;
 	}

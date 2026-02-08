@@ -59,7 +59,7 @@ int	ft_hashmap_del(t_hashmap *map, const char *key)
 	while (i < bucket->len)
 	{
 		entry = ft_vec_get(bucket, i);
-		if (ft_strncmp(entry->key, key, ft_strlen(key) + 1) == 0)
+		if (ft_strcmp(entry->key, key) == 0)
 			return (remove_entry(map, bucket, entry), 1);
 		i++;
 	}
