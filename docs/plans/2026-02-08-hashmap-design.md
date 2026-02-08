@@ -89,10 +89,11 @@ static size_t   hashmap_hash(const char *key)
 
 ```
 srcs/ft_hashmap/
-    ft_hashmap_new.c   # new, free, clear
-    ft_hashmap_set.c   # set + static: hash, grow, find_entry
-    ft_hashmap_get.c   # get, has, del
-    ft_hashmap_iter.c  # iter, size
+    ft_hashmap_internal.h  # t_hashmap_entry typedef
+    ft_hashmap_new.c       # new, free, clear
+    ft_hashmap_set.c       # set + static: hash, grow, find_entry
+    ft_hashmap_get.c       # get, has, del + static: find_entry
+    ft_hashmap_iter.c      # iter, size
 ```
 
 ## Implementation Order
@@ -109,3 +110,50 @@ srcs/ft_hashmap/
 - Max 80 chars per line
 - `while` loops only (no `for`)
 - Variables declared at function start
+
+## Internal Header
+
+Create `srcs/ft_hashmap/ft_hashmap_internal.h` for shared internals:
+
+```c
+#ifndef FT_HASHMAP_INTERNAL_H
+# define FT_HASHMAP_INTERNAL_H
+
+# include "libft.h"
+
+typedef struct s_hashmap_entry
+{
+    char    *key;
+    void    *value;
+}   t_hashmap_entry;
+
+#endif
+```
+
+Note: `find_entry` helper is small enough to duplicate as `static` in both `ft_hashmap_set.c` and `ft_hashmap_get.c`.
+
+## Build Integration
+
+- Update `Makefile` to include `srcs/ft_hashmap/*.c`
+- Update `includes/libft.h` with:
+  - `t_hashmap` typedef (public struct)
+  - All 9 function prototypes
+
+## Error Handling
+
+| Condition | Behavior |
+|-----------|----------|
+| NULL map | All functions return 0/NULL safely |
+| NULL key | `set/get/has/del` return 0/NULL |
+| Allocation failure | Return 0, original state unchanged |
+| `grow` failure | `set` returns 0, map retains existing entries |
+
+## Testing
+
+Add tests in `tests/` covering:
+- Basic set/get/del operations
+- Key overwrite behavior
+- NULL handling
+- Growth/rehashing
+- Iteration order (not guaranteed, but should visit all)
+- Memory leaks (valgrind)
