@@ -1,0 +1,1083 @@
+#+TITLE: ft_hashmap: A Hash Table Implementation for libft
+#+AUTHOR: yiyuli
+#+DATE: 2026-02-08
+#+PROPERTY: header-args:c :comments link :mkdirp yes
+
+* Chapter 1: Introduction to Hash Tables
+
+** What is a Hash Table?
+
+A hash table (or hashmap) is a data structure that provides average O(1)
+lookup, insertion, and deletion of key-value pairs. It achieves this by
+using a *hash function* to convert keys into array indices.
+
+#+begin_example
+  Key "PATH"  -->  hash("PATH") = 5381...  -->  index 7  -->  bucket[7]
+  Key "HOME"  -->  hash("HOME") = 5381...  -->  index 3  -->  bucket[3]
+#+end_example
+
+** Why Do We Need This?
+
+In 42 projects like minishell, you need to store environment variables
+(~PATH=/usr/bin~, ~HOME=/Users/yuan~). A naive approach uses a linked list:
+
+- *Linked list lookup*: O(n) - must scan every node
+- *Hash table lookup*: O(1) average - direct index access
+
+For 100 environment variables, that's 100x faster lookups on average.
+
+** The Hashing Problem
+
+The core challenge: how do we convert arbitrary strings into array indices?
+
+*** The djb2 Algorithm
+
+We use Daniel J. Bernstein's djb2 hash, created in 1991. It's simple,
+fast, and produces good distribution for string keys.
+
+#+begin_example
+  hash = 5381
+  for each character c in key:
+      hash = hash * 33 + c
+#+end_example
+
+Why 5381? It's a prime number that produces good bit distribution.
+Why 33? ~hash * 33~ equals ~(hash << 5) + hash~, which is fast on CPUs.
+
+*** Mathematical Properties
+
+For a good hash function, we want:
+1. *Deterministic*: same input always gives same output
+2. *Uniform distribution*: outputs spread evenly across buckets
+3. *Avalanche effect*: small input changes cause large output changes
+
+The djb2 algorithm satisfies all three reasonably well for string keys.
+
+** Collision Resolution
+
+When two keys hash to the same bucket index, we have a *collision*.
+Our strategy: *chaining with dynamic arrays* (using our existing ~t_vec~).
+
+#+begin_example
+  buckets[3]: [("HOME", "/Users/yuan")] --> single entry
+  buckets[7]: [("PATH", "/usr/bin"), ("SHELL", "/bin/zsh")] --> collision!
+#+end_example
+
+Each bucket is a ~t_vec~ containing ~(key, value)~ pairs. On collision,
+we simply append to the vector and search linearly within that bucket.
+
+** Load Factor and Resizing
+
+The *load factor* is: ~size / capacity~
+
+- At load factor 0.5: half the buckets are used on average
+- At load factor 1.0: every bucket has one entry on average
+- At load factor 2.0: each bucket has two entries on average
+
+We resize at *load factor 0.75* - this is the sweet spot used by Java's
+HashMap and Python's dict. Higher means more collisions; lower wastes memory.
+
+When we resize, we must *rehash* every entry because:
+~index = hash(key) % capacity~
+
+A different capacity means different indices for the same keys.
+
+* Chapter 2: Architecture Overview
+
+** Data Flow
+
+#+begin_example
+                           +------------------+
+    ft_hashmap_set() ----> |   t_hashmap      |
+    ft_hashmap_get() ----> |  .buckets[]      | ---> t_vec (bucket)
+    ft_hashmap_del() ----> |  .size           |        |
+                           |  .cap            |        v
+                           |  .del            |    t_hashmap_entry
+                           +------------------+      .key
+                                                     .value
+#+end_example
+
+** Memory Layout
+
+#+begin_example
+  t_hashmap (heap)
+      |
+      +---> buckets: t_vec** (array of pointers)
+                |
+                +---> [0] NULL           (empty bucket - lazy allocation)
+                +---> [1] NULL
+                +---> [2] t_vec* ------> data: [entry0, entry1, ...]
+                +---> [3] t_vec* ------> data: [entry0]
+                +---> ...
+                +---> [cap-1] NULL
+#+end_example
+
+Lazy allocation: buckets start as NULL and only allocate a ~t_vec~
+when the first entry is inserted into that bucket. This saves memory
+for sparse hash tables.
+
+** Ownership Model
+
+| Component | Owner | Freed by |
+|-----------+-------+----------|
+| ~t_hashmap~ struct | caller | ~ft_hashmap_free~ |
+| ~buckets~ array | hashmap | ~ft_hashmap_free~ |
+| Each ~t_vec~ bucket | hashmap | ~ft_hashmap_free~ |
+| Entry keys (~char*~) | hashmap | ~ft_hashmap_free~ (via ~free~) |
+| Entry values (~void*~) | hashmap | ~ft_hashmap_free~ (via ~del~ callback) |
+
+Keys are always duplicated on insert. Values are owned if a ~del~
+function is provided; otherwise, the caller must manage value memory.
+
+* Chapter 3: Internal Header
+
+The internal header defines ~t_hashmap_entry~, which is not exposed
+to users of the library. Users only see ~t_hashmap~ in ~libft.h~.
+
+#+begin_src c :tangle srcs/ft_hashmap/ft_hashmap_internal.h
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                          :::      ::::::   */
+/*   ft_hashmap_internal.h                             :+:      :+:    :+:   */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2026/02/08 00:00:00 by yiyuli           #+#      #+#            */
+/*   Updated: 2026/02/08 00:00:00 by yiyuli         ###      ########.fr      */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FT_HASHMAP_INTERNAL_H
+# define FT_HASHMAP_INTERNAL_H
+
+# include "libft.h"
+
+/**
+ * @brief Internal key-value pair stored in hash buckets.
+ *
+ * This structure is not exposed to library users. Each entry holds
+ * an owned copy of the key (freed on removal) and a pointer to the
+ * value (freed via the del callback if provided).
+ */
+typedef struct s_hashmap_entry
+{
+	char	*key;
+	void	*value;
+}	t_hashmap_entry;
+
+#endif
+#+end_src
+
+* Chapter 4: Public Header Additions
+
+These declarations must be added to ~includes/libft.h~. The ~t_hashmap~
+structure is public so users can stack-allocate or embed it in other
+structures if needed.
+
+#+begin_src c :tangle no
+/* ************************************************************************** */
+/*                                  Hashmap                                   */
+/* ************************************************************************** */
+
+/**
+ * @brief Hash table with string keys and arbitrary values.
+ *
+ * Provides O(1) average-case lookup, insertion, and deletion.
+ * Uses chaining with t_vec for collision resolution.
+ * Automatically resizes when load factor exceeds 0.75.
+ */
+typedef struct s_hashmap
+{
+	t_vec	**buckets;
+	size_t	size;
+	size_t	cap;
+	void	(*del)(void *);
+}	t_hashmap;
+
+/* Lifecycle */
+t_hashmap	*ft_hashmap_new(size_t init_cap, void (*del)(void *));
+void		ft_hashmap_free(t_hashmap *map);
+void		ft_hashmap_clear(t_hashmap *map);
+
+/* Operations */
+int			ft_hashmap_set(t_hashmap *map, const char *key, void *value);
+void		*ft_hashmap_get(t_hashmap *map, const char *key);
+int			ft_hashmap_has(t_hashmap *map, const char *key);
+int			ft_hashmap_del(t_hashmap *map, const char *key);
+
+/* Iteration */
+void		ft_hashmap_iter(t_hashmap *map, void (*fn)(const char *, void *));
+
+/* Utility */
+size_t		ft_hashmap_size(t_hashmap *map);
+#+end_src
+
+* Chapter 5: Lifecycle Functions
+
+This file handles creation, destruction, and clearing of hashmaps.
+
+** ft_hashmap_new
+
+Creating a new hashmap requires:
+1. Allocate the ~t_hashmap~ struct
+2. Allocate the ~buckets~ array (array of ~t_vec*~ pointers)
+3. Initialize all buckets to NULL (lazy allocation)
+4. Store the destructor callback
+
+#+begin_example
+  ft_hashmap_new(16, free)
+      |
+      v
+  +------------------+
+  | t_hashmap        |
+  | .buckets --------|---> [NULL, NULL, NULL, ..., NULL] (16 slots)
+  | .size = 0        |
+  | .cap = 16        |
+  | .del = free      |
+  +------------------+
+#+end_example
+
+** ft_hashmap_free
+
+Freeing requires careful ordering:
+1. For each non-NULL bucket:
+   a. For each entry in the bucket:
+      - Free the key (always owned)
+      - Call del(value) if del is not NULL
+   b. Free the bucket vector
+2. Free the buckets array
+3. Free the hashmap struct
+
+** ft_hashmap_clear
+
+Clear removes all entries but keeps the bucket array allocated.
+This is useful for reusing a hashmap without reallocation overhead.
+
+#+begin_src c :tangle srcs/ft_hashmap/ft_hashmap_new.c
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                          :::      ::::::   */
+/*   ft_hashmap_new.c                                  :+:      :+:    :+:   */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2026/02/08 00:00:00 by yiyuli           #+#      #+#            */
+/*   Updated: 2026/02/08 00:00:00 by yiyuli         ###      ########.fr      */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_hashmap_internal.h"
+
+/**
+ * @brief Free a single bucket and all its entries.
+ *
+ * Iterates through all entries in the bucket, freeing keys and
+ * calling the del function on values if provided.
+ *
+ * @param bucket The bucket vector to free.
+ * @param del Value destructor function (can be NULL).
+ */
+static void	free_bucket(t_vec *bucket, void (*del)(void *))
+{
+	size_t				i;
+	t_hashmap_entry		*entry;
+
+	if (!bucket)
+		return ;
+	i = 0;
+	while (i < bucket->len)
+	{
+		entry = ft_vec_get(bucket, i);
+		free(entry->key);
+		if (del && entry->value)
+			del(entry->value);
+		i++;
+	}
+	ft_vec_free(bucket);
+}
+
+/**
+ * @brief Create a new hash table.
+ *
+ * Allocates a hash table with the specified initial bucket count.
+ * If init_cap is 0, defaults to 16 buckets. The del function is
+ * called on values during removal/clear/free operations.
+ *
+ * @param init_cap Initial number of buckets (0 for default of 16).
+ * @param del Value destructor function (NULL if values not owned).
+ * @return New hashmap, or NULL on allocation failure.
+ */
+t_hashmap	*ft_hashmap_new(size_t init_cap, void (*del)(void *))
+{
+	t_hashmap	*map;
+
+	map = ft_calloc(1, sizeof(t_hashmap));
+	if (!map)
+		return (NULL);
+	if (init_cap == 0)
+		init_cap = 16;
+	map->buckets = ft_calloc(init_cap, sizeof(t_vec *));
+	if (!map->buckets)
+		return (free(map), NULL);
+	map->cap = init_cap;
+	map->size = 0;
+	map->del = del;
+	return (map);
+}
+
+/**
+ * @brief Remove all entries without freeing the hashmap.
+ *
+ * Frees all buckets and their entries, then resets the bucket
+ * array to all NULLs. The hashmap can be reused after clearing.
+ *
+ * @param map Hashmap to clear. Safe to call with NULL.
+ */
+void	ft_hashmap_clear(t_hashmap *map)
+{
+	size_t	i;
+
+	if (!map)
+		return ;
+	i = 0;
+	while (i < map->cap)
+	{
+		free_bucket(map->buckets[i], map->del);
+		map->buckets[i] = NULL;
+		i++;
+	}
+	map->size = 0;
+}
+
+/**
+ * @brief Free a hashmap and all its contents.
+ *
+ * Frees all entries, all buckets, the bucket array, and the
+ * hashmap struct itself. Safe to call with NULL.
+ *
+ * @param map Hashmap to free.
+ */
+void	ft_hashmap_free(t_hashmap *map)
+{
+	if (!map)
+		return ;
+	ft_hashmap_clear(map);
+	free(map->buckets);
+	free(map);
+}
+#+end_src
+
+* Chapter 6: Set Operation
+
+The ~set~ operation is the most complex because it handles:
+1. Hashing the key to find the bucket index
+2. Checking if the key already exists (update case)
+3. Creating a new entry if the key is new
+4. Growing the table if load factor exceeds 0.75
+
+** The djb2 Hash Function
+
+#+begin_example
+  hash("PATH"):
+    hash = 5381
+    'P': hash = 5381 * 33 + 80  = 177653
+    'A': hash = 177653 * 33 + 65 = 5862614
+    'T': hash = 5862614 * 33 + 84 = 193466346
+    'H': hash = 193466346 * 33 + 72 = 6384389490
+
+  bucket_index = 6384389490 % 16 = 2
+#+end_example
+
+We use ~((hash << 5) + hash)~ instead of ~hash * 33~ because bit
+shifting is often faster than multiplication on CPUs.
+
+** Finding an Entry
+
+To find an existing entry for a key, we:
+1. Compute ~bucket_index = hash(key) % capacity~
+2. If ~buckets[bucket_index]~ is NULL, the key doesn't exist
+3. Otherwise, linear search through the bucket's entries
+
+Linear search within a bucket is O(n) worst case, but with a good hash
+function and load factor < 1, buckets rarely have more than 1-2 entries.
+
+** Growing the Table
+
+When ~size >= cap * 0.75~, we need to grow:
+
+#+begin_example
+  Before (cap=4, size=3, load=0.75):
+    [0]: ("A", 1)
+    [1]: ("B", 2)
+    [2]: NULL
+    [3]: ("C", 3)
+
+  After grow (cap=8):
+    [0]: NULL
+    [1]: NULL
+    [2]: ("A", 1)  <-- rehashed!
+    [3]: ("C", 3)  <-- same bucket (lucky)
+    [4]: NULL
+    [5]: ("B", 2)  <-- rehashed!
+    [6]: NULL
+    [7]: NULL
+#+end_example
+
+Growing is O(n) but happens rarely, giving O(1) amortized insertion.
+
+#+begin_src c :tangle srcs/ft_hashmap/ft_hashmap_set.c
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                          :::      ::::::   */
+/*   ft_hashmap_set.c                                  :+:      :+:    :+:   */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2026/02/08 00:00:00 by yiyuli           #+#      #+#            */
+/*   Updated: 2026/02/08 00:00:00 by yiyuli         ###      ########.fr      */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_hashmap_internal.h"
+
+/**
+ * @brief Compute hash value for a string key using djb2 algorithm.
+ *
+ * djb2 was created by Daniel J. Bernstein. It uses the formula:
+ * hash = hash * 33 + c, which is computed as (hash << 5) + hash + c
+ * for efficiency. The magic number 5381 is a prime that gives good
+ * distribution.
+ *
+ * @param key Null-terminated string to hash.
+ * @return Hash value (not yet modulo'd to bucket index).
+ */
+static size_t	hashmap_hash(const char *key)
+{
+	size_t	hash;
+
+	hash = 5381;
+	while (*key)
+	{
+		hash = ((hash << 5) + hash) + *key;
+		key++;
+	}
+	return (hash);
+}
+
+/**
+ * @brief Find entry with matching key in a bucket.
+ *
+ * Performs linear search through the bucket's entries.
+ * Returns NULL if bucket is NULL or key not found.
+ *
+ * @param bucket The bucket vector to search.
+ * @param key Key to find.
+ * @return Pointer to entry if found, NULL otherwise.
+ */
+static t_hashmap_entry	*find_entry(t_vec *bucket, const char *key)
+{
+	size_t			i;
+	t_hashmap_entry	*entry;
+
+	if (!bucket)
+		return (NULL);
+	i = 0;
+	while (i < bucket->len)
+	{
+		entry = ft_vec_get(bucket, i);
+		if (ft_strncmp(entry->key, key, ft_strlen(key) + 1) == 0)
+			return (entry);
+		i++;
+	}
+	return (NULL);
+}
+
+/**
+ * @brief Grow hash table capacity and rehash all entries.
+ *
+ * Doubles the capacity, allocates new bucket array, and rehashes
+ * all existing entries. On failure, original map is unchanged.
+ *
+ * @param map Hashmap to grow.
+ * @return 1 on success, 0 on allocation failure.
+ */
+static int	hashmap_grow(t_hashmap *map)
+{
+	t_vec			**old_buckets;
+	size_t			old_cap;
+	size_t			i;
+	t_hashmap_entry	*entry;
+
+	old_buckets = map->buckets;
+	old_cap = map->cap;
+	map->cap = old_cap * 2;
+	map->buckets = ft_calloc(map->cap, sizeof(t_vec *));
+	if (!map->buckets)
+		return (map->buckets = old_buckets, map->cap = old_cap, 0);
+	map->size = 0;
+	i = 0;
+	while (i < old_cap)
+	{
+		if (old_buckets[i])
+		{
+			while (old_buckets[i]->len > 0)
+			{
+				entry = ft_vec_get(old_buckets[i], old_buckets[i]->len - 1);
+				ft_hashmap_set(map, entry->key, entry->value);
+				free(entry->key);
+				old_buckets[i]->len--;
+			}
+			ft_vec_free(old_buckets[i]);
+		}
+		i++;
+	}
+	return (free(old_buckets), 1);
+}
+
+/**
+ * @brief Insert or update a key-value pair.
+ *
+ * If key exists, updates the value (freeing old value if del set).
+ * If key is new, creates a copy of the key and stores the value.
+ * Grows table if load factor exceeds 0.75 after insertion.
+ *
+ * @param map Hashmap to modify.
+ * @param key Key string (will be copied).
+ * @param value Value pointer (ownership depends on del callback).
+ * @return 1 on success, 0 on failure (NULL args or allocation failure).
+ */
+int	ft_hashmap_set(t_hashmap *map, const char *key, void *value)
+{
+	size_t			idx;
+	t_hashmap_entry	*existing;
+	t_hashmap_entry	new_entry;
+
+	if (!map || !key)
+		return (0);
+	idx = hashmap_hash(key) % map->cap;
+	existing = find_entry(map->buckets[idx], key);
+	if (existing)
+	{
+		if (map->del && existing->value)
+			map->del(existing->value);
+		existing->value = value;
+		return (1);
+	}
+	if (!map->buckets[idx])
+		map->buckets[idx] = ft_vec_new(sizeof(t_hashmap_entry), 4);
+	if (!map->buckets[idx])
+		return (0);
+	new_entry.key = ft_strdup(key);
+	new_entry.value = value;
+	if (!new_entry.key || !ft_vec_push(map->buckets[idx], &new_entry))
+		return (free(new_entry.key), 0);
+	map->size++;
+	if (map->size * 4 > map->cap * 3)
+		hashmap_grow(map);
+	return (1);
+}
+#+end_src
+
+* Chapter 7: Get, Has, and Delete Operations
+
+These operations all use the same pattern:
+1. Hash the key to find the bucket index
+2. Search the bucket for the key
+3. Return the appropriate result or modify the entry
+
+** Get vs Has
+
+Why have both? Consider this code:
+
+#+begin_src c :tangle no
+// Is the key present, or is the value actually NULL?
+void *val = ft_hashmap_get(map, "KEY");
+if (val == NULL)  // Ambiguous!
+    // Key missing? Or value is NULL?
+#+end_src
+
+With ~ft_hashmap_has~:
+
+#+begin_src c :tangle no
+if (ft_hashmap_has(map, "KEY"))
+    // Key definitely exists
+    void *val = ft_hashmap_get(map, "KEY");  // May be NULL, but key exists
+#+end_src
+
+** Delete Operation
+
+Deletion requires:
+1. Find the entry in the bucket
+2. Free the key
+3. Call del(value) if del is set
+4. Remove entry from bucket vector (using swap-and-pop for efficiency)
+5. Decrement size
+
+We use *swap-and-pop* to avoid O(n) shifting:
+
+#+begin_example
+  Before delete("B") in bucket:
+    [("A", 1), ("B", 2), ("C", 3)]
+                  ^--- to delete
+
+  Swap with last:
+    [("A", 1), ("C", 3), ("B", 2)]
+                          ^--- now at end
+
+  Pop (decrement len):
+    [("A", 1), ("C", 3)]  len=2
+#+end_example
+
+This is O(1) instead of O(n) for deletion!
+
+#+begin_src c :tangle srcs/ft_hashmap/ft_hashmap_get.c
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                          :::      ::::::   */
+/*   ft_hashmap_get.c                                  :+:      :+:    :+:   */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2026/02/08 00:00:00 by yiyuli           #+#      #+#            */
+/*   Updated: 2026/02/08 00:00:00 by yiyuli         ###      ########.fr      */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_hashmap_internal.h"
+
+/**
+ * @brief Compute hash value for a string key using djb2 algorithm.
+ */
+static size_t	hashmap_hash(const char *key)
+{
+	size_t	hash;
+
+	hash = 5381;
+	while (*key)
+	{
+		hash = ((hash << 5) + hash) + *key;
+		key++;
+	}
+	return (hash);
+}
+
+/**
+ * @brief Find entry with matching key in a bucket.
+ */
+static t_hashmap_entry	*find_entry(t_vec *bucket, const char *key)
+{
+	size_t			i;
+	t_hashmap_entry	*entry;
+
+	if (!bucket)
+		return (NULL);
+	i = 0;
+	while (i < bucket->len)
+	{
+		entry = ft_vec_get(bucket, i);
+		if (ft_strncmp(entry->key, key, ft_strlen(key) + 1) == 0)
+			return (entry);
+		i++;
+	}
+	return (NULL);
+}
+
+/**
+ * @brief Retrieve value for a given key.
+ *
+ * Returns NULL if key is not found. Note that NULL is also a valid
+ * value, so use ft_hashmap_has() to distinguish between "not found"
+ * and "found with NULL value".
+ *
+ * @param map Hashmap to search.
+ * @param key Key to look up.
+ * @return Value pointer if found, NULL if not found or NULL args.
+ */
+void	*ft_hashmap_get(t_hashmap *map, const char *key)
+{
+	size_t			idx;
+	t_hashmap_entry	*entry;
+
+	if (!map || !key)
+		return (NULL);
+	idx = hashmap_hash(key) % map->cap;
+	entry = find_entry(map->buckets[idx], key);
+	if (entry)
+		return (entry->value);
+	return (NULL);
+}
+
+/**
+ * @brief Check if a key exists in the hashmap.
+ *
+ * More reliable than checking get() == NULL when NULL values
+ * are stored in the map.
+ *
+ * @param map Hashmap to search.
+ * @param key Key to look up.
+ * @return 1 if key exists, 0 if not found or NULL args.
+ */
+int	ft_hashmap_has(t_hashmap *map, const char *key)
+{
+	size_t	idx;
+
+	if (!map || !key)
+		return (0);
+	idx = hashmap_hash(key) % map->cap;
+	return (find_entry(map->buckets[idx], key) != NULL);
+}
+
+/**
+ * @brief Remove a key-value pair from the hashmap.
+ *
+ * Frees the key and calls del(value) if del was provided.
+ * Uses swap-and-pop for O(1) removal from bucket vector.
+ *
+ * @param map Hashmap to modify.
+ * @param key Key to remove.
+ * @return 1 if key was found and removed, 0 otherwise.
+ */
+int	ft_hashmap_del(t_hashmap *map, const char *key)
+{
+	size_t			idx;
+	size_t			i;
+	t_vec			*bucket;
+	t_hashmap_entry	*entry;
+	t_hashmap_entry	*last;
+
+	if (!map || !key)
+		return (0);
+	idx = hashmap_hash(key) % map->cap;
+	bucket = map->buckets[idx];
+	if (!bucket)
+		return (0);
+	i = 0;
+	while (i < bucket->len)
+	{
+		entry = ft_vec_get(bucket, i);
+		if (ft_strncmp(entry->key, key, ft_strlen(key) + 1) == 0)
+		{
+			free(entry->key);
+			if (map->del && entry->value)
+				map->del(entry->value);
+			last = ft_vec_get(bucket, bucket->len - 1);
+			if (entry != last)
+				*entry = *last;
+			bucket->len--;
+			map->size--;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+#+end_src
+
+* Chapter 8: Iteration and Utility Functions
+
+** Iteration
+
+The ~ft_hashmap_iter~ function visits every key-value pair, calling a
+user-provided callback. The iteration order is *not* defined - it
+depends on hash values and insertion order.
+
+#+begin_example
+  ft_hashmap_iter(map, print_pair);
+
+  Visits:
+    buckets[0]: (empty)
+    buckets[1]: (empty)
+    buckets[2]: callback("A", 1), callback("B", 2)  <-- collision bucket
+    buckets[3]: callback("C", 3)
+    ...
+#+end_example
+
+This matches the ~ft_lstiter~ pattern from the linked list API.
+
+** Size Function
+
+~ft_hashmap_size~ returns the number of entries (not buckets). This is
+stored in ~map->size~ and maintained by set/del operations, so it's O(1).
+
+#+begin_src c :tangle srcs/ft_hashmap/ft_hashmap_iter.c
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                          :::      ::::::   */
+/*   ft_hashmap_iter.c                                 :+:      :+:    :+:   */
+/*                                                  +:+ +:+           +:+     */
+/*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
+/*                                              +#+#+#+#+#+      +#+          */
+/*   Created: 2026/02/08 00:00:00 by yiyuli           #+#      #+#            */
+/*   Updated: 2026/02/08 00:00:00 by yiyuli         ###      ########.fr      */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_hashmap_internal.h"
+
+/**
+ * @brief Iterate over all key-value pairs in the hashmap.
+ *
+ * Calls the provided function for each entry. Iteration order is
+ * undefined (depends on hash distribution). Matches the ft_lstiter
+ * pattern from the linked list API.
+ *
+ * @param map Hashmap to iterate.
+ * @param fn Callback function receiving (key, value) for each entry.
+ */
+void	ft_hashmap_iter(t_hashmap *map, void (*fn)(const char *, void *))
+{
+	size_t			i;
+	size_t			j;
+	t_vec			*bucket;
+	t_hashmap_entry	*entry;
+
+	if (!map || !fn)
+		return ;
+	i = 0;
+	while (i < map->cap)
+	{
+		bucket = map->buckets[i];
+		if (bucket)
+		{
+			j = 0;
+			while (j < bucket->len)
+			{
+				entry = ft_vec_get(bucket, j);
+				fn(entry->key, entry->value);
+				j++;
+			}
+		}
+		i++;
+	}
+}
+
+/**
+ * @brief Get the number of entries in the hashmap.
+ *
+ * This is O(1) as the size is tracked during insertions/deletions.
+ *
+ * @param map Hashmap to query.
+ * @return Number of entries, or 0 if map is NULL.
+ */
+size_t	ft_hashmap_size(t_hashmap *map)
+{
+	if (!map)
+		return (0);
+	return (map->size);
+}
+#+end_src
+
+* Chapter 9: Header File Update
+
+This section shows the additions needed in ~includes/libft.h~. Add this
+after the existing ~t_vec~ section:
+
+#+begin_src c :tangle no
+/* ************************************************************************** */
+/*                                  Hashmap                                   */
+/* ************************************************************************** */
+
+/**
+ * @brief Hash table with string keys and arbitrary values.
+ *
+ * Provides O(1) average-case lookup, insertion, and deletion.
+ * Uses chaining with t_vec for collision resolution.
+ * Automatically resizes when load factor exceeds 0.75.
+ *
+ * @param buckets Array of bucket vectors (lazily allocated).
+ * @param size Current number of entries.
+ * @param cap Number of buckets (capacity).
+ * @param del Value destructor function (can be NULL).
+ */
+typedef struct s_hashmap
+{
+	t_vec	**buckets;
+	size_t	size;
+	size_t	cap;
+	void	(*del)(void *);
+}	t_hashmap;
+
+/* Lifecycle */
+
+/**
+ * @brief Create a new hash table.
+ * @param init_cap Initial number of buckets (0 for default of 16).
+ * @param del Value destructor function (NULL if values not owned).
+ * @return New hashmap, or NULL on allocation failure.
+ */
+t_hashmap	*ft_hashmap_new(size_t init_cap, void (*del)(void *));
+
+/**
+ * @brief Free a hashmap and all its contents.
+ * @param map Hashmap to free. Safe to call with NULL.
+ */
+void		ft_hashmap_free(t_hashmap *map);
+
+/**
+ * @brief Remove all entries without freeing the hashmap.
+ * @param map Hashmap to clear. Safe to call with NULL.
+ */
+void		ft_hashmap_clear(t_hashmap *map);
+
+/* Operations */
+
+/**
+ * @brief Insert or update a key-value pair.
+ * @param map Hashmap to modify.
+ * @param key Key string (will be copied).
+ * @param value Value pointer (ownership depends on del callback).
+ * @return 1 on success, 0 on failure.
+ */
+int			ft_hashmap_set(t_hashmap *map, const char *key, void *value);
+
+/**
+ * @brief Retrieve value for a given key.
+ * @param map Hashmap to search.
+ * @param key Key to look up.
+ * @return Value pointer if found, NULL if not found.
+ */
+void		*ft_hashmap_get(t_hashmap *map, const char *key);
+
+/**
+ * @brief Check if a key exists in the hashmap.
+ * @param map Hashmap to search.
+ * @param key Key to look up.
+ * @return 1 if key exists, 0 if not found.
+ */
+int			ft_hashmap_has(t_hashmap *map, const char *key);
+
+/**
+ * @brief Remove a key-value pair from the hashmap.
+ * @param map Hashmap to modify.
+ * @param key Key to remove.
+ * @return 1 if removed, 0 if not found.
+ */
+int			ft_hashmap_del(t_hashmap *map, const char *key);
+
+/* Iteration */
+
+/**
+ * @brief Iterate over all key-value pairs.
+ * @param map Hashmap to iterate.
+ * @param fn Callback function receiving (key, value).
+ */
+void		ft_hashmap_iter(t_hashmap *map, void (*fn)(const char *, void *));
+
+/* Utility */
+
+/**
+ * @brief Get the number of entries.
+ * @param map Hashmap to query.
+ * @return Number of entries, or 0 if NULL.
+ */
+size_t		ft_hashmap_size(t_hashmap *map);
+#+end_src
+
+* Appendix A: Quick Reference
+
+** Time Complexity
+
+| Operation | Average | Worst Case | Notes |
+|-----------+---------+------------+-------|
+| set | O(1) | O(n) | Worst case during resize |
+| get | O(1) | O(n) | Worst case: all keys collide |
+| has | O(1) | O(n) | Same as get |
+| del | O(1) | O(n) | Uses swap-and-pop |
+| iter | O(n) | O(n) | Visits all entries |
+| size | O(1) | O(1) | Cached in struct |
+
+** Memory Usage
+
+#+begin_example
+  Base:           sizeof(t_hashmap) = ~32 bytes
+  Bucket array:   cap * sizeof(t_vec*) = cap * 8 bytes
+  Per bucket:     sizeof(t_vec) = ~32 bytes (when allocated)
+  Per entry:      sizeof(t_hashmap_entry) + strlen(key) + 1
+#+end_example
+
+For n entries with capacity c:
+- Minimum: ~32 + 8c bytes (all buckets empty)
+- Typical: ~32 + 8c + 32*n + entry_size*n bytes
+
+** Usage Example
+
+#+begin_src c :tangle no
+// Create hashmap that owns string values
+t_hashmap *env = ft_hashmap_new(0, free);
+
+// Set environment variables
+ft_hashmap_set(env, "PATH", ft_strdup("/usr/bin:/bin"));
+ft_hashmap_set(env, "HOME", ft_strdup("/Users/yuan"));
+ft_hashmap_set(env, "SHELL", ft_strdup("/bin/zsh"));
+
+// Get a value
+char *path = ft_hashmap_get(env, "PATH");
+printf("PATH=%s\n", path);
+
+// Check existence
+if (ft_hashmap_has(env, "UNDEFINED"))
+    printf("Never printed\n");
+
+// Delete
+ft_hashmap_del(env, "SHELL");
+
+// Iterate all
+void print_var(const char *key, void *value) {
+    printf("%s=%s\n", key, (char *)value);
+}
+ft_hashmap_iter(env, print_var);
+
+// Cleanup
+ft_hashmap_free(env);
+#+end_src
+
+* Appendix B: Troubleshooting
+
+** Common Issues
+
+*** "Why is my value corrupted after set?"
+
+The hashmap stores the pointer you provide, not a copy of the value.
+If you do this:
+
+#+begin_src c :tangle no
+char buffer[100];
+strcpy(buffer, "hello");
+ft_hashmap_set(map, "key", buffer);  // BAD: storing stack pointer!
+#+end_src
+
+The buffer will be invalid when the function returns. Instead:
+
+#+begin_src c :tangle no
+ft_hashmap_set(map, "key", ft_strdup("hello"));  // GOOD: heap allocation
+#+end_src
+
+*** "Memory leak with my custom structs"
+
+If you store pointers to structs, provide a proper ~del~ function:
+
+#+begin_src c :tangle no
+void free_my_struct(void *ptr) {
+    t_my_struct *s = ptr;
+    free(s->name);
+    free(s->data);
+    free(s);
+}
+
+t_hashmap *map = ft_hashmap_new(0, free_my_struct);
+#+end_src
+
+*** "Why doesn't resize happen?"
+
+Resize triggers when ~size * 4 > cap * 3~ (i.e., load > 0.75).
+With default cap=16, this means after 12 insertions.
+
+** Build Issues
+
+Make sure the Makefile includes the new source files. The existing
+~rwildcard~ function should automatically find ~srcs/ft_hashmap/*.c~.
+
+To verify:
+#+begin_src bash :tangle no
+make re && make norm
+#+end_src
