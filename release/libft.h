@@ -6,7 +6,7 @@
 /*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
 /*                                              +#+#+#+#+#+      +#+          */
 /*   Created: 2025/11/18 18:42:23 by yiyuli           #+#      #+#            */
-/*   Updated: 2025/12/16 13:28:37 by yiyuli         ###      ########.fr      */
+/*   Updated: 2026/01/09 17:56:16 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1245,7 +1245,6 @@ char	**ft_split(char const *s, char c)
 }
 
 /* --- ft_strchr.c --- */
-
 
 char	*ft_strchr(const char *s, int c)
 {
