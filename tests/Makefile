@@ -21,17 +21,20 @@ LIBFT_DIR	= ..
 VEC_NAME		= test_vec
 DEQUE_NAME		= test_deque
 VEC_MATH_NAME	= test_vec_math
+HASHMAP_NAME	= test_hashmap
 
 # Source files
 VEC_SRCS		= test_ft_vec.c
 DEQUE_SRCS		= test_ft_deque.c
 VEC_MATH_SRCS	= test_ft_vec_math.c
+HASHMAP_SRCS	= test_ft_hashmap.c
 
 VEC_OBJS		= $(VEC_SRCS:.c=.o)
 DEQUE_OBJS		= $(DEQUE_SRCS:.c=.o)
 VEC_MATH_OBJS	= $(VEC_MATH_SRCS:.c=.o)
+HASHMAP_OBJS	= $(HASHMAP_SRCS:.c=.o)
 
-all: $(LIBFT) $(VEC_NAME) $(DEQUE_NAME) $(VEC_MATH_NAME)
+all: $(LIBFT) $(VEC_NAME) $(DEQUE_NAME) $(VEC_MATH_NAME) $(HASHMAP_NAME)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
@@ -45,6 +48,9 @@ $(DEQUE_NAME): $(DEQUE_OBJS) $(LIBFT)
 $(VEC_MATH_NAME): $(VEC_MATH_OBJS) $(LIBFT)
 	$(CC) $(CFLAGS) $(VEC_MATH_OBJS) $(LIBFT) -lm -o $(VEC_MATH_NAME)
 
+$(HASHMAP_NAME): $(HASHMAP_OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(HASHMAP_OBJS) $(LIBFT) -o $(HASHMAP_NAME)
+
 %.o: %.c
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
@@ -55,6 +61,8 @@ test: all
 	@./$(DEQUE_NAME)
 	@echo "\n\033[1;33m>>> Running ft_vec_math tests...\033[0m"
 	@./$(VEC_MATH_NAME)
+	@echo "\n\033[1;33m>>> Running ft_hashmap tests...\033[0m"
+	@./$(HASHMAP_NAME)
 
 test-vec: $(LIBFT) $(VEC_NAME)
 	@echo "\n\033[1;33m>>> Running ft_vec tests...\033[0m"
@@ -68,11 +76,17 @@ test-vec-math: $(LIBFT) $(VEC_MATH_NAME)
 	@echo "\n\033[1;33m>>> Running ft_vec_math tests...\033[0m"
 	@./$(VEC_MATH_NAME)
 
+test-hashmap: $(LIBFT) $(HASHMAP_NAME)
+	@echo "\n\033[1;33m>>> Running ft_hashmap tests...\033[0m"
+	@./$(HASHMAP_NAME)
+
 leaks: all
 	@echo "\n\033[1;33m>>> Running memory leak check for ft_vec...\033[0m"
 	@leaks -atExit -- ./$(VEC_NAME) 2>&1 | grep -E "(Process|leaks for)"
 	@echo "\n\033[1;33m>>> Running memory leak check for ft_deque...\033[0m"
 	@leaks -atExit -- ./$(DEQUE_NAME) 2>&1 | grep -E "(Process|leaks for)"
+	@echo "\n\033[1;33m>>> Running memory leak check for ft_hashmap...\033[0m"
+	@leaks -atExit -- ./$(HASHMAP_NAME) 2>&1 | grep -E "(Process|leaks for)"
 
 leaks-vec: $(LIBFT) $(VEC_NAME)
 	@echo "\n\033[1;33m>>> Running memory leak check for ft_vec...\033[0m"
@@ -82,12 +96,16 @@ leaks-deque: $(LIBFT) $(DEQUE_NAME)
 	@echo "\n\033[1;33m>>> Running memory leak check for ft_deque...\033[0m"
 	@leaks -atExit -- ./$(DEQUE_NAME)
 
+leaks-hashmap: $(LIBFT) $(HASHMAP_NAME)
+	@echo "\n\033[1;33m>>> Running memory leak check for ft_hashmap...\033[0m"
+	@leaks -atExit -- ./$(HASHMAP_NAME)
+
 clean:
-	rm -f $(VEC_OBJS) $(DEQUE_OBJS) $(VEC_MATH_OBJS)
+	rm -f $(VEC_OBJS) $(DEQUE_OBJS) $(VEC_MATH_OBJS) $(HASHMAP_OBJS)
 
 fclean: clean
-	rm -f $(VEC_NAME) $(DEQUE_NAME) $(VEC_MATH_NAME) test_runner
+	rm -f $(VEC_NAME) $(DEQUE_NAME) $(VEC_MATH_NAME) $(HASHMAP_NAME) test_runner
 
 re: fclean all
 
-.PHONY: all clean fclean re test test-vec test-deque test-vec-math leaks leaks-vec leaks-deque
+.PHONY: all clean fclean re test test-vec test-deque test-vec-math test-hashmap leaks leaks-vec leaks-deque leaks-hashmap
