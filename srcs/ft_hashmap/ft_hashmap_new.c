@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                          :::      ::::::   */
-/*   ft_hashmap_new.c                                  :+:      :+:    :+:   */
+/*   ft_hashmap_new.c                                   :+:      :+:    :+:   */
 /*                                                  +:+ +:+           +:+     */
 /*   By: yiyuli <yy@eyuan.me>                     +#+  +:+         +#+        */
 /*                                              +#+#+#+#+#+      +#+          */
-/*   Created: 2026/02/08 00:00:00 by yiyuli           #+#      #+#            */
-/*   Updated: 2026/02/08 00:00:00 by yiyuli         ###      ########.fr      */
+/*   Created: 2026/03/20 15:47:00 by yiyuli           #+#      #+#            */
+/*   Updated: 2026/03/20 23:10:23 by yiyuli         ###      ########.fr      */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,15 @@
  * @param bucket The bucket vector to free.
  * @param del Value destructor function (can be NULL).
  */
-static void	free_bucket(t_vec *bucket, void (*del)(void *))
+static void free_bucket(t_vec *bucket, void (*del)(void *))
 {
-	size_t				i;
-	t_hashmap_entry		*entry;
+	size_t i;
+	t_hashmap_entry *entry;
 
 	if (!bucket)
-		return ;
+		return;
 	i = 0;
-	while (i < bucket->len)
-	{
+	while (i < bucket->len) {
 		entry = ft_vec_get(bucket, i);
 		free(entry->key);
 		if (del && entry->value)
@@ -51,22 +50,21 @@ static void	free_bucket(t_vec *bucket, void (*del)(void *))
  * @param del Value destructor function (NULL if values not owned).
  * @return New hashmap, or NULL on allocation failure.
  */
-t_hashmap	*ft_hashmap_new(size_t init_cap, void (*del)(void *))
-{
-	t_hashmap	*map;
+t_hashmap *ft_hashmap_new(size_t init_cap, void (*del)(void *)) {
+	t_hashmap *map;
 
 	map = ft_calloc(1, sizeof(t_hashmap));
 	if (!map)
-		return (NULL);
+		return NULL;
 	if (init_cap == 0)
 		init_cap = 16;
 	map->buckets = ft_calloc(init_cap, sizeof(t_vec *));
 	if (!map->buckets)
-		return (free(map), NULL);
+		return free(map), NULL;
 	map->cap = init_cap;
 	map->size = 0;
 	map->del = del;
-	return (map);
+	return map;
 }
 
 /**
@@ -79,33 +77,11 @@ t_hashmap	*ft_hashmap_new(size_t init_cap, void (*del)(void *))
  */
 void	ft_hashmap_clear(t_hashmap *map)
 {
-	size_t	i;
+	size_t i;
 
 	if (!map)
 		return ;
 	i = 0;
-	while (i < map->cap)
-	{
-		free_bucket(map->buckets[i], map->del);
-		map->buckets[i] = NULL;
-		i++;
-	}
-	map->size = 0;
-}
-
-/**
- * @brief Free a hashmap and all its contents.
- *
- * Frees all entries, all buckets, the bucket array, and the
- * hashmap struct itself. Safe to call with NULL.
- *
- * @param map Hashmap to free.
- */
-void	ft_hashmap_free(t_hashmap *map)
-{
-	if (!map)
-		return ;
-	ft_hashmap_clear(map);
-	free(map->buckets);
-	free(map);
+	while (i < map->cap) {
+    }
 }
